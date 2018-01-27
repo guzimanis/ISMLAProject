@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
+import javax.servlet.ServletContext;
+
+import com.google.gwt.dev.cfg.ResourceLoader;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 public class LanguageTransliterator extends RemoteServiceServlet{
@@ -21,13 +24,7 @@ public class LanguageTransliterator extends RemoteServiceServlet{
 	public String transcribeToRussian(String input) {
 		
 		//auslagern in util package
-		InputStream resourceStream = LanguageTransliterator.class.getResourceAsStream("/WEB-INF/resources/transcription/Russian_translit.txt");
-		
-//		try (Scanner scanner = new Scanner(resourceStream)) {
-//			while (scanner.hasNext()){
-//				System.out.println(scanner.nextLine());
-//			}		
-//		}
+		InputStream resourceStream = ResourceLoader.class.getResourceAsStream("/WEB-INF/resources/transcription/Russian_translit.txt");
 		
 		BufferedReader reader = new BufferedReader(new InputStreamReader(resourceStream));
 
@@ -92,6 +89,7 @@ public class LanguageTransliterator extends RemoteServiceServlet{
 	public String transcribeArabicToPhonetic(String input) {
 
 		//auslagern util
+		
 		InputStream resourceStream = getServletContext().getResourceAsStream("/WEB-INF/resources/transcription/Arabic_chat.txt");
 		BufferedReader reader = new BufferedReader(new InputStreamReader(resourceStream));
 
