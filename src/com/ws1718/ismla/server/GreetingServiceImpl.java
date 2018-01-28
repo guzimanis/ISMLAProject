@@ -37,13 +37,15 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 		LanguageTransliterator lt = new LanguageTransliterator();
 		
 		String result = "";
-		String arabicPhon = lt.transcribeArabicToPhonetic(input);
-		String russiaRepresentation = lt.transcribeToRussian(input);
+//		String arabicPhon = lt.transcribeArabicToPhonetic(input);
+//		String russiaRepresentation = lt.transcribeToRussian(input);
 		
 //		result += arabicPhon + "\n";
 //		result += russiaRepresentation + "\n";
 		
-		
+		/**
+		 * input
+		 */
 		Map<LanguageCodes, String> phoneticRepresentations = PhoneticTransliterator.getPhoneticRepresentationForAllLanguages(input);
 		
 		for(LanguageCodes c : phoneticRepresentations.keySet()){
@@ -52,7 +54,123 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 			System.out.println();
 		}
 		
-
+		
+		/**
+		 * tabu 
+		 */
+		for(LanguageCodes c : LanguageCodes.values()){
+			if( c.equals(LanguageCodes.UNKNOWN) || c.equals(LanguageCodes.EN) || c.equals(LanguageCodes.FRA)
+					|| c.equals(LanguageCodes.TH)  || c.equals(LanguageCodes.CMN) || c.equals(LanguageCodes.JPN)
+					|| c.equals(LanguageCodes.FAS) || c.equals(LanguageCodes.ARA) ) continue;
+			
+			System.out.println("-------------------------------------------------------------");
+			System.out.println(LanguageCodes.fullLanguageName(c) + "/" + c + " tabu words:");
+			List<String> tabuList = getLinesFromFile("/tabuLists/tabu_" + c + ".txt");
+			
+			List<String> phonetics = PhoneticTransliterator.getPhoneticRepresentationForList(tabuList, c);
+			//real words
+			for(int i = 0; i < tabuList.size(); i++){
+				System.out.println(tabuList.get(i) + " -> " + phonetics.get(i));
+			}
+			System.out.println();
+			System.out.println();
+		}
+		
+		
+		/*
+		 * persisch
+		 * 
+		 */
+		System.out.println("--------------------------------------------------------------------");
+		System.out.println("persian tabu words");
+		List<String> tabuListPersian = getLinesFromFile("/tabuLists/tabu_FAS.txt");
+		List<String> tabuListPersianLatin = new ArrayList<>();
+		for(String s : tabuListPersian){
+			String[] cols = s.split("\t");
+			if(cols.length >= 2){
+				tabuListPersianLatin.add(cols[1]);
+			}
+		}
+		
+		//phonetics
+		List<String> persianPhonetics = PhoneticTransliterator.getPhoneticRepresentationForList(tabuListPersianLatin, LanguageCodes.FAS);
+		for(String s : persianPhonetics){
+			System.out.println(s);
+		}
+		
+		
+		/*
+		 * Japanisch
+		 * 
+		 */
+		System.out.println("--------------------------------------------------------------------");
+		System.out.println("japanese tabu words");
+		List<String> tabuListJapanese = getLinesFromFile("/tabuLists/tabu_JPN.txt");
+		List<String> tabuListJapaneseLatin = new ArrayList<>();
+		for(String s : tabuListJapanese){
+			String[] cols = s.split("\t");
+			if(cols.length >= 2){
+				tabuListJapaneseLatin.add(cols[1]);
+			}
+		}
+		
+		//phonetics
+		List<String> japanesePhonetics = PhoneticTransliterator.getPhoneticRepresentationForList(tabuListJapaneseLatin, LanguageCodes.JPN);
+		for(String s : japanesePhonetics){
+			System.out.println(s);
+		}
+		
+		
+		
+		/*
+		 * thai
+		 */
+		System.out.println("--------------------------------------------------------------------");
+		System.out.println("thai tabu words");
+		List<String> tabuListThai = getLinesFromFile("/tabuLists/tabu_TH.txt");
+		List<String> tabuListThaiPhon = new ArrayList<>();
+		for(String s : tabuListThai){
+			String[] cols = s.split("\t");
+			if(cols.length >= 2){
+				tabuListThaiPhon.add(cols[1]);
+			}
+		}
+		for(String s : tabuListThaiPhon){
+			System.out.println(s);
+		}
+		
+		
+		/*
+		 * arabic
+		 */
+		System.out.println("--------------------------------------------------------------------");
+		System.out.println("arabic tabu words");
+		List<String> tabuListArabic = getLinesFromFile("/tabuLists/tabu_ARA.txt");
+		List<String> tabuListArabicVocalized = new ArrayList<>();
+		for(String s : tabuListArabic){
+			String[] cols = s.split("\t");
+			if(cols.length > 2){
+				tabuListArabicVocalized.add(cols[1]);
+			}
+		}
+		
+		//phonetics
+		List<String> arabicPhonetics = PhoneticTransliterator.getPhoneticRepresentationForList(tabuListArabicVocalized, LanguageCodes.ARA);
+		for(String s : arabicPhonetics){
+			System.out.println(s);
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		return result;
 	}
 	

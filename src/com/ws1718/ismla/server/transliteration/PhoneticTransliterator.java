@@ -54,7 +54,8 @@ public class PhoneticTransliterator {
 		
 		if( c.equals(LanguageCodes.DEU) || c.equals(LanguageCodes.SPA) || c.equals(LanguageCodes.ITA) ||
 				c.equals(LanguageCodes.KOR) || c.equals(LanguageCodes.NLD) || c.equals(LanguageCodes.POL) ||
-				c.equals(LanguageCodes.POR) || c.equals(LanguageCodes.SWE) || c.equals(LanguageCodes.TUR) ){
+				c.equals(LanguageCodes.POR) || c.equals(LanguageCodes.SWE) || c.equals(LanguageCodes.TUR) ||
+				c.equals(LanguageCodes.ARA) || c.equals(LanguageCodes.RUS) ){
 			
 			rval.add(GeneralTransliterator.orthToIPA(c.code(), input));
 			
@@ -79,7 +80,8 @@ public class PhoneticTransliterator {
 		
 		if( c.equals(LanguageCodes.DEU) || c.equals(LanguageCodes.SPA) || c.equals(LanguageCodes.ITA) ||
 				c.equals(LanguageCodes.KOR) || c.equals(LanguageCodes.NLD) || c.equals(LanguageCodes.POL) ||
-				c.equals(LanguageCodes.POR) || c.equals(LanguageCodes.SWE) || c.equals(LanguageCodes.TUR) ){
+				c.equals(LanguageCodes.POR) || c.equals(LanguageCodes.SWE) || c.equals(LanguageCodes.TUR) ||
+				c.equals(LanguageCodes.ARA) || c.equals(LanguageCodes.RUS) ){
 			
 			for(String s : inputs){
 				rval.add(GeneralTransliterator.orthToIPA(c.code(), s));
