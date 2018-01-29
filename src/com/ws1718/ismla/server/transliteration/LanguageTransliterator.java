@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Scanner;
 
 import javax.servlet.ServletContext;
@@ -19,41 +20,28 @@ public class LanguageTransliterator extends RemoteServiceServlet{
 	 * transcription from latin to russian 
 	 * 
 	 * @param input latin token
+	 * @param fileLines is a list of read in lines
 	 * @return russian token
 	 */
-	public String transcribeToRussian(String input) {
-		
-		//auslagern in util package
-		InputStream resourceStream = ResourceLoader.class.getResourceAsStream("/WEB-INF/resources/transcription/Russian_translit.txt");
-		
-		BufferedReader reader = new BufferedReader(new InputStreamReader(resourceStream));
+	public String transcribeToRussian(String input, List<String> fileLines) {
 
 		HashMap<String, String> latinToRussianCharacters = new HashMap<>();
 
-		// read file into map
-		String line;
-		try {
+		for(String line : fileLines){
+			
+			String[] cols = line.split("\t");
+			
+			String russianCharacter = cols[0].trim();
+			String russianTranslit = cols[1];
 
-			// read in
-			while ((line = reader.readLine()) != null && line.length() > 0) {
-				
-					String[] cols = line.split("\t");
-					
-					String russianCharacter = cols[0].trim();
-					String russianTranslit = cols[1];
+			String[] russianTranslitSymbols = russianTranslit.split("\\s+");
 
-					String[] russianTranslitSymbols = russianTranslit.split("\\s+");
+			for (String phon : russianTranslitSymbols) {
+				latinToRussianCharacters.put(phon, russianCharacter);
+			}
+			
+		}			
 
-					for (String phon : russianTranslitSymbols) {
-						latinToRussianCharacters.put(phon, russianCharacter);
-					}
-				}
-	
-
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 
 		// apply phonetic transformation
 		StringBuilder sb = new StringBuilder();

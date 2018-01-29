@@ -34,11 +34,14 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 			System.out.println(s);
 		}
 		
+		List<String> russianTranslit = getLinesFromFile("/transcription/Russian_translit.txt");
+		
 		LanguageTransliterator lt = new LanguageTransliterator();
+		String russianInputRepresentation = lt.transcribeToRussian(input, russianTranslit);
 		
 		String result = "";
+		result += russianInputRepresentation;
 //		String arabicPhon = lt.transcribeArabicToPhonetic(input);
-//		String russiaRepresentation = lt.transcribeToRussian(input);
 		
 //		result += arabicPhon + "\n";
 //		result += russiaRepresentation + "\n";
