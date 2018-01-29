@@ -1,17 +1,8 @@
 package com.ws1718.ismla.server.transliteration;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Scanner;
-
-import javax.servlet.ServletContext;
-
-import com.google.gwt.dev.cfg.ResourceLoader;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 public class LanguageTransliterator extends RemoteServiceServlet{
@@ -20,18 +11,17 @@ public class LanguageTransliterator extends RemoteServiceServlet{
 	 * transcription from latin to russian 
 	 * 
 	 * @param input latin token
-	 * @param fileLines is a list of read in lines
+	 * @param fileLines is a list of read in lines from a resource file
 	 * @return russian token
 	 */
-	public String transcribeToRussian(String input, List<String> fileLines) {
+	public static String transcribeToRussian(String input, List<String> fileLines) {
 
 		HashMap<String, String> latinToRussianCharacters = new HashMap<>();
 
 		for(String line : fileLines){
 			
 			String[] cols = line.split("\t");
-			
-			String russianCharacter = cols[0].trim();
+			String russianCharacter = cols[0];
 			String russianTranslit = cols[1];
 
 			String[] russianTranslitSymbols = russianTranslit.split("\\s+");
@@ -72,47 +62,36 @@ public class LanguageTransliterator extends RemoteServiceServlet{
 	 * latin transcription to phonetic version of arabic token
 	 * 
 	 * @param input latin token
+	 * @param fileLines is a list of read in lines from a resource file
 	 * @return phonetic token 
 	 */
-	public String transcribeArabicToPhonetic(String input) {
-
-		//auslagern util
-		
-		InputStream resourceStream = getServletContext().getResourceAsStream("/WEB-INF/resources/transcription/Arabic_chat.txt");
-		BufferedReader reader = new BufferedReader(new InputStreamReader(resourceStream));
+	public static String transcribeArabicToPhonetic(String input, List<String> fileLines) {
 
 		HashMap<String, ArrayList<String>> characterToPhonSymobls = new HashMap<>();
 
-		// read file into map
-		String line;
-		try {
+		for(String line : fileLines){
 
-			// read in
-			while ((line = reader.readLine()) != null && line.length() > 0) {
-				String[] cols = line.split("\t");
+			String[] cols = line.split("\t");
+			String arabic = cols[0];
+			String latinArabic = cols[1];
+			String phoneticArabic = cols[2];
 
-				String arabic = cols[0];
-				String latinArabic = cols[1];
-				String phoneticArabic = cols[2];
+			String[] latinArabicCharacters = latinArabic.split("\\s+");
+			String[] phoneticArabicSymbols = phoneticArabic.split("\\s+");
 
-				String[] latinArabicCharacters = latinArabic.split("\\s+");
-				String[] phoneticArabicSymbols = phoneticArabic.split("\\s+");
-
-				// create character to phon mapping
-				for (String s : latinArabicCharacters) {
-					ArrayList<String> phonSymbols = new ArrayList<>();
-					for (String phon : phoneticArabicSymbols) {
-						phonSymbols.add(phon);
-					}
-
-					characterToPhonSymobls.put(s, phonSymbols);
+			// create character to phon mapping
+			for (String s : latinArabicCharacters) {
+				ArrayList<String> phonSymbols = new ArrayList<>();
+				for (String phon : phoneticArabicSymbols) {
+					phonSymbols.add(phon);
 				}
-			}
 
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+				characterToPhonSymobls.put(s, phonSymbols);
+			}
 		}
+				
+			
+
 
 		// apply phonetic transformation
 		StringBuilder sb = new StringBuilder();

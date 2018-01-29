@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -16,6 +17,7 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.ws1718.ismla.client.GreetingService;
 import com.ws1718.ismla.server.transliteration.LanguageTransliterator;
 import com.ws1718.ismla.server.transliteration.PhoneticTransliterator;
+import com.ws1718.ismla.server.transliteration.SourceTransliteration;
 import com.ws1718.ismla.shared.LanguageCodes;
 
 /**
@@ -24,33 +26,36 @@ import com.ws1718.ismla.shared.LanguageCodes;
 @SuppressWarnings("serial")
 public class GreetingServiceImpl extends RemoteServiceServlet implements GreetingService {
 	
-
+	//transliteration source
+	private static final String TRANSLIT_LOCATION = "/transcription/";
+	private static final String ARABIC_TRANSLIT = TRANSLIT_LOCATION + "Arabic_chat.txt";
+	private static final String RUSSIAN_TRANSLIT = TRANSLIT_LOCATION + "Russian_translit.txt";
+	
+	//tabu lists source
+	private static final String TABU_LOCATION = "/tabuLists/";
+	private static final String PREFIX = TABU_LOCATION + "tabu_";
+	private static final String SUFFIX = ".txt";
 
 	public String greetServer(String input) throws IllegalArgumentException {
 		
+		String result = "done";
 		
-		List<String> listofLines = getLinesFromFile("/transcription/Arabic_chat.txt");
-		for(String s : listofLines){
-			System.out.println(s);
-		}
-		
-		List<String> russianTranslit = getLinesFromFile("/transcription/Russian_translit.txt");
-		
-		LanguageTransliterator lt = new LanguageTransliterator();
-		String russianInputRepresentation = lt.transcribeToRussian(input, russianTranslit);
-		
-		String result = "";
-		result += russianInputRepresentation;
-//		String arabicPhon = lt.transcribeArabicToPhonetic(input);
-		
-//		result += arabicPhon + "\n";
-//		result += russiaRepresentation + "\n";
-		
-		/**
-		 * input
+		/*
+		 * input transformation to phonetic representation
 		 */
-		Map<LanguageCodes, String> phoneticRepresentations = PhoneticTransliterator.getPhoneticRepresentationForAllLanguages(input);
+		final List<String> arabicChat = getLinesFromFile(ARABIC_TRANSLIT);
+		String arabicInputTransliterated = LanguageTransliterator.transcribeArabicToPhonetic(input, arabicChat);
 		
+		final List<String> russianTranslit = getLinesFromFile(RUSSIAN_TRANSLIT);
+		String russianInputTransliterated = LanguageTransliterator.transcribeToRussian(input, russianTranslit);
+		
+		List<SourceTransliteration> transliterations = new ArrayList<>();
+		transliterations.add(new SourceTransliteration(russianInputTransliterated, LanguageCodes.RUS));
+		transliterations.add(new SourceTransliteration(arabicInputTransliterated, LanguageCodes.ARA));
+		
+		final Map<LanguageCodes, String> phoneticRepresentations = PhoneticTransliterator.getPhoneticRepresentationForAllLanguages(input, transliterations);
+		
+		//phonetic mapping of the input for all languages
 		for(LanguageCodes c : phoneticRepresentations.keySet()){
 			System.out.println(LanguageCodes.fullLanguageName(c));
 			System.out.println(phoneticRepresentations.get(c));
@@ -58,25 +63,24 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 		}
 		
 		
-		/**
-		 * tabu 
+		
+		/*
+		 * tabu word transformation to phonetic representation
 		 */
+		
+		//mapping of languages to their phonetic representation of tabu words
+		Map<LanguageCodes, List<String>> phoneticTabuWords = new HashMap<LanguageCodes, List<String>>();
+		
 		for(LanguageCodes c : LanguageCodes.values()){
 			if( c.equals(LanguageCodes.UNKNOWN) || c.equals(LanguageCodes.EN) || c.equals(LanguageCodes.FRA)
 					|| c.equals(LanguageCodes.TH)  || c.equals(LanguageCodes.CMN) || c.equals(LanguageCodes.JPN)
 					|| c.equals(LanguageCodes.FAS) || c.equals(LanguageCodes.ARA) ) continue;
 			
-			System.out.println("-------------------------------------------------------------");
-			System.out.println(LanguageCodes.fullLanguageName(c) + "/" + c + " tabu words:");
-			List<String> tabuList = getLinesFromFile("/tabuLists/tabu_" + c + ".txt");
+			final List<String> tabuList = getLinesFromFile(PREFIX + c + SUFFIX);
+			final List<String> phonetics = PhoneticTransliterator.getPhoneticRepresentationForList(tabuList, c);
 			
-			List<String> phonetics = PhoneticTransliterator.getPhoneticRepresentationForList(tabuList, c);
-			//real words
-			for(int i = 0; i < tabuList.size(); i++){
-				System.out.println(tabuList.get(i) + " -> " + phonetics.get(i));
-			}
-			System.out.println();
-			System.out.println();
+			//fill the |language -> tabu words| map
+			phoneticTabuWords.put(c, phonetics);
 		}
 		
 		
@@ -84,9 +88,8 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 		 * persisch
 		 * 
 		 */
-		System.out.println("--------------------------------------------------------------------");
-		System.out.println("persian tabu words");
-		List<String> tabuListPersian = getLinesFromFile("/tabuLists/tabu_FAS.txt");
+		LanguageCodes fas = LanguageCodes.FAS;
+		final List<String> tabuListPersian = getLinesFromFile(PREFIX + fas + SUFFIX);
 		List<String> tabuListPersianLatin = new ArrayList<>();
 		for(String s : tabuListPersian){
 			String[] cols = s.split("\t");
@@ -96,19 +99,17 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 		}
 		
 		//phonetics
-		List<String> persianPhonetics = PhoneticTransliterator.getPhoneticRepresentationForList(tabuListPersianLatin, LanguageCodes.FAS);
-		for(String s : persianPhonetics){
-			System.out.println(s);
-		}
+		final List<String> persianPhonetics = PhoneticTransliterator.getPhoneticRepresentationForList(tabuListPersianLatin, LanguageCodes.FAS);
+		//fill the |language -> tabu words| map
+		phoneticTabuWords.put(fas, persianPhonetics);
 		
 		
 		/*
 		 * Japanisch
 		 * 
 		 */
-		System.out.println("--------------------------------------------------------------------");
-		System.out.println("japanese tabu words");
-		List<String> tabuListJapanese = getLinesFromFile("/tabuLists/tabu_JPN.txt");
+		LanguageCodes jpn = LanguageCodes.JPN;
+		final List<String> tabuListJapanese = getLinesFromFile(PREFIX + jpn + SUFFIX);
 		List<String> tabuListJapaneseLatin = new ArrayList<>();
 		for(String s : tabuListJapanese){
 			String[] cols = s.split("\t");
@@ -119,18 +120,16 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 		
 		//phonetics
 		List<String> japanesePhonetics = PhoneticTransliterator.getPhoneticRepresentationForList(tabuListJapaneseLatin, LanguageCodes.JPN);
-		for(String s : japanesePhonetics){
-			System.out.println(s);
-		}
+		//fill the |language -> tabu words| map
+		phoneticTabuWords.put(jpn, japanesePhonetics);
 		
 		
 		
 		/*
 		 * thai
 		 */
-		System.out.println("--------------------------------------------------------------------");
-		System.out.println("thai tabu words");
-		List<String> tabuListThai = getLinesFromFile("/tabuLists/tabu_TH.txt");
+		LanguageCodes th = LanguageCodes.TH;
+		final List<String> tabuListThai = getLinesFromFile(PREFIX + th + SUFFIX);
 		List<String> tabuListThaiPhon = new ArrayList<>();
 		for(String s : tabuListThai){
 			String[] cols = s.split("\t");
@@ -138,17 +137,15 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 				tabuListThaiPhon.add(cols[1]);
 			}
 		}
-		for(String s : tabuListThaiPhon){
-			System.out.println(s);
-		}
+		//fill the |language -> tabu words| map
+		phoneticTabuWords.put(th, tabuListThaiPhon);
 		
 		
 		/*
 		 * arabic
 		 */
-		System.out.println("--------------------------------------------------------------------");
-		System.out.println("arabic tabu words");
-		List<String> tabuListArabic = getLinesFromFile("/tabuLists/tabu_ARA.txt");
+		LanguageCodes ara = LanguageCodes.ARA;
+		List<String> tabuListArabic = getLinesFromFile(PREFIX + ara + SUFFIX);
 		List<String> tabuListArabicVocalized = new ArrayList<>();
 		for(String s : tabuListArabic){
 			String[] cols = s.split("\t");
@@ -159,15 +156,24 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 		
 		//phonetics
 		List<String> arabicPhonetics = PhoneticTransliterator.getPhoneticRepresentationForList(tabuListArabicVocalized, LanguageCodes.ARA);
-		for(String s : arabicPhonetics){
-			System.out.println(s);
+		//fill the |language -> tabu words| map
+		phoneticTabuWords.put(ara, arabicPhonetics);
+		
+		
+		
+		
+		//phonetic tabu words
+		for(LanguageCodes c : phoneticTabuWords.keySet()){
+			List<String> tabuWords = phoneticTabuWords.get(c);
+			
+			System.out.println(c + " tabu words");
+			System.out.println("----------------------------------------------------------");
+			for(String s : tabuWords){
+				System.out.println(s);
+			}
+			System.out.println();
+			System.out.println();
 		}
-		
-		
-		
-		
-		
-		
 		
 		
 		
@@ -178,13 +184,25 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 	}
 	
 	
+	
+	
+	
+	
+	
+	/***
+	 * 
+	 * START: reading util
+	 * 
+	 * 
+	 */
+	
 	/**
 	 * 
 	 * creates the input stream to read files from the resource directory
 	 * @param path
 	 * @return
 	 */
-	public InputStream getInputStream(String path){
+	private InputStream getInputStream(String path){
 		return getServletContext().getResourceAsStream("/WEB-INF/resources/" + path);
 	}
 	
@@ -193,7 +211,7 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 	 * @param path
 	 * @return
 	 */
-	public BufferedReader getBufferedReader(String path){
+	private BufferedReader getBufferedReader(String path){
 		return new BufferedReader(new InputStreamReader(getInputStream(path)));
 	}
 	
@@ -202,16 +220,18 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 	 * @param path
 	 * @return
 	 */
-	public List<String> getLinesFromFile(String path){
+	private List<String> getLinesFromFile(String path){
 		List<String> rval = new ArrayList<String>();
 		
 		BufferedReader reader = getBufferedReader(path);
 		String line;
 		try {
 			while ((line = reader.readLine()) != null) {
-				if(line.isEmpty()) continue;
-				rval.add(line);
+				if(line.trim().length() > 0){
+					rval.add(line);
+				}
 			}
+			reader.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -219,6 +239,13 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 		
 		return rval;
 	}
+	
+	/***
+	 * 
+	 * END: reading util
+	 * 
+	 * 
+	 */
 	
 }
 

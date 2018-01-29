@@ -16,9 +16,10 @@ public class PhoneticTransliterator {
 	 * @param input
 	 * @return a map
 	 */
-	public static Map<LanguageCodes, String> getPhoneticRepresentationForAllLanguages(String input){
+	public static Map<LanguageCodes, String> getPhoneticRepresentationForAllLanguages(String input, List<SourceTransliteration> transliterations){
 		Map<LanguageCodes, String> rval = new HashMap<>();
 		
+		//get phonetic representations from input
 		rval.put(LanguageCodes.DEU, GeneralTransliterator.orthToIPA(LanguageCodes.DEU.code(), input));
 		rval.put(LanguageCodes.SPA, GeneralTransliterator.orthToIPA(LanguageCodes.SPA.code(), input));
 		rval.put(LanguageCodes.FAS, GeneralTransliterator.prncToIPA(LanguageCodes.FAS.code(), input));
@@ -33,8 +34,17 @@ public class PhoneticTransliterator {
 		rval.put(LanguageCodes.TUR, GeneralTransliterator.orthToIPA(LanguageCodes.TUR.code(), input));
 		rval.put(LanguageCodes.CMN, GeneralTransliterator.prncToIPA(LanguageCodes.CMN.code(), input));
 	
-//		String inputAR = GeneralTransliterator.orthToIPA("ara", arabicPhon);
-//		String inputRU = GeneralTransliterator.orthToIPA("rus", russiaRepresentation);
+		//get phonetic representations from transliterated input
+		for(SourceTransliteration st : transliterations){
+			LanguageCodes c = st.getLanguageCode();
+			final String transliteratedInput = st.getTranslit();
+			
+			if(c.equals(LanguageCodes.RUS)){
+				rval.put(c, GeneralTransliterator.orthToIPA(c.code(), transliteratedInput));
+			}else if(c.equals(LanguageCodes.ARA)){
+				rval.put(c, GeneralTransliterator.prncToIPA(c.code(), transliteratedInput));
+			}
+		}
 		
 		String inputEN = "";
 		String inputFR = "";
