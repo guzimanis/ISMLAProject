@@ -1,33 +1,33 @@
 ﻿а	a
 б	b 6
 в	v w
-г	g Γ s
-д	d Δ g
-е	e ye je ie
-ё	yo jo io e
-ж	zh ž j z g * >|<
+г	g Γ
+д	d Δ
+е	je
+ё	jo
+ж	zh ž
 з	z 3
-и	i u
-й	y j i u
-к	k c
-л	l Jl Λ
+и	i
+й	j
+к	k
+л	l
 м	m
 н	n
 о	o
-п	p Π n
+п	p Π
 р	r
 с	s
-т	t m
-у	u y
-ф	f Φ
+т	t
+у	u
+ф	f
 х	h kh x
-ц	c z ts tc u
-ч	ch č Ψ 4
-ш	sch sh š w Ψ 6
-щ	sh shch sch šč shh w
-ъ	' y j '' #
-ы	y i q bl
-ь	' y j b
-э	e e' eh
-ю	yu ju iu u
-я	ya ja ia ea a q 9 9I
+ц	c ts tc
+ч	ch č 4
+ш	sch š 6
+щ	sh shch šč shh
+ъ	'' #
+ы	y
+ь	'
+э	e eh
+ю	yu ju
+я	ya ja 9 9I
