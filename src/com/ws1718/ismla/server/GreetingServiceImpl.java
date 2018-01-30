@@ -66,23 +66,7 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 		 */
 		final Map<LanguageCodes, String> phonologicalRepresentationsOfInput = getPhonologicalRepresentationsOfInput(input);
 		//create
-		Map<LanguageCodes, String> simplePhonologicalRepresentationOfInput = new HashMap<>();
-		
-		// transformation of phonological representation to simplified version
-		for (LanguageCodes c : phonologicalRepresentationsOfInput.keySet()) {
-			String phonWord = phonologicalRepresentationsOfInput.get(c);
-			StringBuilder sb = new StringBuilder();
-			for(int i = 0; i < phonWord.length(); i++){
-				System.out.print(phonWord.charAt(i) + " -> ");
-				if(ipaSimple.containsKey(phonWord.charAt(i) + "")){
-					sb.append(ipaSimple.get(phonWord.charAt(i) + ""));
-					System.out.print(ipaSimple.get(phonWord.charAt(i) + ""));	
-				}
-				System.out.println();
-			}
-			System.out.println();
-			simplePhonologicalRepresentationOfInput.put(c, sb.toString());
-		}
+		Map<LanguageCodes, String> simplePhonologicalRepresentationOfInput = PhoneticTransliterator.getSimplePhonologicalRepresentationOfInput(ipaSimple, phonologicalRepresentationsOfInput);
 		
 		
 		System.out.println();
@@ -110,47 +94,26 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 		 */
 		final Map<LanguageCodes, List<String>> phonologicalRepresentationOfTabuWords = getPhonologicalRepresentationOfTabuWords();
 		//create
-		Map<LanguageCodes, List<String>> simplePhonologicalRepresentationOfTabuWords = new HashMap<>();
+		Map<LanguageCodes, List<String>> simplePhonologicalRepresentationOfTabuWords = PhoneticTransliterator.getSimplePhonologicalRepresentationOfTabuWords(ipaSimple, phonologicalRepresentationOfTabuWords);
 		
-		//transformation of phonological representation to simplified version
-		for (LanguageCodes c : phonologicalRepresentationOfTabuWords.keySet()) {
-			System.out.println(c + " tabu words on character and word level");
-			System.out.println("-----------------------------------------------------------------------");
-			final List<String> tabuWords = phonologicalRepresentationOfTabuWords.get(c);
-			List<String> simpleTabuWords = new ArrayList<>();
-			for(String tabuWord : tabuWords){
-				StringBuilder sb = new StringBuilder();
-				for(int i = 0; i < tabuWord.length(); i++){
-					System.out.print(tabuWord.charAt(i) + " -> ");
-					if(ipaSimple.containsKey(tabuWord.charAt(i)+"")){
-						sb.append(ipaSimple.get(tabuWord.charAt(i)+""));
-						System.out.print(ipaSimple.get(tabuWord.charAt(i) + ""));
-					}
-					System.out.println();
-				}
-				System.out.println(tabuWord + " -> " + sb.toString());
-				System.out.println();
-				simpleTabuWords.add(sb.toString());
+		//print
+		for(LanguageCodes c : phonologicalRepresentationOfTabuWords.keySet()){
+			List<String> originalPhonWords = phonologicalRepresentationOfTabuWords.get(c);
+			List<String> simplePhonWords = simplePhonologicalRepresentationOfTabuWords.get(c);
+			
+			System.out.println(c + " tabu words original phon -> simple phon");
+			System.out.println("--------------------------------------------------------");
+			for(int i = 0; i < originalPhonWords.size(); i++){
+				String originalWord = originalPhonWords.get(i);
+				String simpleWord = simplePhonWords.get(i);
+				
+				System.out.println(originalWord + " -> " + simpleWord);
 			}
 			System.out.println();
 			System.out.println();
-			simplePhonologicalRepresentationOfTabuWords.put(c, simpleTabuWords);
-			
+			System.out.println();
 		}
 		
-		//print
-//		for(LanguageCodes c : phonologicalRepresentationOfTabuWords.keySet()){
-//			List<String> tabuWords = phonologicalRepresentationOfTabuWords.get(c);
-//			List<String> simpleTabuWords = simplePhonologicalRepresentationOfTabuWords.get(c);
-//			
-//			System.out.println(c + " tabu words");
-//			System.out.println("--------------------------------------------------------------------------");
-//			for(int i = 0; i < tabuWords.size(); i++){
-//				System.out.println(tabuWords.get(i) + " -> " + simpleTabuWords.get(i));
-//			}
-//			System.out.println();
-//			System.out.println();
-//		}
 		
 		
 
