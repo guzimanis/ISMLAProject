@@ -16,6 +16,7 @@ import javax.servlet.ServletContext;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.sun.webkit.ThemeClient;
 import com.ws1718.ismla.client.GreetingService;
+import com.ws1718.ismla.server.distance.Levenshtein;
 import com.ws1718.ismla.server.transliteration.LanguageTransliterator;
 import com.ws1718.ismla.server.transliteration.PhoneticTransliterator;
 import com.ws1718.ismla.server.transliteration.SourceTransliteration;
@@ -48,7 +49,7 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 		/*
 		 * equivalence classes of IPA
 		 */
-		Map<String, String> ipaSimple = getMapForColumns(IPA_SIMPLE, 0, 1);
+		final Map<String, String> ipaSimple = getMapForColumns(IPA_SIMPLE, 0, 1);
 		
 		System.out.println("equivalence classes: ");
 		System.out.println("------------------------------------------------------------");
@@ -115,7 +116,28 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 		}
 		
 		
-		
+		/*
+		 * distance
+		 */
+		Levenshtein dist = new Levenshtein();
+		for(LanguageCodes c : simplePhonologicalRepresentationOfInput.keySet()){
+			String simplePhonInput = simplePhonologicalRepresentationOfInput.get(c);
+			
+			LanguageCodes closestLanguage;
+			float lowestDistance = 999;
+			
+			for(LanguageCodes ct : simplePhonologicalRepresentationOfTabuWords.keySet()){
+				List<String> phonTabuWords = simplePhonologicalRepresentationOfTabuWords.get(ct);
+				for(String phonTabuWord : phonTabuWords){
+					float distance = dist.getDistance(simplePhonInput, phonTabuWord);
+					if(distance < lowestDistance){
+						lowestDistance = distance;
+						closestLanguage = ct;
+					}
+				}
+			}
+			
+		}
 
 		return result;
 	}
