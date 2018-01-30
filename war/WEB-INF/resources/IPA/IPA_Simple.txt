@@ -8,6 +8,7 @@ c	t
 ɟ	t
 k	k
 g	k
+ɡ	k
 q	k
 ɢ	k
 ʔ	#
@@ -29,6 +30,7 @@ f	f
 v	f
 θ	f
 ð	f
+w	f
 s	s
 z	s
 ʃ	s

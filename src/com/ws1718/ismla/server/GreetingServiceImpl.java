@@ -50,14 +50,16 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 		 */
 		Map<String, String> ipaSimple = getMapForColumns(IPA_SIMPLE, 0, 1);
 		
+		System.out.println("equivalence classes: ");
+		System.out.println("------------------------------------------------------------");
 		for(String s : ipaSimple.keySet()){
 			String value = ipaSimple.get(s);
 			System.out.println(s + " -> " + value);
 		}
-		System.out.println("contains g: " + ipaSimple.keySet().contains("g"));
-		System.out.println("contains g: " + ipaSimple.containsKey("g"));
 		
-		
+		System.out.println();
+		System.out.println("phonetic representation of the input character level");
+		System.out.println("-------------------------------------------------------------");
 
 		/*
 		 * input transformation to phonetic representation
@@ -66,7 +68,7 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 		//create
 		Map<LanguageCodes, String> simplePhonologicalRepresentationOfInput = new HashMap<>();
 		
-		// phonetic mapping of the input for all languages
+		// transformation of phonological representation to simplified version
 		for (LanguageCodes c : phonologicalRepresentationsOfInput.keySet()) {
 			String phonWord = phonologicalRepresentationsOfInput.get(c);
 			StringBuilder sb = new StringBuilder();
@@ -82,6 +84,10 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 			simplePhonologicalRepresentationOfInput.put(c, sb.toString());
 		}
 		
+		
+		System.out.println();
+		System.out.println("phonetic representation of the input word level");
+		System.out.println("-------------------------------------------------------------");
 		//print
 		for(LanguageCodes c : phonologicalRepresentationsOfInput.keySet()){
 			String originalPhonWord = phonologicalRepresentationsOfInput.get(c);
@@ -89,25 +95,62 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 			System.out.println(originalPhonWord + " -> " + simplifiedPhonWord);
 		}
 		
-		
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println("phonetic representation of the tabu words");
+		System.out.println("#####################################################################################");
+		System.out.println();
+		System.out.println();
+		System.out.println();
 
 		/*
 		 * tabu word transformation to phonetic representation
 		 */
 		final Map<LanguageCodes, List<String>> phonologicalRepresentationOfTabuWords = getPhonologicalRepresentationOfTabuWords();
-
-		// phonetic tabu words
+		//create
+		Map<LanguageCodes, List<String>> simplePhonologicalRepresentationOfTabuWords = new HashMap<>();
+		
+		//transformation of phonological representation to simplified version
 		for (LanguageCodes c : phonologicalRepresentationOfTabuWords.keySet()) {
-			List<String> tabuWords = phonologicalRepresentationOfTabuWords.get(c);
-
-			System.out.println(c + " tabu words");
-			System.out.println("----------------------------------------------------------");
-			for (String s : tabuWords) {
-				System.out.println(s);
+			System.out.println(c + " tabu words on character and word level");
+			System.out.println("-----------------------------------------------------------------------");
+			final List<String> tabuWords = phonologicalRepresentationOfTabuWords.get(c);
+			List<String> simpleTabuWords = new ArrayList<>();
+			for(String tabuWord : tabuWords){
+				StringBuilder sb = new StringBuilder();
+				for(int i = 0; i < tabuWord.length(); i++){
+					System.out.print(tabuWord.charAt(i) + " -> ");
+					if(ipaSimple.containsKey(tabuWord.charAt(i)+"")){
+						sb.append(ipaSimple.get(tabuWord.charAt(i)+""));
+						System.out.print(ipaSimple.get(tabuWord.charAt(i) + ""));
+					}
+					System.out.println();
+				}
+				System.out.println(tabuWord + " -> " + sb.toString());
+				System.out.println();
+				simpleTabuWords.add(sb.toString());
 			}
 			System.out.println();
 			System.out.println();
+			simplePhonologicalRepresentationOfTabuWords.put(c, simpleTabuWords);
+			
 		}
+		
+		//print
+//		for(LanguageCodes c : phonologicalRepresentationOfTabuWords.keySet()){
+//			List<String> tabuWords = phonologicalRepresentationOfTabuWords.get(c);
+//			List<String> simpleTabuWords = simplePhonologicalRepresentationOfTabuWords.get(c);
+//			
+//			System.out.println(c + " tabu words");
+//			System.out.println("--------------------------------------------------------------------------");
+//			for(int i = 0; i < tabuWords.size(); i++){
+//				System.out.println(tabuWords.get(i) + " -> " + simpleTabuWords.get(i));
+//			}
+//			System.out.println();
+//			System.out.println();
+//		}
 		
 		
 
