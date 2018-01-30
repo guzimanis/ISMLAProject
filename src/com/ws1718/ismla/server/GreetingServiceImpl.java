@@ -14,6 +14,7 @@ import java.util.Scanner;
 import javax.servlet.ServletContext;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+import com.sun.webkit.ThemeClient;
 import com.ws1718.ismla.client.GreetingService;
 import com.ws1718.ismla.server.transliteration.LanguageTransliterator;
 import com.ws1718.ismla.server.transliteration.PhoneticTransliterator;
@@ -33,24 +34,62 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 
 	// tabu lists source
 	private static final String TABU_LOCATION = "/tabuLists/";
-	private static final String PREFIX = TABU_LOCATION + "tabu_";
-	private static final String SUFFIX = ".txt";
+	private static final String PREFIX_TABU = TABU_LOCATION + "tabu_";
+	private static final String SUFFIX_TABU = ".txt";
+	
+	//ipa list resources
+	private static final String IPA_LOCATION = "/IPA/";
+	private static final String IPA_SIMPLE = IPA_LOCATION + "IPA_Simple.txt";
 
 	public String greetServer(String input) throws IllegalArgumentException {
 
 		String result = "done";
+		
+		/*
+		 * equivalence classes of IPA
+		 */
+		Map<String, String> ipaSimple = getMapForColumns(IPA_SIMPLE, 0, 1);
+		
+		for(String s : ipaSimple.keySet()){
+			String value = ipaSimple.get(s);
+			System.out.println(s + " -> " + value);
+		}
+		System.out.println("contains g: " + ipaSimple.keySet().contains("g"));
+		System.out.println("contains g: " + ipaSimple.containsKey("g"));
+		
+		
 
 		/*
 		 * input transformation to phonetic representation
 		 */
 		final Map<LanguageCodes, String> phonologicalRepresentationsOfInput = getPhonologicalRepresentationsOfInput(input);
-
+		//create
+		Map<LanguageCodes, String> simplePhonologicalRepresentationOfInput = new HashMap<>();
+		
 		// phonetic mapping of the input for all languages
 		for (LanguageCodes c : phonologicalRepresentationsOfInput.keySet()) {
-			System.out.println(LanguageCodes.fullLanguageName(c));
-			System.out.println(phonologicalRepresentationsOfInput.get(c));
+			String phonWord = phonologicalRepresentationsOfInput.get(c);
+			StringBuilder sb = new StringBuilder();
+			for(int i = 0; i < phonWord.length(); i++){
+				System.out.print(phonWord.charAt(i) + " -> ");
+				if(ipaSimple.containsKey(phonWord.charAt(i) + "")){
+					sb.append(ipaSimple.get(phonWord.charAt(i) + ""));
+					System.out.print(ipaSimple.get(phonWord.charAt(i) + ""));	
+				}
+				System.out.println();
+			}
 			System.out.println();
+			simplePhonologicalRepresentationOfInput.put(c, sb.toString());
 		}
+		
+		//print
+		for(LanguageCodes c : phonologicalRepresentationsOfInput.keySet()){
+			String originalPhonWord = phonologicalRepresentationsOfInput.get(c);
+			String simplifiedPhonWord = simplePhonologicalRepresentationOfInput.get(c);
+			System.out.println(originalPhonWord + " -> " + simplifiedPhonWord);
+		}
+		
+		
 
 		/*
 		 * tabu word transformation to phonetic representation
@@ -69,6 +108,8 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 			System.out.println();
 			System.out.println();
 		}
+		
+		
 
 		return result;
 	}
@@ -110,7 +151,7 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 					|| c.equals(LanguageCodes.FAS) || c.equals(LanguageCodes.ARA))
 				continue;
 
-			final List<String> tabuList = getLinesFromFile(PREFIX + c + SUFFIX);
+			final List<String> tabuList = getLinesFromFile(PREFIX_TABU + c + SUFFIX_TABU);
 			final List<String> phonetics = PhoneticTransliterator.getPhoneticRepresentationForList(tabuList, c);
 
 			// fill the |language -> tabu words| map
@@ -164,7 +205,7 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 	 */
 	private List<String> getColumnForLanguage(LanguageCodes c, int col){
 		
-		final List<String> tabuList = getLinesFromFile(PREFIX + c + SUFFIX);
+		final List<String> tabuList = getLinesFromFile(PREFIX_TABU + c + SUFFIX_TABU);
 		List<String> tabuListTranscribed = new ArrayList<>();
 		for(String s : tabuList){
 			String[] cols = s.split("\t");
@@ -176,8 +217,30 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 		return tabuListTranscribed;
 	}
 	
-	
-	
+	/**
+	 * reades a file and creates a map based on the given columns
+	 * where the elements of the one column will be the keys in the map 
+	 * and the elements of the other column will be the values in the map
+	 * 
+	 * @param path to the file
+	 * @param keyColumn the column which elements will be the keys
+	 * @param valueColumn the column which elements will be the values
+	 * @return
+	 */
+	private Map<String, String> getMapForColumns(String path, int keyColumn, int valueColumn){
+		Map<String, String> rval = new HashMap<>();
+		
+		final List<String> lines = getLinesFromFile(path);
+		for(String line : lines){
+			String[] cols = line.split("\t");
+			int numberOfColumns = cols.length -1;
+			if(numberOfColumns >= keyColumn && numberOfColumns >= valueColumn){
+				rval.put(cols[keyColumn], cols[valueColumn]);
+			}
+		}
+		
+		return rval;
+	}
 
 	/***
 	 * 
