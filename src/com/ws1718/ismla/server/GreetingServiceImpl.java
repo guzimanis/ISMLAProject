@@ -1,27 +1,24 @@
 package com.ws1718.ismla.server;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
 
-import javax.servlet.ServletContext;
+
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
-import com.sun.webkit.ThemeClient;
 import com.ws1718.ismla.client.GreetingService;
 import com.ws1718.ismla.server.distance.Levenshtein;
 import com.ws1718.ismla.server.transliteration.LanguageTransliterator;
 import com.ws1718.ismla.server.transliteration.PhoneticTransliterator;
 import com.ws1718.ismla.server.transliteration.SourceTransliteration;
 import com.ws1718.ismla.shared.LanguageCodes;
+import com.ws1718.ismla.shared.TabooWordSummary;
 
 /**
  * The server-side implementation of the RPC service.
@@ -91,25 +88,27 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 		System.out.println();
 		System.out.println();
 
+		
 		/*
 		 * tabu word transformation to phonetic representation
 		 */
-		final Map<LanguageCodes, List<String>> phonologicalRepresentationOfTabuWords = getPhonologicalRepresentationOfTabuWords();
-		//create
-		Map<LanguageCodes, List<String>> simplePhonologicalRepresentationOfTabuWords = PhoneticTransliterator.getSimplePhonologicalRepresentationOfTabuWords(ipaSimple, phonologicalRepresentationOfTabuWords);
+		Map<LanguageCodes, List<TabooWordSummary>> phonologicalRepresentationOfTabuWords = getPhonologicalRepresentationOfTabuWords();
+		//add simple phon
+		phonologicalRepresentationOfTabuWords = PhoneticTransliterator.getSimplePhonologicalRepresentationOfTabuWords(ipaSimple, phonologicalRepresentationOfTabuWords);
 		
 		//print
 		for(LanguageCodes c : phonologicalRepresentationOfTabuWords.keySet()){
-			List<String> originalPhonWords = phonologicalRepresentationOfTabuWords.get(c);
-			List<String> simplePhonWords = simplePhonologicalRepresentationOfTabuWords.get(c);
+		
+			List<TabooWordSummary> simplePhonWords = phonologicalRepresentationOfTabuWords.get(c);
 			
 			System.out.println(c + " tabu words original phon -> simple phon");
 			System.out.println("--------------------------------------------------------");
-			for(int i = 0; i < originalPhonWords.size(); i++){
-				String originalWord = originalPhonWords.get(i);
-				String simpleWord = simplePhonWords.get(i);
+			for(int i = 0; i < simplePhonWords.size(); i++){
+				String originalWord = simplePhonWords.get(i).getTabooWord();
+				String originalPhonWord = simplePhonWords.get(i).getPhonologicalRepresentationOfTabooWord();
+				String simplePhonWord = simplePhonWords.get(i).getSimplefiedPhonologicalRepresentationOfTabooWord();
 				
-				System.out.println(originalWord + " -> " + simpleWord);
+				System.out.println(originalWord + " -> " + originalPhonWord + " -> " + simplePhonWord);
 			}
 			System.out.println();
 			System.out.println();
@@ -117,28 +116,35 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 		}
 		
 		
-		System.out.println("DISTANCE");
-		System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+		
+		
 		/*
 		 * distance
 		 */
+		System.out.println("DISTANCE");
+		System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+		
 		Levenshtein dist = new Levenshtein();
 		for(LanguageCodes c : simplePhonologicalRepresentationOfInput.keySet()){
 			String simplePhonInput = simplePhonologicalRepresentationOfInput.get(c);
 			
-			LanguageCodes closestLanguage;
 			float lowestDistance = 999;
-			String closestPhonTabuWord = "";
+			String closestSimplePhonTabuWord = "";
+			String closestPhonTabooWord = "";
+			String closestOriginalWord = "";
 			
-			for(LanguageCodes ct : simplePhonologicalRepresentationOfTabuWords.keySet()){
+			for(LanguageCodes ct : phonologicalRepresentationOfTabuWords.keySet()){
 				if(c.equals(ct)){
 					
-					List<String> phonTabuWords = simplePhonologicalRepresentationOfTabuWords.get(ct);
-					for(String phonTabuWord : phonTabuWords){
-						float distance = dist.getDistance(simplePhonInput, phonTabuWord);
+					List<TabooWordSummary> phonTabuWords = phonologicalRepresentationOfTabuWords.get(ct);
+					for(TabooWordSummary phonTabuWord : phonTabuWords){
+						String simplePhonTabooWord = phonTabuWord.getSimplefiedPhonologicalRepresentationOfTabooWord();
+						float distance = dist.getDistance(simplePhonInput, simplePhonTabooWord);
 						if(distance < lowestDistance){
 							lowestDistance = distance;
-							closestPhonTabuWord = phonTabuWord;
+							closestSimplePhonTabuWord = simplePhonTabooWord;
+							closestPhonTabooWord = phonTabuWord.getPhonologicalRepresentationOfTabooWord();
+							closestOriginalWord = phonTabuWord.getTabooWord();
 						}
 					}
 					
@@ -146,7 +152,7 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 			}
 			
 			System.out.println("In " + c + " the input (with a distance of " + lowestDistance + ") equals the most to: ");
-			System.out.println(closestPhonTabuWord);
+			System.out.println(closestOriginalWord + " (original) -> " + closestPhonTabooWord + " (phon) -> " + closestSimplePhonTabuWord + " (simple phon) ");
 			System.out.println();
 			
 		}
@@ -182,8 +188,8 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 	 * creates a mapping of all languages to the phonetic representation of the corresponding tabu words
 	 * @return a map
 	 */
-	private Map<LanguageCodes, List<String>> getPhonologicalRepresentationOfTabuWords() {
-		Map<LanguageCodes, List<String>> rval = new HashMap<LanguageCodes, List<String>>();
+	private Map<LanguageCodes, List<TabooWordSummary>> getPhonologicalRepresentationOfTabuWords() {
+		Map<LanguageCodes, List<TabooWordSummary>> rval = new HashMap<LanguageCodes, List<TabooWordSummary>>();
 
 		for (LanguageCodes c : LanguageCodes.values()) {
 			if (c.equals(LanguageCodes.UNKNOWN) || c.equals(LanguageCodes.EN) || c.equals(LanguageCodes.FRA)
@@ -192,10 +198,16 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 				continue;
 
 			final List<String> tabuList = getLinesFromFile(PREFIX_TABU + c + SUFFIX_TABU);
-			final List<String> phonetics = PhoneticTransliterator.getPhoneticRepresentationForList(tabuList, c);
+			
+			List<TabooWordSummary> summary = new ArrayList<>();
+			for(String tabooWord : tabuList){
+				String phonologicalRepresentationOfTabooWord = PhoneticTransliterator.getPhoneticRepresentation(tabooWord, c);
+				summary.add(new TabooWordSummary(c, tabooWord, phonologicalRepresentationOfTabooWord));
+			}
+			
 
-			// fill the |language -> tabu words| map
-			rval.put(c, phonetics);
+			// fill the |language -> tabu words summary| map
+			rval.put(c, summary);
 		}
 
 		/*
@@ -214,7 +226,12 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 		 * thai
 		 */
 		LanguageCodes th = LanguageCodes.TH;
-		rval.put(th, getColumnForLanguage(th, 1));
+		List<String> originalThaiTabooWords = getColumnForLanguage(th, 0);
+		List<String> phonologicalRepresentationOfThaiTabooWords = getColumnForLanguage(th, 1);
+		List<TabooWordSummary> summary = new ArrayList<>();
+		for(int i = 0; i < originalThaiTabooWords.size(); i++){
+			summary.add(new TabooWordSummary(th, originalThaiTabooWords.get(i), phonologicalRepresentationOfThaiTabooWords.get(i)));
+		}
 
 		/*
 		 * arabic
@@ -237,10 +254,17 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 	 * @param col the files column where the respective information can be found
 	 * @return a list
 	 */
-	private List<String> phonologicalRepresentationForToTranscribeLanguage(LanguageCodes c, int col){
+	private List<TabooWordSummary> phonologicalRepresentationForToTranscribeLanguage(LanguageCodes c, int col){
+		List<TabooWordSummary> rval = new ArrayList<>();
+		
 		List<String> tabuListTranscribed = getColumnForLanguage(c, col);
-		//phonetics
-		return PhoneticTransliterator.getPhoneticRepresentationForList(tabuListTranscribed, c);
+		
+		for(String tabooWord : tabuListTranscribed){
+			String phonologicalRepresentationOfTabooWord = PhoneticTransliterator.getPhoneticRepresentation(tabooWord, c);
+			rval.add(new TabooWordSummary(c, tabooWord, phonologicalRepresentationOfTabooWord));
+		}
+		
+		return rval;
 	}
 	
 	/**

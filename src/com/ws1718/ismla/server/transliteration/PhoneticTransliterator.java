@@ -8,6 +8,7 @@ import java.util.Map;
 import org.northeuralex.util.convert.GeneralTransliterator;
 
 import com.ws1718.ismla.shared.LanguageCodes;
+import com.ws1718.ismla.shared.TabooWordSummary;
 
 public class PhoneticTransliterator {
 
@@ -65,20 +66,20 @@ public class PhoneticTransliterator {
 	 *            language code
 	 * @return list
 	 */
-	public static List<String> getPhoneticRepresentation(String input, LanguageCodes c) {
-		List<String> rval = new ArrayList<>();
+	public static String getPhoneticRepresentation(String input, LanguageCodes c) {
+		String rval = "";
 
 		if (c.equals(LanguageCodes.DEU) || c.equals(LanguageCodes.SPA) || c.equals(LanguageCodes.ITA)
 				|| c.equals(LanguageCodes.KOR) || c.equals(LanguageCodes.NLD) || c.equals(LanguageCodes.POL)
 				|| c.equals(LanguageCodes.POR) || c.equals(LanguageCodes.SWE) || c.equals(LanguageCodes.TUR)
 				|| c.equals(LanguageCodes.ARA) || c.equals(LanguageCodes.RUS)) {
 
-			rval.add(GeneralTransliterator.orthToIPA(c.code(), input));
+			rval = GeneralTransliterator.orthToIPA(c.code(), input);
 
-		} else if (c.equals(LanguageCodes.FAS) || c.equals(LanguageCodes.HIN) || c.equals(LanguageCodes.JPN)
+		} else if (c.equals(LanguageCodes.FAS) || /*c.equals(LanguageCodes.HIN) ||*/ c.equals(LanguageCodes.JPN)
 				|| c.equals(LanguageCodes.CMN)) {
 
-			rval.add(GeneralTransliterator.prncToIPA(c.code(), input));
+			rval = GeneralTransliterator.prncToIPA(c.code(), input);
 
 		}
 
@@ -164,25 +165,26 @@ public class PhoneticTransliterator {
 	 * @return a map from languages to the corresponding simplified ipa
 	 *         representation
 	 */
-	public static Map<LanguageCodes, List<String>> getSimplePhonologicalRepresentationOfTabuWords(Map<String, String> simpleIpaMapping, Map<LanguageCodes, List<String>> phonologicalRepresentations) {
-		Map<LanguageCodes, List<String>> rval = new HashMap<>();
+	public static Map<LanguageCodes, List<TabooWordSummary>> getSimplePhonologicalRepresentationOfTabuWords(Map<String, String> simpleIpaMapping, Map<LanguageCodes, List<TabooWordSummary>> phonologicalRepresentations) {
+		Map<LanguageCodes, List<TabooWordSummary>> rval = new HashMap<>();
 
 		// transformation of phonological representation to simplified version
 		for (LanguageCodes c : phonologicalRepresentations.keySet()) {
 			
-			final List<String> tabuWords = phonologicalRepresentations.get(c);
-			List<String> simpleTabuWords = new ArrayList<>();
-			for (String tabuWord : tabuWords) {
+			final List<TabooWordSummary> tabuWords = phonologicalRepresentations.get(c);
+			
+			for (TabooWordSummary tbs : tabuWords) {
+				String phonologicalRepresentationOfTabuWord = tbs.getPhonologicalRepresentationOfTabooWord();
 				StringBuilder sb = new StringBuilder();
-				for (int i = 0; i < tabuWord.length(); i++) {
+				for (int i = 0; i < phonologicalRepresentationOfTabuWord.length(); i++) {
 				
-					if (simpleIpaMapping.containsKey(tabuWord.charAt(i) + "")) {
-						sb.append(simpleIpaMapping.get(tabuWord.charAt(i) + ""));
+					if (simpleIpaMapping.containsKey(phonologicalRepresentationOfTabuWord.charAt(i) + "")) {
+						sb.append(simpleIpaMapping.get(phonologicalRepresentationOfTabuWord.charAt(i) + ""));
 					}
 				}
-				simpleTabuWords.add(sb.toString());
+				tbs.setSimplefiedPhonologicalRepresentationOfTabooWord(sb.toString());
 			}
-			rval.put(c, simpleTabuWords);
+			rval.put(c, tabuWords);
 		}
 
 		return rval;
