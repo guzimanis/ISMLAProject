@@ -8,8 +8,8 @@ c	t
 ɟ	t
 k	k
 g	k
-ɡ	k
 q	k
+ɡ	k
 ɢ	k
 ʔ	#
 m	n
@@ -38,6 +38,8 @@ z	s
 ʂ	s
 ʐ	s
 ç	s
+ɕ	s
+ʑ	s
 ʝ	j
 x	h	
 ɣ	r
@@ -47,6 +49,7 @@ x	h
 ʕ	r
 h	h
 ɦ	h
+ɧ
 ɬ	s
 ɮ	s
 ʋ	f
@@ -58,9 +61,11 @@ l	l
 ɭ	l
 ʎ	j
 ʟ	l
+ɫ	l
 i	e	
 y	e
 ɨ	e
+ɥ	e
 ʉ	o
 ɯ	e
 u	o
@@ -68,6 +73,7 @@ u	o
 ʏ	o
 ʊ	o
 e	e
+ê	e
 ø	o
 ɘ	o
 ɵ	o
@@ -85,6 +91,7 @@ o	o
 a	a
 ä	a
 ɑ	a
+â	a
 ɒ	o
 
 

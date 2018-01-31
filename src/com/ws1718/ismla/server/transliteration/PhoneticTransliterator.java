@@ -107,7 +107,7 @@ public class PhoneticTransliterator {
 				rval.add(GeneralTransliterator.orthToIPA(c.code(), s));
 			}
 
-		} else if (c.equals(LanguageCodes.FAS) || c.equals(LanguageCodes.HIN) || c.equals(LanguageCodes.JPN)
+		} else if (c.equals(LanguageCodes.FAS) || /*c.equals(LanguageCodes.HIN) ||*/ c.equals(LanguageCodes.JPN)
 				|| c.equals(LanguageCodes.CMN)) {
 
 			for (String s : inputs) {

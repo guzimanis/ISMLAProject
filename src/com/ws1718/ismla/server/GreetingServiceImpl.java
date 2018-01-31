@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -115,6 +116,31 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 			System.out.println();
 		}
 		
+		System.out.println("******************************************************");
+		System.out.println("******************************************************");
+		System.out.println("******************************************************");
+		HashSet<String> allPhonSymbolsUsed = new HashSet<>();
+		
+		for(LanguageCodes c : phonologicalRepresentationOfTabuWords.keySet()){
+			List<String> originalPhonWords = phonologicalRepresentationOfTabuWords.get(c);
+			
+			for(String phonWord : originalPhonWords){
+				for(int i = 0; i < phonWord.length(); i++){
+					String ipaSymbol = phonWord.charAt(i)+"";
+					allPhonSymbolsUsed.add(ipaSymbol);
+				}
+			}
+		}
+		
+		for(String ipaSymbol : allPhonSymbolsUsed){
+			System.out.println(ipaSymbol);
+		}
+		
+		System.out.println("******************************************************");
+		System.out.println("******************************************************");
+		System.out.println("******************************************************");
+		
+		
 		
 		/*
 		 * distance
@@ -209,6 +235,12 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 		 */
 		LanguageCodes ara = LanguageCodes.ARA;
 		rval.put(ara, phonologicalRepresentationForToTranscribeLanguage(ara, 1));
+		
+		/*
+		 * chinese
+		 */
+		LanguageCodes cmn = LanguageCodes.CMN;
+		rval.put(cmn, phonologicalRepresentationForToTranscribeLanguage(cmn, 1));
 
 		return rval;
 	}
