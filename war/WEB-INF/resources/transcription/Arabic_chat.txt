@@ -1,30 +1,51 @@
-﻿ء أ ؤ إ ئ آ‬	 2	ʔ
-ا‬	a e è	æ(ː) a(ː) ɑ(ː) ɛ(ː) ɐ
-ب‬	b p	b p
-ت‬	t	t t̪ t͡s
-ث‬	s th	s θ
-ج‬	j dj g	ʒ d͡ʒ ɟ ɟ͡ʝ ɡ
-ح	7	ħ ʜ
-خ‬	kh	x χ
-د‬	d	d d̪
-ذ‬	z th dh	z ð
-ر‬	r	ɾ r rˤ
-ز‬	z	z
-س‬	s	s
-ش‬	sh ch	ʃ
-ص‬	s 9	sˤ sˠ
-ض‬	d dh	dˤ d̪ˤ d̪ˠ
-ط‬	t	tˤ t̪ˤ t̪ˠ
-ظ‬	z th dh	zˤ ðˤ ðˠ
-ع‬	3	ʕ ʢ
-غ‬	gh 3'	ɣ ʁ
-ف‬	f v	f v
-ق‬	2 g 8 9 q	ʔ ɡ ɢ q
-ك‬	k g	k ɡ
-ل‬	l	l ɫ
-م‬	m	m
-ن‬	n	n
-ه‬	h a e ah eh é	h /a e/
-ة‬	a e eh at et é	/a e at et/
-و‬	w o ou oo u	w o(ː) u(ː)
-ي‬	y i ee ei ai a é	j i(ː) e(ː) /a/
+a	a
+aa	a:
+b	b
+t	t	
+th	þ
+j	dž
+dj	dž
+g	dž
+7	ħ	
+kh	x
+d	d
+dh	ð
+r	r
+z	z
+s	s
+sh	š
+ch	š
+9	S
+3	3
+gh	G
+3'	G
+f	f
+v	f
+2	q
+8	q
+9	q
+q	q
+k	k
+l	l
+m	m
+n	n
+h	h
+a	a
+e	i
+ah	a
+eh	a
+é	h
+w	w
+o	u:
+ou	u:
+oo	u:
+u	w
+y	j
+i	i
+ii	i:
+ee	i:
+ei	j
+ai	ai
+a	a
+é	i
+p	b

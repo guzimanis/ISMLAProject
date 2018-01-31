@@ -78,7 +78,7 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 		for(LanguageCodes c : phonologicalRepresentationsOfInput.keySet()){
 			String originalPhonWord = phonologicalRepresentationsOfInput.get(c);
 			String simplifiedPhonWord = simplePhonologicalRepresentationOfInput.get(c);
-			System.out.println(originalPhonWord + " -> " + simplifiedPhonWord);
+			System.out.println(c + " -> " + originalPhonWord + " -> " + simplifiedPhonWord);
 		}
 		
 		System.out.println();
@@ -116,32 +116,9 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 			System.out.println();
 		}
 		
-		System.out.println("******************************************************");
-		System.out.println("******************************************************");
-		System.out.println("******************************************************");
-		HashSet<String> allPhonSymbolsUsed = new HashSet<>();
 		
-		for(LanguageCodes c : phonologicalRepresentationOfTabuWords.keySet()){
-			List<String> originalPhonWords = phonologicalRepresentationOfTabuWords.get(c);
-			
-			for(String phonWord : originalPhonWords){
-				for(int i = 0; i < phonWord.length(); i++){
-					String ipaSymbol = phonWord.charAt(i)+"";
-					allPhonSymbolsUsed.add(ipaSymbol);
-				}
-			}
-		}
-		
-		for(String ipaSymbol : allPhonSymbolsUsed){
-			System.out.println(ipaSymbol);
-		}
-		
-		System.out.println("******************************************************");
-		System.out.println("******************************************************");
-		System.out.println("******************************************************");
-		
-		
-		
+		System.out.println("DISTANCE");
+		System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 		/*
 		 * distance
 		 */
@@ -151,17 +128,26 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 			
 			LanguageCodes closestLanguage;
 			float lowestDistance = 999;
+			String closestPhonTabuWord = "";
 			
 			for(LanguageCodes ct : simplePhonologicalRepresentationOfTabuWords.keySet()){
-				List<String> phonTabuWords = simplePhonologicalRepresentationOfTabuWords.get(ct);
-				for(String phonTabuWord : phonTabuWords){
-					float distance = dist.getDistance(simplePhonInput, phonTabuWord);
-					if(distance < lowestDistance){
-						lowestDistance = distance;
-						closestLanguage = ct;
+				if(c.equals(ct)){
+					
+					List<String> phonTabuWords = simplePhonologicalRepresentationOfTabuWords.get(ct);
+					for(String phonTabuWord : phonTabuWords){
+						float distance = dist.getDistance(simplePhonInput, phonTabuWord);
+						if(distance < lowestDistance){
+							lowestDistance = distance;
+							closestPhonTabuWord = phonTabuWord;
+						}
 					}
+					
 				}
 			}
+			
+			System.out.println("In " + c + " the input (with a distance of " + lowestDistance + ") equals the most to: ");
+			System.out.println(closestPhonTabuWord);
+			System.out.println();
 			
 		}
 
@@ -179,7 +165,7 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 	private Map<LanguageCodes, String> getPhonologicalRepresentationsOfInput(String input) {
 
 		final List<String> arabicChat = getLinesFromFile(ARABIC_TRANSLIT);
-		String arabicInputTransliterated = LanguageTransliterator.transcribeArabicToPhonetic(input, arabicChat);
+		String arabicInputTransliterated = LanguageTransliterator.transcribeArabicToOfficialTranscription(input, arabicChat);
 
 		final List<String> russianTranslit = getLinesFromFile(RUSSIAN_TRANSLIT);
 		String russianInputTransliterated = LanguageTransliterator.transcribeToRussian(input, russianTranslit);
