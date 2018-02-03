@@ -14,6 +14,7 @@ import java.util.Map;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.ws1718.ismla.client.GreetingService;
 import com.ws1718.ismla.server.distance.Levenshtein;
+import com.ws1718.ismla.server.distance.SimilarityMeasures;
 import com.ws1718.ismla.server.transliteration.LanguageTransliterator;
 import com.ws1718.ismla.server.transliteration.PhoneticTransliterator;
 import com.ws1718.ismla.server.transliteration.SourceTransliteration;
@@ -132,6 +133,7 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 			String closestSimplePhonTabuWord = "";
 			String closestPhonTabooWord = "";
 			String closestOriginalWord = "";
+			String longestCommonSubstring = "";
 			
 			for(LanguageCodes ct : phonologicalRepresentationOfTabuWords.keySet()){
 				if(c.equals(ct)){
@@ -139,8 +141,69 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 					List<TabooWordSummary> phonTabuWords = phonologicalRepresentationOfTabuWords.get(ct);
 					for(TabooWordSummary phonTabuWord : phonTabuWords){
 						String simplePhonTabooWord = phonTabuWord.getSimplefiedPhonologicalRepresentationOfTabooWord();
-						float distance = dist.getDistance(simplePhonInput, simplePhonTabooWord);
+						String lcs = SimilarityMeasures.longestCommonSubstring(simplePhonInput, simplePhonTabooWord);
+						
+						String[] beforeAndAfterLCSInput = simplePhonInput.split(lcs, 2); 
+						String[] beforeAndAfterLCSTabooWord = simplePhonTabooWord.split(lcs, 2);
+						
+						/*
+						 * before / after means in regard to the LCS
+						 */
+						float distance = 0;
+						
+						if(lcs != null && lcs.length() > 0){
+//							System.out.println();
+//							System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+//							System.out.println(simplePhonInput + " / " + simplePhonTabooWord);
+							
+							String beforeInput = "";
+							if(beforeAndAfterLCSInput.length > 1 || lcs.charAt(0) != simplePhonInput.charAt(0)){
+								beforeInput = beforeAndAfterLCSInput[0];
+							}
+							
+							String beforeTabooWord = "";
+							if(beforeAndAfterLCSTabooWord.length > 1 || lcs.charAt(0) != simplePhonTabooWord.charAt(0)){
+								beforeTabooWord = beforeAndAfterLCSTabooWord[0];
+							}
+							
+							String afterInput = "";
+							if(beforeAndAfterLCSInput.length > 1){
+								afterInput = beforeAndAfterLCSInput[1];
+							}else if(beforeAndAfterLCSInput.length > 0 && lcs.charAt(0) == simplePhonInput.charAt(0)){
+								afterInput = beforeAndAfterLCSInput[0];
+							}
+							
+							String afterTabooWord = "";
+							if(beforeAndAfterLCSTabooWord.length > 1){
+								afterTabooWord = beforeAndAfterLCSTabooWord[1];
+							}else if(beforeAndAfterLCSTabooWord.length > 0 && lcs.charAt(0) == simplePhonTabooWord.charAt(0)){
+								afterTabooWord = beforeAndAfterLCSTabooWord[0];
+							}
+							
+							//weighting
+							float before = dist.getDistance(beforeInput, beforeTabooWord);
+							float after = dist.getDistance(afterInput, afterTabooWord);
+							distance = (before * 3) + (after * 2);
+							
+//							System.out.println("prefix: " + before + " " + beforeInput + " / " + beforeTabooWord);
+//							System.out.println("suffix: " + after + " " + afterInput + " / " + afterTabooWord);
+//							System.out.println("total distance: " + distance);
+//							System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+//							System.out.println();
+						
+						}else{
+//							System.out.println("***************************************************");
+//							System.out.println(simplePhonInput + " / " + simplePhonTabooWord);
+							distance = dist.getDistance(simplePhonInput, simplePhonTabooWord);
+						}
+						
+						
+						
+						
+//						float distance = dist.getDistance(simplePhonInput, simplePhonTabooWord);
 						if(distance < lowestDistance){
+							
+							longestCommonSubstring = lcs;
 							lowestDistance = distance;
 							closestSimplePhonTabuWord = simplePhonTabooWord;
 							closestPhonTabooWord = phonTabuWord.getPhonologicalRepresentationOfTabooWord();
@@ -151,7 +214,10 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 				}
 			}
 			
-			System.out.println("In " + c + " the input (with a distance of " + lowestDistance + ") equals the most to: ");
+			System.out.println(c);
+			System.out.println("input (simple phon): " + simplePhonInput);
+			System.out.println("distance " + lowestDistance);
+			System.out.println("longest common substring: " + longestCommonSubstring);
 			System.out.println(closestOriginalWord + " (original) -> " + closestPhonTabooWord + " (phon) -> " + closestSimplePhonTabuWord + " (simple phon) ");
 			System.out.println();
 			

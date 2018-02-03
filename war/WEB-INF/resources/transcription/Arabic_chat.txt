@@ -23,7 +23,6 @@ f	f
 v	f
 2	q
 8	q
-9	q
 q	q
 k	k
 l	l
@@ -34,7 +33,6 @@ a	a
 e	i
 ah	a
 eh	a
-é	h
 w	w
 o	u:
 ou	u:
@@ -46,6 +44,5 @@ ii	i:
 ee	i:
 ei	j
 ai	ai
-a	a
 é	i
 p	b

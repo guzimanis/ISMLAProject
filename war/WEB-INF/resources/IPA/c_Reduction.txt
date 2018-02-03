@@ -1,0 +1,10 @@
+ts	c
+tz	c
+tʃ	c
+tʒ	c
+tʂ	c
+tʐ	c
+tç	c
+tʝ	c
+tɬ	c
+tɮ	c
