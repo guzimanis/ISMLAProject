@@ -134,8 +134,7 @@ public class PhoneticTransliterator {
 	 * @return a map from languages to the corresponding simplified ipa
 	 *         representation
 	 */
-	public static Map<LanguageCodes, String> getSimplePhonologicalRepresentationOfInput(
-			Map<String, String> simpleIpaMapping, Map<LanguageCodes, String> phonologicalRepresentations) {
+	public static Map<LanguageCodes, String> getSimplePhonologicalRepresentationOfInput(Map<String, String> simpleIpaMapping, Map<LanguageCodes, String> phonologicalRepresentations) {
 
 		Map<LanguageCodes, String> rval = new HashMap<>();
 
@@ -145,9 +144,19 @@ public class PhoneticTransliterator {
 			StringBuilder sb = new StringBuilder();
 			for (int i = 0; i < phonWord.length(); i++) {
 
-				if (simpleIpaMapping.containsKey(phonWord.charAt(i) + "")) {
-					sb.append(simpleIpaMapping.get(phonWord.charAt(i) + ""));
+				if(phonWord.charAt(i) == 't' && i < phonWord.length()-1){
+					//potential silibant like ts -> c
+					String potentialSilibant = phonWord.substring(i, i+2);
+					if(simpleIpaMapping.containsKey(potentialSilibant)){
+						sb.append(simpleIpaMapping.get(potentialSilibant));
+						i++;
+					}
+				}else{
+					if (simpleIpaMapping.containsKey(phonWord.charAt(i) + "")) {
+						sb.append(simpleIpaMapping.get(phonWord.charAt(i) + ""));
+					}
 				}
+				
 			}
 
 			rval.put(c, sb.toString());
@@ -177,10 +186,19 @@ public class PhoneticTransliterator {
 				String phonologicalRepresentationOfTabuWord = tbs.getPhonologicalRepresentationOfTabooWord();
 				StringBuilder sb = new StringBuilder();
 				for (int i = 0; i < phonologicalRepresentationOfTabuWord.length(); i++) {
-				
-					if (simpleIpaMapping.containsKey(phonologicalRepresentationOfTabuWord.charAt(i) + "")) {
-						sb.append(simpleIpaMapping.get(phonologicalRepresentationOfTabuWord.charAt(i) + ""));
+					
+					if(phonologicalRepresentationOfTabuWord.charAt(i) == 't' && i < phonologicalRepresentationOfTabuWord.length()-1){
+						String potentialSilibant = phonologicalRepresentationOfTabuWord.substring(i, i+2);
+						if(simpleIpaMapping.containsKey(potentialSilibant)){
+							sb.append(simpleIpaMapping.get(potentialSilibant));
+							i++;
+						}
+					}else{
+						if (simpleIpaMapping.containsKey(phonologicalRepresentationOfTabuWord.charAt(i) + "")) {
+							sb.append(simpleIpaMapping.get(phonologicalRepresentationOfTabuWord.charAt(i) + ""));
+						}
 					}
+					
 				}
 				tbs.setSimplefiedPhonologicalRepresentationOfTabooWord(sb.toString());
 			}
