@@ -146,9 +146,9 @@ public class PhoneticTransliterator {
 
 				if(phonWord.charAt(i) == 't' && i < phonWord.length()-1){
 					//potential silibant like ts -> c
-					String potentialSilibant = phonWord.substring(i, i+2);
-					if(simpleIpaMapping.containsKey(potentialSilibant)){
-						sb.append(simpleIpaMapping.get(potentialSilibant));
+					String potentialSibilant = phonWord.substring(i, i+2);
+					if(simpleIpaMapping.containsKey(potentialSibilant)){
+						sb.append(simpleIpaMapping.get(potentialSibilant));
 						i++;
 					}
 				}else{
@@ -188,9 +188,9 @@ public class PhoneticTransliterator {
 				for (int i = 0; i < phonologicalRepresentationOfTabuWord.length(); i++) {
 					
 					if(phonologicalRepresentationOfTabuWord.charAt(i) == 't' && i < phonologicalRepresentationOfTabuWord.length()-1){
-						String potentialSilibant = phonologicalRepresentationOfTabuWord.substring(i, i+2);
-						if(simpleIpaMapping.containsKey(potentialSilibant)){
-							sb.append(simpleIpaMapping.get(potentialSilibant));
+						String potentialSibilant = phonologicalRepresentationOfTabuWord.substring(i, i+2);
+						if(simpleIpaMapping.containsKey(potentialSibilant)){
+							sb.append(simpleIpaMapping.get(potentialSibilant));
 							i++;
 						}
 					}else{
