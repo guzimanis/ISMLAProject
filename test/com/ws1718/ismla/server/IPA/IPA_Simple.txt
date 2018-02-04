@@ -1,0 +1,124 @@
+p	p
+b	p
+t	t
+d	t
+ʈ	t
+ɖ	t
+c	t
+ɟ	t
+k	k
+g	k
+q	k
+ɡ	k
+ɢ	k
+m	n
+ɱ	n
+n	n
+ɳ	n
+ɲ	n
+ŋ	n
+ɴ	n
+ʙ	r
+r	r
+ʀ	r
+ɾ	r
+ɽ	r
+ɸ	f
+β	f
+f	f
+v	f
+θ	f
+ð	f
+w	f
+s	s
+z	s
+ʃ	s
+ʒ	s
+ʂ	s
+ʐ	s
+ç	s
+ɕ	s
+ʑ	s
+ʝ	j
+x	h	
+ɣ	r
+χ	h
+ʁ	f
+ħ	h
+ʕ	r
+h	h
+ɦ	h
+ɧ
+ɬ	s
+ɮ	s
+ʋ	f
+ɹ	r
+ɻ	r
+j	j
+ɰ	r
+l	l
+ɭ	l
+ʎ	j
+ʟ	l
+ɫ	l
+i	e	
+y	e
+ɨ	e
+ɥ	e
+ʉ	o
+ɯ	e
+u	o
+ɪ	e
+ʏ	o
+ʊ	o
+e	e
+ê	e
+ø	o
+ɘ	o
+ɵ	o
+ɤ	o
+o	o
+ə	a
+ɛ	e
+œ	o
+ɜ	a
+ɞ	o
+ʌ	a
+ɔ	o
+æ	e
+ɐ	a
+a	a
+ä	a
+ɑ	a
+â	a
+ɒ	o
+ts	c
+tz	c
+tʃ	c
+tʒ	c
+tʂ	c
+tʐ	c
+tç	c
+tʝ	c
+tɬ	c
+tɮ	c
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

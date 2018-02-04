@@ -1,0 +1,33 @@
+﻿а	a
+б	b 6
+в	v w
+г	g Γ
+д	d Δ
+е	je
+ё	jo
+ж	zh ž
+з	z 3
+и	i
+й	j
+к	k
+л	l
+м	m
+н	n
+о	o
+п	p Π
+р	r
+с	s
+т	t
+у	u
+ф	f
+х	h kh x
+ц	c ts tc
+ч	ch č 4
+ш	sch š 6
+щ	sh shch šč shh
+ъ	'' #
+ы	y
+ь	'
+э	e eh
+ю	yu ju
+я	ya ja 9 9I
