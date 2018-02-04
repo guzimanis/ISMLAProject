@@ -83,6 +83,221 @@ public class ISMLAProjectTests extends TestCase {
 			assertEquals(distance, (float)0);
 		}
 	}
+	
+	
+	
+	public void testItalienTabooWords() {
+		LanguageCodes language = LanguageCodes.ITA;
+		
+	    final Map<String, String> ipaSimple = getMapForColumns(IPA_SIMPLE, 0, 1);
+		Map<LanguageCodes, List<TabooWordSummary>> phonologicalRepresentationOfTabuWords = getPhonologicalRepresentationOfTabuWords();
+		phonologicalRepresentationOfTabuWords = PhoneticTransliterator.getSimplePhonologicalRepresentationOfTabuWords(ipaSimple, phonologicalRepresentationOfTabuWords);
+		
+		
+		List<String> lines = getLinesFromFile(PREFIX_TABU + language + SUFFIX_TABU);
+
+		List<TabooWordSummary> languageSpecificPhonTabooWords = phonologicalRepresentationOfTabuWords.get(language);
+		
+		for(String input : lines){
+			float distance = Float.MAX_VALUE;
+			String phonInput = PhoneticTransliterator.getPhoneticRepresentation(input, language);
+			Map<LanguageCodes, String> phonologicalRepresentationsOfInput = new HashMap<>();
+			phonologicalRepresentationsOfInput.put(language, phonInput);
+			HashMap<LanguageCodes, String> simplePhonInput = (HashMap<LanguageCodes, String>) PhoneticTransliterator.getSimplePhonologicalRepresentationOfInput(ipaSimple, phonologicalRepresentationsOfInput); 
+			String simpleInput = simplePhonInput.get(language);
+			
+			for(TabooWordSummary tbs : languageSpecificPhonTabooWords){
+				String simpleTaboo = tbs.getSimplefiedPhonologicalRepresentationOfTabooWord();
+
+				float dist = WeightedMeasures.weightedLevenshteinWithLCS(simpleInput, simpleTaboo, 1, 1);
+				if(dist < distance){
+					distance = dist;
+				}
+			}
+			
+			assertEquals(distance, (float)0);
+		}
+	}
+	
+	
+	
+	public void testDutchTabooWords() {
+		LanguageCodes language = LanguageCodes.NLD;
+		
+	    final Map<String, String> ipaSimple = getMapForColumns(IPA_SIMPLE, 0, 1);
+		Map<LanguageCodes, List<TabooWordSummary>> phonologicalRepresentationOfTabuWords = getPhonologicalRepresentationOfTabuWords();
+		phonologicalRepresentationOfTabuWords = PhoneticTransliterator.getSimplePhonologicalRepresentationOfTabuWords(ipaSimple, phonologicalRepresentationOfTabuWords);
+		
+		
+		List<String> lines = getLinesFromFile(PREFIX_TABU + language + SUFFIX_TABU);
+
+		List<TabooWordSummary> languageSpecificPhonTabooWords = phonologicalRepresentationOfTabuWords.get(language);
+		
+		for(String input : lines){
+			float distance = Float.MAX_VALUE;
+			String phonInput = PhoneticTransliterator.getPhoneticRepresentation(input, language);
+			Map<LanguageCodes, String> phonologicalRepresentationsOfInput = new HashMap<>();
+			phonologicalRepresentationsOfInput.put(language, phonInput);
+			HashMap<LanguageCodes, String> simplePhonInput = (HashMap<LanguageCodes, String>) PhoneticTransliterator.getSimplePhonologicalRepresentationOfInput(ipaSimple, phonologicalRepresentationsOfInput); 
+			String simpleInput = simplePhonInput.get(language);
+			
+			for(TabooWordSummary tbs : languageSpecificPhonTabooWords){
+				String simpleTaboo = tbs.getSimplefiedPhonologicalRepresentationOfTabooWord();
+
+				float dist = WeightedMeasures.weightedLevenshteinWithLCS(simpleInput, simpleTaboo, 1, 1);
+				if(dist < distance){
+					distance = dist;
+				}
+			}
+			
+			assertEquals(distance, (float)0);
+		}
+	}
+	
+	
+	
+	public void testPolishTabooWords() {
+		LanguageCodes language = LanguageCodes.NLD;
+		
+	    final Map<String, String> ipaSimple = getMapForColumns(IPA_SIMPLE, 0, 1);
+		Map<LanguageCodes, List<TabooWordSummary>> phonologicalRepresentationOfTabuWords = getPhonologicalRepresentationOfTabuWords();
+		phonologicalRepresentationOfTabuWords = PhoneticTransliterator.getSimplePhonologicalRepresentationOfTabuWords(ipaSimple, phonologicalRepresentationOfTabuWords);
+		
+		
+		List<String> lines = getLinesFromFile(PREFIX_TABU + language + SUFFIX_TABU);
+
+		List<TabooWordSummary> languageSpecificPhonTabooWords = phonologicalRepresentationOfTabuWords.get(language);
+		
+		for(String input : lines){
+			float distance = Float.MAX_VALUE;
+			String phonInput = PhoneticTransliterator.getPhoneticRepresentation(input, language);
+			Map<LanguageCodes, String> phonologicalRepresentationsOfInput = new HashMap<>();
+			phonologicalRepresentationsOfInput.put(language, phonInput);
+			HashMap<LanguageCodes, String> simplePhonInput = (HashMap<LanguageCodes, String>) PhoneticTransliterator.getSimplePhonologicalRepresentationOfInput(ipaSimple, phonologicalRepresentationsOfInput); 
+			String simpleInput = simplePhonInput.get(language);
+			
+			for(TabooWordSummary tbs : languageSpecificPhonTabooWords){
+				String simpleTaboo = tbs.getSimplefiedPhonologicalRepresentationOfTabooWord();
+
+				float dist = WeightedMeasures.weightedLevenshteinWithLCS(simpleInput, simpleTaboo, 1, 1);
+				if(dist < distance){
+					distance = dist;
+				}
+			}
+			
+			assertEquals(distance, (float)0);
+		}
+	}
+	
+	
+	
+	public void testPortugueseTabooWords() {
+		LanguageCodes language = LanguageCodes.POR;
+		
+	    final Map<String, String> ipaSimple = getMapForColumns(IPA_SIMPLE, 0, 1);
+		Map<LanguageCodes, List<TabooWordSummary>> phonologicalRepresentationOfTabuWords = getPhonologicalRepresentationOfTabuWords();
+		phonologicalRepresentationOfTabuWords = PhoneticTransliterator.getSimplePhonologicalRepresentationOfTabuWords(ipaSimple, phonologicalRepresentationOfTabuWords);
+		
+		
+		List<String> lines = getLinesFromFile(PREFIX_TABU + language + SUFFIX_TABU);
+
+		List<TabooWordSummary> languageSpecificPhonTabooWords = phonologicalRepresentationOfTabuWords.get(language);
+		
+		for(String input : lines){
+			float distance = Float.MAX_VALUE;
+			String phonInput = PhoneticTransliterator.getPhoneticRepresentation(input, language);
+			Map<LanguageCodes, String> phonologicalRepresentationsOfInput = new HashMap<>();
+			phonologicalRepresentationsOfInput.put(language, phonInput);
+			HashMap<LanguageCodes, String> simplePhonInput = (HashMap<LanguageCodes, String>) PhoneticTransliterator.getSimplePhonologicalRepresentationOfInput(ipaSimple, phonologicalRepresentationsOfInput); 
+			String simpleInput = simplePhonInput.get(language);
+			
+			for(TabooWordSummary tbs : languageSpecificPhonTabooWords){
+				String simpleTaboo = tbs.getSimplefiedPhonologicalRepresentationOfTabooWord();
+
+				float dist = WeightedMeasures.weightedLevenshteinWithLCS(simpleInput, simpleTaboo, 1, 1);
+				if(dist < distance){
+					distance = dist;
+				}
+			}
+			
+			assertEquals(distance, (float)0);
+		}
+	}
+	
+	
+	
+	public void testSpanishTabooWords() {
+		LanguageCodes language = LanguageCodes.SPA;
+		
+	    final Map<String, String> ipaSimple = getMapForColumns(IPA_SIMPLE, 0, 1);
+		Map<LanguageCodes, List<TabooWordSummary>> phonologicalRepresentationOfTabuWords = getPhonologicalRepresentationOfTabuWords();
+		phonologicalRepresentationOfTabuWords = PhoneticTransliterator.getSimplePhonologicalRepresentationOfTabuWords(ipaSimple, phonologicalRepresentationOfTabuWords);
+		
+		
+		List<String> lines = getLinesFromFile(PREFIX_TABU + language + SUFFIX_TABU);
+
+		List<TabooWordSummary> languageSpecificPhonTabooWords = phonologicalRepresentationOfTabuWords.get(language);
+		
+		for(String input : lines){
+			float distance = Float.MAX_VALUE;
+			String phonInput = PhoneticTransliterator.getPhoneticRepresentation(input, language);
+			Map<LanguageCodes, String> phonologicalRepresentationsOfInput = new HashMap<>();
+			phonologicalRepresentationsOfInput.put(language, phonInput);
+			HashMap<LanguageCodes, String> simplePhonInput = (HashMap<LanguageCodes, String>) PhoneticTransliterator.getSimplePhonologicalRepresentationOfInput(ipaSimple, phonologicalRepresentationsOfInput); 
+			String simpleInput = simplePhonInput.get(language);
+			
+			for(TabooWordSummary tbs : languageSpecificPhonTabooWords){
+				String simpleTaboo = tbs.getSimplefiedPhonologicalRepresentationOfTabooWord();
+
+				float dist = WeightedMeasures.weightedLevenshteinWithLCS(simpleInput, simpleTaboo, 1, 1);
+				if(dist < distance){
+					distance = dist;
+				}
+			}
+			
+			assertEquals(distance, (float)0);
+		}
+	}
+	
+	
+	
+	
+	public void testSwedishTabooWords() {
+		LanguageCodes language = LanguageCodes.SWE;
+		
+	    final Map<String, String> ipaSimple = getMapForColumns(IPA_SIMPLE, 0, 1);
+		Map<LanguageCodes, List<TabooWordSummary>> phonologicalRepresentationOfTabuWords = getPhonologicalRepresentationOfTabuWords();
+		phonologicalRepresentationOfTabuWords = PhoneticTransliterator.getSimplePhonologicalRepresentationOfTabuWords(ipaSimple, phonologicalRepresentationOfTabuWords);
+		
+		
+		List<String> lines = getLinesFromFile(PREFIX_TABU + language + SUFFIX_TABU);
+
+		List<TabooWordSummary> languageSpecificPhonTabooWords = phonologicalRepresentationOfTabuWords.get(language);
+		
+		for(String input : lines){
+			float distance = Float.MAX_VALUE;
+			String phonInput = PhoneticTransliterator.getPhoneticRepresentation(input, language);
+			Map<LanguageCodes, String> phonologicalRepresentationsOfInput = new HashMap<>();
+			phonologicalRepresentationsOfInput.put(language, phonInput);
+			HashMap<LanguageCodes, String> simplePhonInput = (HashMap<LanguageCodes, String>) PhoneticTransliterator.getSimplePhonologicalRepresentationOfInput(ipaSimple, phonologicalRepresentationsOfInput); 
+			String simpleInput = simplePhonInput.get(language);
+			
+			for(TabooWordSummary tbs : languageSpecificPhonTabooWords){
+				String simpleTaboo = tbs.getSimplefiedPhonologicalRepresentationOfTabooWord();
+
+				float dist = WeightedMeasures.weightedLevenshteinWithLCS(simpleInput, simpleTaboo, 1, 1);
+				if(dist < distance){
+					distance = dist;
+				}
+			}
+			
+			assertEquals(distance, (float)0);
+		}
+	}
+	
+	
+	
+	
 
 	/************************************
 	 * 
