@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 
 
@@ -40,26 +41,50 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 	//ipa list resources
 	private static final String IPA_LOCATION = "/IPA/";
 	private static final String IPA_SIMPLE = IPA_LOCATION + "IPA_Simple.txt";
+	
+
+	private static final String TEST_LOCATION = "test/";
+	private static final String TEST_FILE = TEST_LOCATION + "threeSyllablesWords.txt";
 
 	public String greetServer(String input) throws IllegalArgumentException {
 
 		String result = "done";
 		
+		List<String> testList = getLinesFromFile(TEST_FILE);
+		List<String> test2List = new ArrayList();
+		StringBuilder sb = new StringBuilder();
+		
+		Random randomGenerator = new Random();
+		for(int i = 0; i < 10; i++){
+			int randomInt = randomGenerator.nextInt(testList.size());
+			String randomElement = testList.get(randomInt);
+			test2List.add(randomElement);	
+		}
+		
+		for(String test : test2List){
+			input = test;
+			int numberOfDist = 0;
+		
+		
+		
+		
 		/*
 		 * equivalence classes of IPA
+		 * 
+		 * 
 		 */
 		final Map<String, String> ipaSimple = getMapForColumns(IPA_SIMPLE, 0, 1);
 		
-		System.out.println("equivalence classes: ");
-		System.out.println("------------------------------------------------------------");
+		//System.out.println("equivalence classes: ");
+		//System.out.println("------------------------------------------------------------");
 		for(String s : ipaSimple.keySet()){
 			String value = ipaSimple.get(s);
-			System.out.println(s + " -> " + value);
+		//	System.out.println(s + " -> " + value);
 		}
 		
-		System.out.println();
-		System.out.println("phonetic representation of the input character level");
-		System.out.println("-------------------------------------------------------------");
+//		System.out.println();
+//		System.out.println("phonetic representation of the input character level");
+//		System.out.println("-------------------------------------------------------------");
 
 		/*
 		 * input transformation to phonetic representation
@@ -79,15 +104,15 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 			System.out.println(c + " -> " + originalPhonWord + " -> " + simplifiedPhonWord);
 		}
 		
-		System.out.println();
-		System.out.println();
-		System.out.println();
-		System.out.println();
-		System.out.println("phonetic representation of the tabu words");
-		System.out.println("#####################################################################################");
-		System.out.println();
-		System.out.println();
-		System.out.println();
+//		System.out.println();
+//		System.out.println();
+//		System.out.println();
+//		System.out.println();
+//		System.out.println("phonetic representation of the tabu words");
+//		System.out.println("#####################################################################################");
+//		System.out.println();
+//		System.out.println();
+//		System.out.println();
 
 		
 		/*
@@ -102,18 +127,18 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 		
 			List<TabooWordSummary> simplePhonWords = phonologicalRepresentationOfTabuWords.get(c);
 			
-			System.out.println(c + " tabu words original phon -> simple phon");
-			System.out.println("--------------------------------------------------------");
+//			System.out.println(c + " tabu words original phon -> simple phon");
+//			System.out.println("--------------------------------------------------------");
 			for(int i = 0; i < simplePhonWords.size(); i++){
 				String originalWord = simplePhonWords.get(i).getTabooWord();
 				String originalPhonWord = simplePhonWords.get(i).getPhonologicalRepresentationOfTabooWord();
 				String simplePhonWord = simplePhonWords.get(i).getSimplefiedPhonologicalRepresentationOfTabooWord();
 				
-				System.out.println(originalWord + " -> " + originalPhonWord + " -> " + simplePhonWord);
+//				System.out.println(originalWord + " -> " + originalPhonWord + " -> " + simplePhonWord);
 			}
-			System.out.println();
-			System.out.println();
-			System.out.println();
+//			System.out.println();
+//			System.out.println();
+//			System.out.println();
 		}
 		
 		
@@ -202,8 +227,14 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 							
 							//weighting
 							float before = dist.getDistance(beforeInput, beforeTabooWord);
+							int longerDistBefore = Math.max(beforeInput.length(), beforeTabooWord.length());
+							before = before / longerDistBefore;
+							
 							float after = dist.getDistance(afterInput, afterTabooWord);
-							distance = (before * 2) + (after * 1);
+							int longerDistAfter = Math.max(afterInput.length(), afterTabooWord.length());
+							after = after / longerDistAfter;
+							distance = (before * 1) + (after * 1);
+							distance = distance / 2;
 							
 //							System.out.println("prefix: " + before + " " + beforeInput + " / " + beforeTabooWord);
 //							System.out.println("suffix: " + after + " " + afterInput + " / " + afterTabooWord);
@@ -234,6 +265,7 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 				}
 			}
 			
+			
 			System.out.println(c);
 			System.out.println("input (simple phon): " + simplePhonInput);
 			System.out.println("distance " + lowestDistance);
@@ -241,7 +273,21 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 			System.out.println(closestOriginalWord + " (original) -> " + closestPhonTabooWord + " (phon) -> " + closestSimplePhonTabuWord + " (simple phon) ");
 			System.out.println();
 			
+			
+			if(lowestDistance < 0.8){
+				numberOfDist++;
+				sb.append(input);
+				sb.append(" -> ");
+				sb.append(numberOfDist);
+				sb.append("\n");
+			
+			
 		}
+		
+		}
+		
+		}
+		System.out.println(sb);
 
 		return result;
 	}
