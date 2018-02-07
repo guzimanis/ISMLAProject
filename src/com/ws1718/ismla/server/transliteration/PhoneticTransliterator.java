@@ -150,6 +150,8 @@ public class PhoneticTransliterator {
 					if(simpleIpaMapping.containsKey(potentialSibilant)){
 						sb.append(simpleIpaMapping.get(potentialSibilant));
 						i++;
+					}else{
+						sb.append(simpleIpaMapping.get(phonWord.charAt(i) + ""));
 					}
 				}else{
 					if (simpleIpaMapping.containsKey(phonWord.charAt(i) + "")) {
@@ -192,6 +194,8 @@ public class PhoneticTransliterator {
 						if(simpleIpaMapping.containsKey(potentialSibilant)){
 							sb.append(simpleIpaMapping.get(potentialSibilant));
 							i++;
+						}else{
+							sb.append(simpleIpaMapping.get(phonologicalRepresentationOfTabuWord.charAt(i) + ""));
 						}
 					}else{
 						if (simpleIpaMapping.containsKey(phonologicalRepresentationOfTabuWord.charAt(i) + "")) {
