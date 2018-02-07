@@ -1,5 +1,5 @@
 p	p
-b	p
+b	b
 t	t
 d	t
 ʈ	t
@@ -8,11 +8,11 @@ c	t
 ɟ	t
 k	k
 g	k
-q	k
+q	g
 ɡ	k
-ɢ	k
-m	n
-ɱ	n
+ɢ	g
+m	m
+ɱ	m
 n	n
 ɳ	n
 ɲ	n
@@ -24,12 +24,12 @@ r	r
 ɾ	r
 ɽ	r
 ɸ	f
-β	f
+β	w
 f	f
-v	f
+v	w
 θ	f
 ð	f
-w	f
+w	w
 s	s
 z	s
 ʃ	s
@@ -48,7 +48,7 @@ x	h
 ʕ	r
 h	h
 ɦ	h
-ɧ
+ɧ	h
 ɬ	s
 ɮ	s
 ʋ	f
