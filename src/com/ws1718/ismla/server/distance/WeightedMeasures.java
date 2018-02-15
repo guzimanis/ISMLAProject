@@ -25,7 +25,7 @@ public class WeightedMeasures {
 		String[] beforeAndAfterLCSInput = s1.split(lcs, 2); 
 		String[] beforeAndAfterLCSTabooWord = s2.split(lcs, 2);
 		
-		if(lcs != null && lcs.length() > 0){
+		if(lcs != null && lcs.length() > 0 && !(lcs.equals(s1) && lcs.equals(s2))){
 			
 			String beforeInput = "";
 			if(beforeAndAfterLCSInput.length > 1 || lcs.charAt(0) != s1.charAt(0)){
@@ -53,8 +53,14 @@ public class WeightedMeasures {
 			
 			//weighting
 			float before = dist.getDistance(beforeInput, beforeTabooWord);
+			int longerDistBefore = Math.max(beforeInput.length(), beforeTabooWord.length());
+			before = before / (longerDistBefore * prefixWeight);
+			
 			float after = dist.getDistance(afterInput, afterTabooWord);
+			int longerDistAfter = Math.max(afterInput.length(), afterTabooWord.length());
+			after = after / longerDistAfter;
 			distance = (before * prefixWeight) + (after * suffixWeight);
+			distance = distance / 2;
 
 		
 		}else{
