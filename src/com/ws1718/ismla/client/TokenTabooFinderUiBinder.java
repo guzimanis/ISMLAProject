@@ -31,11 +31,11 @@ public class TokenTabooFinderUiBinder extends Composite {
 	/**
 	 * distance evaluations
 	 */
-	private static final String CRITICAL = "critical";
+	private static final String CRITICAL = "inappropriate";
 	private static final String CONCERNING = "concerning";
-	private static final String RELEVANT = "relevant";
+	private static final String RELEVANT = "medium";
 	private static final String FINE = "fine";
-	private static final String PERFECT = "perfect";
+	private static final String PERFECT = "appropriate";
 	
 	/**
 	 * 
@@ -168,7 +168,37 @@ public class TokenTabooFinderUiBinder extends Composite {
 		languages[15] = language_15;
 		languages[16] = language_16;
 		
+		
+		translations[0] = translation_00;
+		translations[1] = translation_01;
+		translations[2] = translation_02;
+		translations[3] = translation_03;
+		translations[4] = translation_04;
+		translations[5] = translation_05;
+		translations[6] = translation_06;
+		translations[7] = translation_07;
+		translations[8] = translation_08;
+		translations[9] = translation_09;
+		translations[10] = translation_10;
+		translations[11] = translation_11;
+		translations[12] = translation_12;
+		translations[13] = translation_13;
+		translations[14] = translation_14;
+		translations[15] = translation_15;
+		translations[16] = translation_16;
+		
 	}
+	
+	@UiField
+	HTMLPanel firstLine;
+	@UiField
+	HTMLPanel secondLine;
+	@UiField
+	HTMLPanel thirdLine;
+	@UiField
+	HTMLPanel fourthLine;
+	@UiField
+	HTMLPanel fithLine;
 
 	@UiField
 	TextBox inputBox;
@@ -360,6 +390,44 @@ public class TokenTabooFinderUiBinder extends Composite {
 	private HTMLPanel[] languages = new HTMLPanel[17];
 	
 	
+	@UiField
+	HTMLPanel translation_00;
+	@UiField
+	HTMLPanel translation_01;
+	@UiField
+	HTMLPanel translation_02;
+	@UiField
+	HTMLPanel translation_03;
+	@UiField
+	HTMLPanel translation_04;
+	@UiField
+	HTMLPanel translation_05;
+	@UiField
+	HTMLPanel translation_06;
+	@UiField
+	HTMLPanel translation_07;
+	@UiField
+	HTMLPanel translation_08;
+	@UiField
+	HTMLPanel translation_09;
+	@UiField
+	HTMLPanel translation_10;
+	@UiField
+	HTMLPanel translation_11;
+	@UiField
+	HTMLPanel translation_12;
+	@UiField
+	HTMLPanel translation_13;
+	@UiField
+	HTMLPanel translation_14;
+	@UiField
+	HTMLPanel translation_15;
+	@UiField
+	HTMLPanel translation_16;
+	
+	
+	private HTMLPanel[] translations = new HTMLPanel[17];
+	
 
 
 	private String getText() {
@@ -372,6 +440,12 @@ public class TokenTabooFinderUiBinder extends Composite {
 			@Override
 			public void onKeyUp(KeyUpEvent event) {
 				if (event.getNativeKeyCode() == KeyCodes.KEY_ENTER) {
+					
+					firstLine.setVisible(false);
+					secondLine.setVisible(false);
+					thirdLine.setVisible(false);
+					fourthLine.setVisible(false);
+					fithLine.setVisible(false);
 
 					img_00.setResource(resources.ajaxLoader());
 					img_01.setResource(resources.ajaxLoader());
@@ -405,6 +479,12 @@ public class TokenTabooFinderUiBinder extends Composite {
 								final float distance = t.getDistanceToInput();
 								final String evaluated = distanceEvaluation(distance); 
 								final String colorClass = distanceColorClass(distance);
+								String translation = "not available";
+								if(t.getTranslation() != null && t.getTranslation().length() > 0){
+									translation = t.getTranslation();
+								}
+								
+								
 
 								switch (l) {
 
@@ -414,6 +494,7 @@ public class TokenTabooFinderUiBinder extends Composite {
 									footers[i].setStyleName(colorClass);
 									status[i].getElement().setInnerHTML(evaluated);
 									languages[i].getElement().setInnerHTML(LanguageCodes.fullLanguageName(l).toUpperCase());
+									translations[i].getElement().setInnerHTML(translation);
 									break;
 								case SPA:
 									slots[i].setResource(resources.spanish());
@@ -421,6 +502,7 @@ public class TokenTabooFinderUiBinder extends Composite {
 									footers[i].setStyleName(colorClass);
 									status[i].getElement().setInnerHTML(evaluated);
 									languages[i].getElement().setInnerHTML(LanguageCodes.fullLanguageName(l).toUpperCase());
+									translations[i].getElement().setInnerHTML(translation);
 									break;
 								case FAS:
 									slots[i].setResource(resources.persian());
@@ -428,6 +510,7 @@ public class TokenTabooFinderUiBinder extends Composite {
 									footers[i].setStyleName(colorClass);
 									status[i].getElement().setInnerHTML(evaluated);
 									languages[i].getElement().setInnerHTML(LanguageCodes.fullLanguageName(l).toUpperCase());
+									translations[i].getElement().setInnerHTML(translation);
 									break;
 								case FRA:
 									slots[i].setResource(resources.french());
@@ -435,6 +518,7 @@ public class TokenTabooFinderUiBinder extends Composite {
 									footers[i].setStyleName(colorClass);
 									status[i].getElement().setInnerHTML(evaluated);
 									languages[i].getElement().setInnerHTML(LanguageCodes.fullLanguageName(l).toUpperCase());
+									translations[i].getElement().setInnerHTML(translation);
 									break;
 								case HIN:
 									slots[i].setResource(resources.hindi());
@@ -442,6 +526,7 @@ public class TokenTabooFinderUiBinder extends Composite {
 									footers[i].setStyleName(colorClass);
 									status[i].getElement().setInnerHTML(evaluated);
 									languages[i].getElement().setInnerHTML(LanguageCodes.fullLanguageName(l).toUpperCase());
+									translations[i].getElement().setInnerHTML(translation);
 									break;
 								case ITA:
 									slots[i].setResource(resources.italian());
@@ -449,6 +534,7 @@ public class TokenTabooFinderUiBinder extends Composite {
 									footers[i].setStyleName(colorClass);
 									status[i].getElement().setInnerHTML(evaluated);
 									languages[i].getElement().setInnerHTML(LanguageCodes.fullLanguageName(l).toUpperCase());
+									translations[i].getElement().setInnerHTML(translation);
 									break;
 								case JPN:
 									slots[i].setResource(resources.japanese());
@@ -456,6 +542,7 @@ public class TokenTabooFinderUiBinder extends Composite {
 									footers[i].setStyleName(colorClass);
 									status[i].getElement().setInnerHTML(evaluated);
 									languages[i].getElement().setInnerHTML(LanguageCodes.fullLanguageName(l).toUpperCase());
+									translations[i].getElement().setInnerHTML(translation);
 									break;
 								case KOR:
 									slots[i].setResource(resources.korean());
@@ -463,6 +550,7 @@ public class TokenTabooFinderUiBinder extends Composite {
 									footers[i].setStyleName(colorClass);
 									status[i].getElement().setInnerHTML(evaluated);
 									languages[i].getElement().setInnerHTML(LanguageCodes.fullLanguageName(l).toUpperCase());
+									translations[i].getElement().setInnerHTML(translation);
 									break;
 								case NLD:
 									slots[i].setResource(resources.dutch());
@@ -470,6 +558,7 @@ public class TokenTabooFinderUiBinder extends Composite {
 									footers[i].setStyleName(colorClass);
 									status[i].getElement().setInnerHTML(evaluated);
 									languages[i].getElement().setInnerHTML(LanguageCodes.fullLanguageName(l).toUpperCase());
+									translations[i].getElement().setInnerHTML(translation);
 									break;
 								case POL:
 									slots[i].setResource(resources.polish());
@@ -477,6 +566,7 @@ public class TokenTabooFinderUiBinder extends Composite {
 									footers[i].setStyleName(colorClass);
 									status[i].getElement().setInnerHTML(evaluated);
 									languages[i].getElement().setInnerHTML(LanguageCodes.fullLanguageName(l).toUpperCase());
+									translations[i].getElement().setInnerHTML(translation);
 									break;
 								case POR:
 									slots[i].setResource(resources.portuguese());
@@ -484,6 +574,7 @@ public class TokenTabooFinderUiBinder extends Composite {
 									footers[i].setStyleName(colorClass);
 									status[i].getElement().setInnerHTML(evaluated);
 									languages[i].getElement().setInnerHTML(LanguageCodes.fullLanguageName(l).toUpperCase());
+									translations[i].getElement().setInnerHTML(translation);
 									break;
 								case SWE:
 									slots[i].setResource(resources.swedish());
@@ -491,6 +582,7 @@ public class TokenTabooFinderUiBinder extends Composite {
 									footers[i].setStyleName(colorClass);
 									status[i].getElement().setInnerHTML(evaluated);
 									languages[i].getElement().setInnerHTML(LanguageCodes.fullLanguageName(l).toUpperCase());
+									translations[i].getElement().setInnerHTML(translation);
 									break;
 								case TH:
 									slots[i].setResource(resources.thai());
@@ -498,6 +590,7 @@ public class TokenTabooFinderUiBinder extends Composite {
 									footers[i].setStyleName(colorClass);
 									status[i].getElement().setInnerHTML(evaluated);
 									languages[i].getElement().setInnerHTML(LanguageCodes.fullLanguageName(l).toUpperCase());
+									translations[i].getElement().setInnerHTML(translation);
 									break;
 								case TUR:
 									slots[i].setResource(resources.turkish());
@@ -505,6 +598,7 @@ public class TokenTabooFinderUiBinder extends Composite {
 									footers[i].setStyleName(colorClass);
 									status[i].getElement().setInnerHTML(evaluated);
 									languages[i].getElement().setInnerHTML(LanguageCodes.fullLanguageName(l).toUpperCase());
+									translations[i].getElement().setInnerHTML(translation);
 									break;
 								case CMN:
 									slots[i].setResource(resources.chinese());
@@ -512,6 +606,7 @@ public class TokenTabooFinderUiBinder extends Composite {
 									footers[i].setStyleName(colorClass);
 									status[i].getElement().setInnerHTML(evaluated);
 									languages[i].getElement().setInnerHTML(LanguageCodes.fullLanguageName(l).toUpperCase());
+									translations[i].getElement().setInnerHTML(translation);
 									break;
 								case ARA:
 									slots[i].setResource(resources.arabic());
@@ -519,6 +614,7 @@ public class TokenTabooFinderUiBinder extends Composite {
 									footers[i].setStyleName(colorClass);
 									status[i].getElement().setInnerHTML(evaluated);
 									languages[i].getElement().setInnerHTML(LanguageCodes.fullLanguageName(l).toUpperCase());
+									translations[i].getElement().setInnerHTML(translation);
 									break;
 								case RUS:
 									slots[i].setResource(resources.russian());
@@ -526,12 +622,20 @@ public class TokenTabooFinderUiBinder extends Composite {
 									footers[i].setStyleName(colorClass);
 									status[i].getElement().setInnerHTML(evaluated);
 									languages[i].getElement().setInnerHTML(LanguageCodes.fullLanguageName(l).toUpperCase());
+									translations[i].getElement().setInnerHTML(translation);
 									break;
 
 								default:
 									break;
 								}
 							}
+							
+							
+							firstLine.setVisible(true);
+							secondLine.setVisible(true);
+							thirdLine.setVisible(true);
+							fourthLine.setVisible(true);
+							fithLine.setVisible(true);
 
 						}
 
