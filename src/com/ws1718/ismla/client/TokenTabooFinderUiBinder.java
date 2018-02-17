@@ -27,6 +27,24 @@ public class TokenTabooFinderUiBinder extends Composite {
 			+ "attempting to contact the server. Please check your network " + "connection and try again.";
 
 	private static TokenTabooFinderUiBinderUiBinder uiBinder = GWT.create(TokenTabooFinderUiBinderUiBinder.class);
+	
+	/**
+	 * distance evaluations
+	 */
+	private static final String CRITICAL = "critical";
+	private static final String CONCERNING = "concerning";
+	private static final String RELEVANT = "relevant";
+	private static final String FINE = "fine";
+	private static final String PERFECT = "perfect";
+	
+	/**
+	 * 
+	 */
+	private static final String CRITICAL_COLOR_CLASS = "footer-red";
+	private static final String CONCERNING_COLOR_CLASS = "footer-orange";
+	private static final String RELEVANT_COLOR_CLASS = "footer-yellow";
+	private static final String FINE_COLOR_CLASS = "footer-limegreen";
+	private static final String PERFECT_COLOR_CLASS = "footer-darkgreen";
 
 	/**
 	 * Create a remote service proxy to talk to the server-side Greeting
@@ -96,7 +114,59 @@ public class TokenTabooFinderUiBinder extends Composite {
 		tabooWords[15] = tabooWord_15;
 		tabooWords[16] = tabooWord_16;
 		
+		footers[0] = footer_00;
+		footers[1] = footer_01;
+		footers[2] = footer_02;
+		footers[3] = footer_03;
+		footers[4] = footer_04;
+		footers[5] = footer_05;
+		footers[6] = footer_06;
+		footers[7] = footer_07;
+		footers[8] = footer_08;
+		footers[9] = footer_09;
+		footers[10] = footer_10;
+		footers[11] = footer_11;
+		footers[12] = footer_12;
+		footers[13] = footer_13;
+		footers[14] = footer_14;
+		footers[15] = footer_15;
+		footers[16] = footer_16;
 		
+		status[0] = status_00;
+		status[1] = status_01;
+		status[2] = status_02;
+		status[3] = status_03;
+		status[4] = status_04;
+		status[5] = status_05;
+		status[6] = status_06;
+		status[7] = status_07;
+		status[8] = status_08;
+		status[9] = status_09;
+		status[10] = status_10;
+		status[11] = status_11;
+		status[12] = status_12;
+		status[13] = status_13;
+		status[14] = status_14;
+		status[15] = status_15;
+		status[16] = status_16;
+		
+		languages[0] = language_00;
+		languages[1] = language_01;
+		languages[2] = language_02;
+		languages[3] = language_03;
+		languages[4] = language_04;
+		languages[5] = language_05;
+		languages[6] = language_06;
+		languages[7] = language_07;
+		languages[8] = language_08;
+		languages[9] = language_09;
+		languages[10] = language_10;
+		languages[11] = language_11;
+		languages[12] = language_12;
+		languages[13] = language_13;
+		languages[14] = language_14;
+		languages[15] = language_15;
+		languages[16] = language_16;
 		
 	}
 
@@ -175,6 +245,121 @@ public class TokenTabooFinderUiBinder extends Composite {
 	HTMLPanel tabooWord_16;
 	
 	private HTMLPanel[] tabooWords = new HTMLPanel[17];
+	
+	@UiField
+	HTMLPanel footer_00;
+	@UiField
+	HTMLPanel footer_01;
+	@UiField
+	HTMLPanel footer_02;
+	@UiField
+	HTMLPanel footer_03;
+	@UiField
+	HTMLPanel footer_04;
+	@UiField
+	HTMLPanel footer_05;
+	@UiField
+	HTMLPanel footer_06;
+	@UiField
+	HTMLPanel footer_07;
+	@UiField
+	HTMLPanel footer_08;
+	@UiField
+	HTMLPanel footer_09;
+	@UiField
+	HTMLPanel footer_10;
+	@UiField
+	HTMLPanel footer_11;
+	@UiField
+	HTMLPanel footer_12;
+	@UiField
+	HTMLPanel footer_13;
+	@UiField
+	HTMLPanel footer_14;
+	@UiField
+	HTMLPanel footer_15;
+	@UiField
+	HTMLPanel footer_16;
+	
+	private HTMLPanel[] footers = new HTMLPanel[17];
+	
+	
+	@UiField
+	HTMLPanel status_00;
+	@UiField
+	HTMLPanel status_01;
+	@UiField
+	HTMLPanel status_02;
+	@UiField
+	HTMLPanel status_03;
+	@UiField
+	HTMLPanel status_04;
+	@UiField
+	HTMLPanel status_05;
+	@UiField
+	HTMLPanel status_06;
+	@UiField
+	HTMLPanel status_07;
+	@UiField
+	HTMLPanel status_08;
+	@UiField
+	HTMLPanel status_09;
+	@UiField
+	HTMLPanel status_10;
+	@UiField
+	HTMLPanel status_11;
+	@UiField
+	HTMLPanel status_12;
+	@UiField
+	HTMLPanel status_13;
+	@UiField
+	HTMLPanel status_14;
+	@UiField
+	HTMLPanel status_15;
+	@UiField
+	HTMLPanel status_16;
+	
+	private HTMLPanel[] status = new HTMLPanel[17];
+	
+	
+	@UiField
+	HTMLPanel language_00;
+	@UiField
+	HTMLPanel language_01;
+	@UiField
+	HTMLPanel language_02;
+	@UiField
+	HTMLPanel language_03;
+	@UiField
+	HTMLPanel language_04;
+	@UiField
+	HTMLPanel language_05;
+	@UiField
+	HTMLPanel language_06;
+	@UiField
+	HTMLPanel language_07;
+	@UiField
+	HTMLPanel language_08;
+	@UiField
+	HTMLPanel language_09;
+	@UiField
+	HTMLPanel language_10;
+	@UiField
+	HTMLPanel language_11;
+	@UiField
+	HTMLPanel language_12;
+	@UiField
+	HTMLPanel language_13;
+	@UiField
+	HTMLPanel language_14;
+	@UiField
+	HTMLPanel language_15;
+	@UiField
+	HTMLPanel language_16;
+	
+	private HTMLPanel[] languages = new HTMLPanel[17];
+	
+	
 
 
 	private String getText() {
@@ -213,91 +398,140 @@ public class TokenTabooFinderUiBinder extends Composite {
 						public void onSuccess(List<ClientTabooWordSummary> result) {
 
 							for (int i = 0; i < result.size(); i++) {
-								ClientTabooWordSummary t = result.get(i);
-								LanguageCodes l = t.getLanguage();
-								String tabooWord = t.getTabooWord();
 								
+								final ClientTabooWordSummary t = result.get(i);
+								final LanguageCodes l = t.getLanguage();
+								final String tabooWord = t.getTabooWord();
+								final float distance = t.getDistanceToInput();
+								final String evaluated = distanceEvaluation(distance); 
+								final String colorClass = distanceColorClass(distance);
 
 								switch (l) {
 
 								case DEU:
 									slots[i].setResource(resources.german());
 									tabooWords[i].getElement().setInnerHTML(tabooWord);
+									footers[i].setStyleName(colorClass);
+									status[i].getElement().setInnerHTML(evaluated);
+									languages[i].getElement().setInnerHTML(LanguageCodes.fullLanguageName(l).toUpperCase());
 									break;
 								case SPA:
 									slots[i].setResource(resources.spanish());
 									tabooWords[i].getElement().setInnerHTML(tabooWord);
+									footers[i].setStyleName(colorClass);
+									status[i].getElement().setInnerHTML(evaluated);
+									languages[i].getElement().setInnerHTML(LanguageCodes.fullLanguageName(l).toUpperCase());
 									break;
 								case FAS:
 									slots[i].setResource(resources.persian());
 									tabooWords[i].getElement().setInnerHTML(tabooWord);
+									footers[i].setStyleName(colorClass);
+									status[i].getElement().setInnerHTML(evaluated);
+									languages[i].getElement().setInnerHTML(LanguageCodes.fullLanguageName(l).toUpperCase());
 									break;
 								case FRA:
 									slots[i].setResource(resources.french());
 									tabooWords[i].getElement().setInnerHTML(tabooWord);
+									footers[i].setStyleName(colorClass);
+									status[i].getElement().setInnerHTML(evaluated);
+									languages[i].getElement().setInnerHTML(LanguageCodes.fullLanguageName(l).toUpperCase());
 									break;
 								case HIN:
 									slots[i].setResource(resources.hindi());
 									tabooWords[i].getElement().setInnerHTML(tabooWord);
+									footers[i].setStyleName(colorClass);
+									status[i].getElement().setInnerHTML(evaluated);
+									languages[i].getElement().setInnerHTML(LanguageCodes.fullLanguageName(l).toUpperCase());
 									break;
 								case ITA:
 									slots[i].setResource(resources.italian());
 									tabooWords[i].getElement().setInnerHTML(tabooWord);
+									footers[i].setStyleName(colorClass);
+									status[i].getElement().setInnerHTML(evaluated);
+									languages[i].getElement().setInnerHTML(LanguageCodes.fullLanguageName(l).toUpperCase());
 									break;
 								case JPN:
 									slots[i].setResource(resources.japanese());
 									tabooWords[i].getElement().setInnerHTML(tabooWord);
+									footers[i].setStyleName(colorClass);
+									status[i].getElement().setInnerHTML(evaluated);
+									languages[i].getElement().setInnerHTML(LanguageCodes.fullLanguageName(l).toUpperCase());
 									break;
 								case KOR:
 									slots[i].setResource(resources.korean());
 									tabooWords[i].getElement().setInnerHTML(tabooWord);
+									footers[i].setStyleName(colorClass);
+									status[i].getElement().setInnerHTML(evaluated);
+									languages[i].getElement().setInnerHTML(LanguageCodes.fullLanguageName(l).toUpperCase());
 									break;
 								case NLD:
 									slots[i].setResource(resources.dutch());
 									tabooWords[i].getElement().setInnerHTML(tabooWord);
+									footers[i].setStyleName(colorClass);
+									status[i].getElement().setInnerHTML(evaluated);
+									languages[i].getElement().setInnerHTML(LanguageCodes.fullLanguageName(l).toUpperCase());
 									break;
 								case POL:
 									slots[i].setResource(resources.polish());
 									tabooWords[i].getElement().setInnerHTML(tabooWord);
+									footers[i].setStyleName(colorClass);
+									status[i].getElement().setInnerHTML(evaluated);
+									languages[i].getElement().setInnerHTML(LanguageCodes.fullLanguageName(l).toUpperCase());
 									break;
 								case POR:
 									slots[i].setResource(resources.portuguese());
 									tabooWords[i].getElement().setInnerHTML(tabooWord);
+									footers[i].setStyleName(colorClass);
+									status[i].getElement().setInnerHTML(evaluated);
+									languages[i].getElement().setInnerHTML(LanguageCodes.fullLanguageName(l).toUpperCase());
 									break;
 								case SWE:
 									slots[i].setResource(resources.swedish());
 									tabooWords[i].getElement().setInnerHTML(tabooWord);
+									footers[i].setStyleName(colorClass);
+									status[i].getElement().setInnerHTML(evaluated);
+									languages[i].getElement().setInnerHTML(LanguageCodes.fullLanguageName(l).toUpperCase());
 									break;
 								case TH:
 									slots[i].setResource(resources.thai());
 									tabooWords[i].getElement().setInnerHTML(tabooWord);
+									footers[i].setStyleName(colorClass);
+									status[i].getElement().setInnerHTML(evaluated);
+									languages[i].getElement().setInnerHTML(LanguageCodes.fullLanguageName(l).toUpperCase());
 									break;
 								case TUR:
 									slots[i].setResource(resources.turkish());
 									tabooWords[i].getElement().setInnerHTML(tabooWord);
+									footers[i].setStyleName(colorClass);
+									status[i].getElement().setInnerHTML(evaluated);
+									languages[i].getElement().setInnerHTML(LanguageCodes.fullLanguageName(l).toUpperCase());
 									break;
 								case CMN:
 									slots[i].setResource(resources.chinese());
 									tabooWords[i].getElement().setInnerHTML(tabooWord);
+									footers[i].setStyleName(colorClass);
+									status[i].getElement().setInnerHTML(evaluated);
+									languages[i].getElement().setInnerHTML(LanguageCodes.fullLanguageName(l).toUpperCase());
 									break;
 								case ARA:
 									slots[i].setResource(resources.arabic());
 									tabooWords[i].getElement().setInnerHTML(tabooWord);
+									footers[i].setStyleName(colorClass);
+									status[i].getElement().setInnerHTML(evaluated);
+									languages[i].getElement().setInnerHTML(LanguageCodes.fullLanguageName(l).toUpperCase());
 									break;
 								case RUS:
 									slots[i].setResource(resources.russian());
 									tabooWords[i].getElement().setInnerHTML(tabooWord);
+									footers[i].setStyleName(colorClass);
+									status[i].getElement().setInnerHTML(evaluated);
+									languages[i].getElement().setInnerHTML(LanguageCodes.fullLanguageName(l).toUpperCase());
 									break;
 
 								default:
 									break;
 								}
 							}
-
-//							for (ClientTabooWordSummary t : result) {
-//								Window.alert(t.getDistanceToInput() + " " + t.getTabooWord() + " "
-//										+ LanguageCodes.fullLanguageName(t.getLanguage()));
-//							}
 
 						}
 
@@ -311,6 +545,37 @@ public class TokenTabooFinderUiBinder extends Composite {
 			}
 		});
 
+	}
+	
+	private String distanceEvaluation(float distance){
+		
+		if(distance <= 0.2){
+			return CRITICAL;
+		}else if(distance <= 0.4){
+			return CONCERNING;
+		}else if(distance <= 0.6){
+			return RELEVANT;
+		}else if(distance <= 0.8){
+			return FINE;
+		}else{
+			return PERFECT;
+		}
+	}
+	
+	
+	private String distanceColorClass(float distance){
+		
+		if(distance <= 0.2){
+			return CRITICAL_COLOR_CLASS;
+		}else if(distance <= 0.4){
+			return CONCERNING_COLOR_CLASS;
+		}else if(distance <= 0.6){
+			return RELEVANT_COLOR_CLASS;
+		}else if(distance <= 0.8){
+			return FINE_COLOR_CLASS;
+		}else{
+			return PERFECT_COLOR_CLASS;
+		}
 	}
 
 }

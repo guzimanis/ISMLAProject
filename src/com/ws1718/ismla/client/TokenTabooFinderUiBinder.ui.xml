@@ -16,7 +16,7 @@
 	}
 	
 	.footer {
-		background-color: orange;
+		background-color: #87CEFA;
 	}
 	
 	.applicationNamefooter {
@@ -27,8 +27,9 @@
 		margin-top: 40px;
 	}
 	
-	.langColor1 {
-		background-color: red;
+	.language{
+		margin-top: 33px;
+		margin-left: 20px;
 	}
 	</ui:style>
 
@@ -48,7 +49,7 @@
 
 						<g:HTMLPanel styleName="{style.applicationNamefooter}">
 							<div class="card-footer">
-								<g:HTMLPanel>hier kommt Status rein jo</g:HTMLPanel>
+								<g:HTMLPanel>.</g:HTMLPanel>
 							</div>
 						</g:HTMLPanel>
 					</div>
@@ -65,6 +66,8 @@
 
 
 
+
+
 			<!-- first line -->
 			<g:HTMLPanel ui:field="firstLine" styleName="{style.card-container}">
 
@@ -75,18 +78,20 @@
 						<div class="card" style="max-width: 20rem;">
 							<div class="card-header">
 								<g:Image ui:field="img_00"></g:Image>
+								<g:HTMLPanel ui:field="language_00" styleName="{style.language}"></g:HTMLPanel>
 							</div>
 							<div class="card-body">
 								<h4 class="card-title">
 									<g:HTMLPanel ui:field="tabooWord_00"></g:HTMLPanel>
 								</h4>
-								<p class="card-text">Best  on the planet. Free shipping, 24/7
-									customer service.</p>
+								<p class="card-text">Best on the planet. Free shipping, 24/7
+									customer
+									service.</p>
 							</div>
 
-							<g:HTMLPanel styleName="{style.footer}">
+							<g:HTMLPanel styleName="{style.footer}" ui:field="footer_00">
 								<div class="card-footer">
-									<g:HTMLPanel>hier kommt Status rein jo</g:HTMLPanel>
+									<g:HTMLPanel ui:field="status_00">hier kommt Status rein jo</g:HTMLPanel>
 								</div>
 							</g:HTMLPanel>
 						</div>
@@ -97,18 +102,20 @@
 						<div class="card" style="max-width: 20rem;">
 							<div class="card-header">
 								<g:Image ui:field="img_01"></g:Image>
+								<g:HTMLPanel ui:field="language_01" styleName="{style.language}"></g:HTMLPanel>
 							</div>
 							<div class="card-body">
 								<h4 class="card-title">
 									<g:HTMLPanel ui:field="tabooWord_01"></g:HTMLPanel>
 								</h4>
-								<p class="card-text">Best  on the planet. Free shipping, 24/7
-									customer service.</p>
+								<p class="card-text">Best on the planet. Free shipping, 24/7
+									customer
+									service.</p>
 							</div>
 
-							<g:HTMLPanel styleName="{style.footer}">
+							<g:HTMLPanel styleName="{style.footer}" ui:field="footer_01">
 								<div class="card-footer">
-									<g:HTMLPanel>hier kommt Status rein jo</g:HTMLPanel>
+									<g:HTMLPanel ui:field="status_01">hier kommt Status rein jo</g:HTMLPanel>
 								</div>
 							</g:HTMLPanel>
 						</div>
@@ -119,18 +126,20 @@
 						<div class="card" style="max-width: 20rem;">
 							<div class="card-header">
 								<g:Image ui:field="img_02"></g:Image>
+								<g:HTMLPanel ui:field="language_02" styleName="{style.language}"></g:HTMLPanel>
 							</div>
 							<div class="card-body">
 								<h4 class="card-title">
 									<g:HTMLPanel ui:field="tabooWord_02"></g:HTMLPanel>
 								</h4>
-								<p class="card-text">Best  on the planet. Free shipping, 24/7
-									customer service.</p>
+								<p class="card-text">Best on the planet. Free shipping, 24/7
+									customer
+									service.</p>
 							</div>
 
-							<g:HTMLPanel styleName="{style.footer}">
+							<g:HTMLPanel styleName="{style.footer}" ui:field="footer_02">
 								<div class="card-footer">
-									<g:HTMLPanel>hier kommt Status rein jo</g:HTMLPanel>
+									<g:HTMLPanel ui:field="status_02">hier kommt Status rein jo</g:HTMLPanel>
 								</div>
 							</g:HTMLPanel>
 						</div>
@@ -141,18 +150,20 @@
 						<div class="card" style="max-width: 20rem;">
 							<div class="card-header">
 								<g:Image ui:field="img_03"></g:Image>
+								<g:HTMLPanel ui:field="language_03" styleName="{style.language}"></g:HTMLPanel>
 							</div>
 							<div class="card-body">
 								<h4 class="card-title">
 									<g:HTMLPanel ui:field="tabooWord_03"></g:HTMLPanel>
 								</h4>
-								<p class="card-text">Best  on the planet. Free shipping, 24/7
-									customer service.</p>
+								<p class="card-text">Best on the planet. Free shipping, 24/7
+									customer
+									service.</p>
 							</div>
 
-							<g:HTMLPanel styleName="{style.footer}">
+							<g:HTMLPanel styleName="{style.footer}" ui:field="footer_03">
 								<div class="card-footer">
-									<g:HTMLPanel>hier kommt Status rein jo</g:HTMLPanel>
+									<g:HTMLPanel ui:field="status_03">hier kommt Status rein jo</g:HTMLPanel>
 								</div>
 							</g:HTMLPanel>
 						</div>
@@ -176,18 +187,20 @@
 						<div class="card" style="max-width: 20rem;">
 							<div class="card-header">
 								<g:Image ui:field="img_04"></g:Image>
+								<g:HTMLPanel ui:field="language_04" styleName="{style.language}"></g:HTMLPanel>
 							</div>
 							<div class="card-body">
 								<h4 class="card-title">
 									<g:HTMLPanel ui:field="tabooWord_04"></g:HTMLPanel>
 								</h4>
-								<p class="card-text">Best  on the planet. Free shipping, 24/7
-									customer service.</p>
+								<p class="card-text">Best on the planet. Free shipping, 24/7
+									customer
+									service.</p>
 							</div>
 
-							<g:HTMLPanel styleName="{style.footer}">
+							<g:HTMLPanel styleName="{style.footer}" ui:field="footer_04">
 								<div class="card-footer">
-									<g:HTMLPanel>hier kommt Status rein jo</g:HTMLPanel>
+									<g:HTMLPanel ui:field="status_04">hier kommt Status rein jo</g:HTMLPanel>
 								</div>
 							</g:HTMLPanel>
 						</div>
@@ -198,18 +211,20 @@
 						<div class="card" style="max-width: 20rem;">
 							<div class="card-header">
 								<g:Image ui:field="img_05"></g:Image>
+								<g:HTMLPanel ui:field="language_05" styleName="{style.language}"></g:HTMLPanel>
 							</div>
 							<div class="card-body">
 								<h4 class="card-title">
 									<g:HTMLPanel ui:field="tabooWord_05"></g:HTMLPanel>
 								</h4>
-								<p class="card-text">Best  on the planet. Free shipping, 24/7
-									customer service.</p>
+								<p class="card-text">Best on the planet. Free shipping, 24/7
+									customer
+									service.</p>
 							</div>
 
-							<g:HTMLPanel styleName="{style.footer}">
+							<g:HTMLPanel styleName="{style.footer}" ui:field="footer_05">
 								<div class="card-footer">
-									<g:HTMLPanel>hier kommt Status rein jo</g:HTMLPanel>
+									<g:HTMLPanel ui:field="status_05">hier kommt Status rein jo</g:HTMLPanel>
 								</div>
 							</g:HTMLPanel>
 						</div>
@@ -220,18 +235,20 @@
 						<div class="card" style="max-width: 20rem;">
 							<div class="card-header">
 								<g:Image ui:field="img_06"></g:Image>
+								<g:HTMLPanel ui:field="language_06" styleName="{style.language}"></g:HTMLPanel>
 							</div>
 							<div class="card-body">
 								<h4 class="card-title">
 									<g:HTMLPanel ui:field="tabooWord_06"></g:HTMLPanel>
 								</h4>
-								<p class="card-text">Best  on the planet. Free shipping, 24/7
-									customer service.</p>
+								<p class="card-text">Best on the planet. Free shipping, 24/7
+									customer
+									service.</p>
 							</div>
 
-							<g:HTMLPanel styleName="{style.footer}">
+							<g:HTMLPanel styleName="{style.footer}" ui:field="footer_06">
 								<div class="card-footer">
-									<g:HTMLPanel>hier kommt Status rein jo</g:HTMLPanel>
+									<g:HTMLPanel ui:field="status_06">hier kommt Status rein jo</g:HTMLPanel>
 								</div>
 							</g:HTMLPanel>
 						</div>
@@ -242,18 +259,20 @@
 						<div class="card" style="max-width: 20rem;">
 							<div class="card-header">
 								<g:Image ui:field="img_07"></g:Image>
+								<g:HTMLPanel ui:field="language_07" styleName="{style.language}"></g:HTMLPanel>
 							</div>
 							<div class="card-body">
 								<h4 class="card-title">
 									<g:HTMLPanel ui:field="tabooWord_07"></g:HTMLPanel>
 								</h4>
-								<p class="card-text">Best  on the planet. Free shipping, 24/7
-									customer service.</p>
+								<p class="card-text">Best on the planet. Free shipping, 24/7
+									customer
+									service.</p>
 							</div>
 
-							<g:HTMLPanel styleName="{style.footer}">
+							<g:HTMLPanel styleName="{style.footer}" ui:field="footer_07">
 								<div class="card-footer">
-									<g:HTMLPanel>hier kommt Status rein jo</g:HTMLPanel>
+									<g:HTMLPanel ui:field="status_07">hier kommt Status rein jo</g:HTMLPanel>
 								</div>
 							</g:HTMLPanel>
 						</div>
@@ -275,18 +294,20 @@
 						<div class="card" style="max-width: 20rem;">
 							<div class="card-header">
 								<g:Image ui:field="img_08"></g:Image>
+								<g:HTMLPanel ui:field="language_08" styleName="{style.language}"></g:HTMLPanel>
 							</div>
 							<div class="card-body">
 								<h4 class="card-title">
 									<g:HTMLPanel ui:field="tabooWord_08"></g:HTMLPanel>
 								</h4>
-								<p class="card-text">Best  on the planet. Free shipping, 24/7
-									customer service.</p>
+								<p class="card-text">Best on the planet. Free shipping, 24/7
+									customer
+									service.</p>
 							</div>
 
-							<g:HTMLPanel styleName="{style.footer}">
+							<g:HTMLPanel styleName="{style.footer}" ui:field="footer_08">
 								<div class="card-footer">
-									<g:HTMLPanel>hier kommt Status rein jo</g:HTMLPanel>
+									<g:HTMLPanel ui:field="status_08">hier kommt Status rein jo</g:HTMLPanel>
 								</div>
 							</g:HTMLPanel>
 						</div>
@@ -297,18 +318,20 @@
 						<div class="card" style="max-width: 20rem;">
 							<div class="card-header">
 								<g:Image ui:field="img_09"></g:Image>
+								<g:HTMLPanel ui:field="language_09" styleName="{style.language}"></g:HTMLPanel>
 							</div>
 							<div class="card-body">
 								<h4 class="card-title">
 									<g:HTMLPanel ui:field="tabooWord_09"></g:HTMLPanel>
 								</h4>
-								<p class="card-text">Best  on the planet. Free shipping, 24/7
-									customer service.</p>
+								<p class="card-text">Best on the planet. Free shipping, 24/7
+									customer
+									service.</p>
 							</div>
 
-							<g:HTMLPanel styleName="{style.footer}">
+							<g:HTMLPanel styleName="{style.footer}" ui:field="footer_09">
 								<div class="card-footer">
-									<g:HTMLPanel>hier kommt Status rein jo</g:HTMLPanel>
+									<g:HTMLPanel ui:field="status_09">hier kommt Status rein jo</g:HTMLPanel>
 								</div>
 							</g:HTMLPanel>
 						</div>
@@ -319,18 +342,20 @@
 						<div class="card" style="max-width: 20rem;">
 							<div class="card-header">
 								<g:Image ui:field="img_10"></g:Image>
+								<g:HTMLPanel ui:field="language_10" styleName="{style.language}"></g:HTMLPanel>
 							</div>
 							<div class="card-body">
 								<h4 class="card-title">
 									<g:HTMLPanel ui:field="tabooWord_10"></g:HTMLPanel>
 								</h4>
-								<p class="card-text">Best  on the planet. Free shipping, 24/7
-									customer service.</p>
+								<p class="card-text">Best on the planet. Free shipping, 24/7
+									customer
+									service.</p>
 							</div>
 
-							<g:HTMLPanel styleName="{style.footer}">
+							<g:HTMLPanel styleName="{style.footer}" ui:field="footer_10">
 								<div class="card-footer">
-									<g:HTMLPanel>hier kommt Status rein jo</g:HTMLPanel>
+									<g:HTMLPanel ui:field="status_10">hier kommt Status rein jo</g:HTMLPanel>
 								</div>
 							</g:HTMLPanel>
 						</div>
@@ -341,18 +366,20 @@
 						<div class="card" style="max-width: 20rem;">
 							<div class="card-header">
 								<g:Image ui:field="img_11"></g:Image>
+								<g:HTMLPanel ui:field="language_11" styleName="{style.language}"></g:HTMLPanel>
 							</div>
 							<div class="card-body">
 								<h4 class="card-title">
 									<g:HTMLPanel ui:field="tabooWord_11"></g:HTMLPanel>
 								</h4>
-								<p class="card-text">Best  on the planet. Free shipping, 24/7
-									customer service.</p>
+								<p class="card-text">Best on the planet. Free shipping, 24/7
+									customer
+									service.</p>
 							</div>
 
-							<g:HTMLPanel styleName="{style.footer}">
+							<g:HTMLPanel styleName="{style.footer}" ui:field="footer_11">
 								<div class="card-footer">
-									<g:HTMLPanel>hier kommt Status rein jo</g:HTMLPanel>
+									<g:HTMLPanel ui:field="status_11">hier kommt Status rein jo</g:HTMLPanel>
 								</div>
 							</g:HTMLPanel>
 						</div>
@@ -374,18 +401,20 @@
 						<div class="card" style="max-width: 20rem;">
 							<div class="card-header">
 								<g:Image ui:field="img_12"></g:Image>
+								<g:HTMLPanel ui:field="language_12" styleName="{style.language}"></g:HTMLPanel>
 							</div>
 							<div class="card-body">
 								<h4 class="card-title">
 									<g:HTMLPanel ui:field="tabooWord_12"></g:HTMLPanel>
 								</h4>
-								<p class="card-text">Best  on the planet. Free shipping, 24/7
-									customer service.</p>
+								<p class="card-text">Best on the planet. Free shipping, 24/7
+									customer
+									service.</p>
 							</div>
 
-							<g:HTMLPanel styleName="{style.footer}">
+							<g:HTMLPanel styleName="{style.footer}" ui:field="footer_12">
 								<div class="card-footer">
-									<g:HTMLPanel>hier kommt Status rein jo</g:HTMLPanel>
+									<g:HTMLPanel ui:field="status_12">hier kommt Status rein jo</g:HTMLPanel>
 								</div>
 							</g:HTMLPanel>
 						</div>
@@ -396,18 +425,20 @@
 						<div class="card" style="max-width: 20rem;">
 							<div class="card-header">
 								<g:Image ui:field="img_13"></g:Image>
+								<g:HTMLPanel ui:field="language_13" styleName="{style.language}"></g:HTMLPanel>
 							</div>
 							<div class="card-body">
 								<h4 class="card-title">
 									<g:HTMLPanel ui:field="tabooWord_13"></g:HTMLPanel>
 								</h4>
-								<p class="card-text">Best  on the planet. Free shipping, 24/7
-									customer service.</p>
+								<p class="card-text">Best on the planet. Free shipping, 24/7
+									customer
+									service.</p>
 							</div>
 
-							<g:HTMLPanel styleName="{style.footer}">
+							<g:HTMLPanel styleName="{style.footer}" ui:field="footer_13">
 								<div class="card-footer">
-									<g:HTMLPanel>hier kommt Status rein jo</g:HTMLPanel>
+									<g:HTMLPanel ui:field="status_13">hier kommt Status rein jo</g:HTMLPanel>
 								</div>
 							</g:HTMLPanel>
 						</div>
@@ -418,18 +449,20 @@
 						<div class="card" style="max-width: 20rem;">
 							<div class="card-header">
 								<g:Image ui:field="img_14"></g:Image>
+								<g:HTMLPanel ui:field="language_14" styleName="{style.language}"></g:HTMLPanel>
 							</div>
 							<div class="card-body">
 								<h4 class="card-title">
 									<g:HTMLPanel ui:field="tabooWord_14"></g:HTMLPanel>
 								</h4>
-								<p class="card-text">Best  on the planet. Free shipping, 24/7
-									customer service.</p>
+								<p class="card-text">Best on the planet. Free shipping, 24/7
+									customer
+									service.</p>
 							</div>
 
-							<g:HTMLPanel styleName="{style.footer}">
+							<g:HTMLPanel styleName="{style.footer}" ui:field="footer_14">
 								<div class="card-footer">
-									<g:HTMLPanel>hier kommt Status rein jo</g:HTMLPanel>
+									<g:HTMLPanel ui:field="status_14">hier kommt Status rein jo</g:HTMLPanel>
 								</div>
 							</g:HTMLPanel>
 						</div>
@@ -440,18 +473,20 @@
 						<div class="card" style="max-width: 20rem;">
 							<div class="card-header">
 								<g:Image ui:field="img_15"></g:Image>
+								<g:HTMLPanel ui:field="language_15" styleName="{style.language}"></g:HTMLPanel>
 							</div>
 							<div class="card-body">
 								<h4 class="card-title">
 									<g:HTMLPanel ui:field="tabooWord_15"></g:HTMLPanel>
 								</h4>
-								<p class="card-text">Best  on the planet. Free shipping, 24/7
-									customer service.</p>
+								<p class="card-text">Best on the planet. Free shipping, 24/7
+									customer
+									service.</p>
 							</div>
 
-							<g:HTMLPanel styleName="{style.footer}">
+							<g:HTMLPanel styleName="{style.footer}" ui:field="footer_15">
 								<div class="card-footer">
-									<g:HTMLPanel>hier kommt Status rein jo</g:HTMLPanel>
+									<g:HTMLPanel ui:field="status_15">hier kommt Status rein jo</g:HTMLPanel>
 								</div>
 							</g:HTMLPanel>
 						</div>
@@ -462,8 +497,8 @@
 
 			</g:HTMLPanel>
 
-<!-- fith line  -->
-				<g:HTMLPanel styleName="{style.card-container}">
+			<!-- fith line -->
+			<g:HTMLPanel styleName="{style.card-container}">
 
 				<div class="row">
 
@@ -472,26 +507,28 @@
 						<div class="card" style="max-width: 20rem;">
 							<div class="card-header">
 								<g:Image ui:field="img_16"></g:Image>
+								<g:HTMLPanel ui:field="language_16" styleName="{style.language}"></g:HTMLPanel>
 							</div>
 							<div class="card-body">
 								<h4 class="card-title">
 									<g:HTMLPanel ui:field="tabooWord_16"></g:HTMLPanel>
 								</h4>
-								<p class="card-text">Best  on the planet. Free shipping, 24/7
-									customer service.</p>
+								<p class="card-text">Best on the planet. Free shipping, 24/7
+									customer
+									service.</p>
 							</div>
 
-							<g:HTMLPanel styleName="{style.footer}">
+							<g:HTMLPanel styleName="{style.footer}" ui:field="footer_16">
 								<div class="card-footer">
-									<g:HTMLPanel>hier kommt Status rein jo</g:HTMLPanel>
+									<g:HTMLPanel ui:field="status_16">hier kommt Status rein jo</g:HTMLPanel>
 								</div>
 							</g:HTMLPanel>
 						</div>
 
-					</div>	
+					</div>
 				</div>
 			</g:HTMLPanel>
-			
+
 		</div>
 
 	</g:HTMLPanel>

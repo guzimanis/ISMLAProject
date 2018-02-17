@@ -1,0 +1,24 @@
+  .footer-red{
+    background-color: #FF5733;
+  }
+  
+  .footer-orange{
+    background-color: #FFA000;
+  }
+  
+  .footer-yellow{
+    background-color: #FFFF00;
+  }
+  
+  .footer-limegreen{
+    background-color: #ADFF2F;
+  }
+  
+  .footer-darkgreen{
+    background-color: #008000;
+  }
+
+  .card-header {
+    display: inline-flex;
+  }
+
