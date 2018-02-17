@@ -32,6 +32,7 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 	private static final String TRANSLIT_LOCATION = "/transcription/";
 	private static final String ARABIC_TRANSLIT = TRANSLIT_LOCATION + "Arabic_chat.txt";
 	private static final String RUSSIAN_TRANSLIT = TRANSLIT_LOCATION + "Russian_translit.txt";
+	private static final String PERSIAN_TRANSLIT = TRANSLIT_LOCATION + "Persian_chat.txt";
 
 	// tabu lists source
 	private static final String TABU_LOCATION = "/tabuLists/";
@@ -130,14 +131,42 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 			
 			
 			rval.add(new ClientTabooWordSummary(c, closestOriginalWord, lowestDistance));
+			
+			Map<String, String> cmnTranslations = getMapForColumns(PREFIX_TABU + LanguageCodes.CMN + SUFFIX_TABU, 1, 2);
+			Map<String, String> araTranslations = getMapForColumns(PREFIX_TABU + LanguageCodes.ARA + SUFFIX_TABU, 1, 2);
+			Map<String, String> fasTranslations = getMapForColumns(PREFIX_TABU + LanguageCodes.FAS + SUFFIX_TABU, 1, 2);
+			Map<String, String> jpnTranslations = getMapForColumns(PREFIX_TABU + LanguageCodes.JPN + SUFFIX_TABU, 1, 2);
+			Map<String, String> thTranslations = getMapForColumns(PREFIX_TABU + LanguageCodes.TH + SUFFIX_TABU, 1, 2);
+			
+			for(ClientTabooWordSummary t : rval){
+				LanguageCodes l = t.getLanguage();
+				
+				switch (l) {
+				case CMN:
+					t.setTranslation(cmnTranslations.get(t.getTabooWord()));
+					break;
+					
+				case ARA:
+					t.setTranslation(araTranslations.get(t.getTabooWord()));
+					break;
+					
+				case FAS:
+					t.setTranslation(fasTranslations.get(t.getTabooWord()));
+					break;
+					
+				case JPN:
+					t.setTranslation(jpnTranslations.get(t.getTabooWord()));
+					break;
+				
+				case TH:
+					t.setTranslation(thTranslations.get(t.getTabooWord()));
+					break;
 
-			System.out.println(c);
-			System.out.println("input (simple phon): " + simplePhonInput);
-			System.out.println("distance " + lowestDistance);
-			System.out.println("longest common substring: " + longestCommonSubstring);
-			System.out.println(closestOriginalWord + " (original) -> " + closestPhonTabooWord + " (phon) -> "
-					+ closestSimplePhonTabuWord + " (simple phon) ");
-			System.out.println();
+				default:
+					break;
+				}
+			}
+			
 
 		}
 		
@@ -162,10 +191,14 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 
 		final List<String> russianTranslit = getLinesFromFile(RUSSIAN_TRANSLIT);
 		String russianInputTransliterated = LanguageTransliterator.transcribeToRussian(input, russianTranslit);
+		
+		final List<String> persianChat = getLinesFromFile(PERSIAN_TRANSLIT);
+		String persianInputTransliterated = LanguageTransliterator.transcribeInternetPersian(input, persianChat);
 
 		List<SourceTransliteration> transliterations = new ArrayList<>();
 		transliterations.add(new SourceTransliteration(russianInputTransliterated, LanguageCodes.RUS));
 		transliterations.add(new SourceTransliteration(arabicInputTransliterated, LanguageCodes.ARA));
+		transliterations.add(new SourceTransliteration(persianInputTransliterated, LanguageCodes.FAS));
 
 		return PhoneticTransliterator.getPhoneticRepresentationForAllLanguages(input, transliterations);
 	}

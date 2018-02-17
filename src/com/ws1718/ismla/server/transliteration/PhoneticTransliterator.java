@@ -26,7 +26,6 @@ public class PhoneticTransliterator {
 		// get phonetic representations from input
 		rval.put(LanguageCodes.DEU, GeneralTransliterator.orthToIPA(LanguageCodes.DEU.code(), input));
 		rval.put(LanguageCodes.SPA, GeneralTransliterator.orthToIPA(LanguageCodes.SPA.code(), input));
-		rval.put(LanguageCodes.FAS, GeneralTransliterator.prncToIPA(LanguageCodes.FAS.code(), input));
 		rval.put(LanguageCodes.HIN, GeneralTransliterator.prncToIPA(LanguageCodes.HIN.code(), input));
 		rval.put(LanguageCodes.ITA, GeneralTransliterator.orthToIPA(LanguageCodes.ITA.code(), input));
 		rval.put(LanguageCodes.JPN, GeneralTransliterator.prncToIPA(LanguageCodes.JPN.code(), input));
@@ -47,12 +46,14 @@ public class PhoneticTransliterator {
 				rval.put(c, GeneralTransliterator.orthToIPA(c.code(), transliteratedInput));
 			} else if (c.equals(LanguageCodes.ARA)) {
 				rval.put(c, GeneralTransliterator.prncToIPA(c.code(), transliteratedInput));
+			} else if (c.equals(LanguageCodes.FAS)){
+				rval.put(c, GeneralTransliterator.prncToIPA(c.code(), transliteratedInput));
 			}
 		}
-
-		String inputEN = "";
-		String inputFR = "";
-		String inputTH = "";
+		
+		//thai is mapped to IPA directly
+		//EN not supported
+		//FRA not supported
 
 		return rval;
 	}

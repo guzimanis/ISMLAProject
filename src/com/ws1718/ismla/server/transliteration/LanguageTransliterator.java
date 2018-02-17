@@ -103,4 +103,46 @@ public class LanguageTransliterator extends RemoteServiceServlet {
 
 	}
 
+	/**
+	 * internet persian (in latin characters) transcribed to a processable
+	 * transcription
+	 * 
+	 * @param input
+	 * @param fileLines
+	 * @return
+	 */
+	public static String transcribeInternetPersian(String input, List<String> fileLines) {
+
+		HashMap<String, String> characterMapping = new HashMap<>();
+
+		for (String line : fileLines) {
+			if (line != null && line.length() > 0) {
+				String[] cols = line.split("\t");
+				characterMapping.put(cols[0], cols[1]);
+			}
+		}
+
+		// apply transformation
+		StringBuilder sb = new StringBuilder();
+		// iter over characters of input word
+		for (int i = 0; i < input.length(); i++) {
+			int end = input.length();
+
+			String c = input.substring(i, end);
+
+			for (int k = c.length() - 1; k >= 0; k--) {
+				String subCheck = c.substring(0, k + 1);
+
+				if (characterMapping.containsKey(subCheck)) {
+					sb.append(characterMapping.get(subCheck));
+
+					i += k;
+					break;
+				}
+			}
+		}
+
+		return sb.toString();
+	}
+
 }
