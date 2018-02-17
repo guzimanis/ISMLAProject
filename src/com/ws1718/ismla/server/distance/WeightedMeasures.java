@@ -54,15 +54,19 @@ public class WeightedMeasures {
 			//weighting
 			float before = dist.getDistance(beforeInput, beforeTabooWord);
 			int longerDistBefore = Math.max(beforeInput.length(), beforeTabooWord.length());
-			before = before / (longerDistBefore * prefixWeight);
-			
+			if(before > 0){
+				before = before / (longerDistBefore * prefixWeight);
+			}			
 			float after = dist.getDistance(afterInput, afterTabooWord);
+
 			int longerDistAfter = Math.max(afterInput.length(), afterTabooWord.length());
-			after = after / longerDistAfter;
+			if(after > 0){
+				after = after / longerDistAfter;
+			}
 			distance = (before * prefixWeight) + (after * suffixWeight);
 			distance = distance / 2;
 
-		
+
 		}else{
 			distance = dist.getDistance(s1, s2);
 		}

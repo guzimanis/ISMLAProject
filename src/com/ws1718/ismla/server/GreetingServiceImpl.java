@@ -8,15 +8,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
+
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.ws1718.ismla.client.GreetingService;
 import com.ws1718.ismla.server.distance.Levenshtein;
 import com.ws1718.ismla.server.distance.SimilarityMeasures;
+import com.ws1718.ismla.server.distance.WeightedMeasures;
 import com.ws1718.ismla.server.transliteration.LanguageTransliterator;
 import com.ws1718.ismla.server.transliteration.PhoneticTransliterator;
 import com.ws1718.ismla.server.transliteration.SourceTransliteration;
+import com.ws1718.ismla.shared.ClientTabooWordSummary;
 import com.ws1718.ismla.shared.LanguageCodes;
 import com.ws1718.ismla.shared.TabooWordSummary;
 
@@ -40,210 +42,108 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 	private static final String IPA_LOCATION = "/IPA/";
 	private static final String IPA_SIMPLE = IPA_LOCATION + "IPA_Simple.txt";
 
-	private static final String TEST_LOCATION = "test/";
-//	three_Syll_Words_new        threeSyllablesWords
-	private static final String TEST_FILE = TEST_LOCATION + "three_Syll_Words_new.txt";
+	public List<ClientTabooWordSummary> greetServer(String input) throws IllegalArgumentException {
 
-	public String greetServer(String input) throws IllegalArgumentException {
+		List<ClientTabooWordSummary> rval = new ArrayList<>();
 
-		String result = "done";
+		/*
+		 * equivalence classes of IPA
+		 */
+		final Map<String, String> ipaSimple = getMapForColumns(IPA_SIMPLE, 0, 1);
 
-		List<String> testList = getLinesFromFile(TEST_FILE);
-		List<String> test2List = new ArrayList();
-		StringBuilder sb = new StringBuilder();
+		/*
+		 * input transformation to phonetic representation
+		 */
+		final Map<LanguageCodes, String> phonologicalRepresentationsOfInput = getPhonologicalRepresentationsOfInput(
+				input);
+		// create
+		Map<LanguageCodes, String> simplePhonologicalRepresentationOfInput = PhoneticTransliterator
+				.getSimplePhonologicalRepresentationOfInput(ipaSimple, phonologicalRepresentationsOfInput);
 
-		Random randomGenerator = new Random();
-//		for (int i = 0; i < 10; i++) {
-//			int randomInt = randomGenerator.nextInt(testList.size());
-//			String randomElement = testList.get(randomInt);
-//			test2List.add(randomElement);
-//		}
-		
-//		test2List = testList.subList(0, 10);
+		/*
+		 * tabu word transformation to phonetic representation
+		 */
+		Map<LanguageCodes, List<TabooWordSummary>> phonologicalRepresentationOfTabuWords = getPhonologicalRepresentationOfTabuWords();
+		// add simple phon
+		phonologicalRepresentationOfTabuWords = PhoneticTransliterator
+				.getSimplePhonologicalRepresentationOfTabuWords(ipaSimple, phonologicalRepresentationOfTabuWords);
 
-		for (String test : testList) {
-			input = test;
-			int numberOfDist = 0;
-			
-			System.out.println("INPUT WORD: " + input);
+		Levenshtein dist = new Levenshtein();
 
-			/*
-			 * equivalence classes of IPA
-			 * 
-			 * 
-			 */
-			final Map<String, String> ipaSimple = getMapForColumns(IPA_SIMPLE, 0, 1);
+		// go through simple representations of input
+		for (LanguageCodes c : simplePhonologicalRepresentationOfInput.keySet()) {
 
+			String simplePhonInput = simplePhonologicalRepresentationOfInput.get(c);
 
-			/*
-			 * input transformation to phonetic representation
-			 */
-			final Map<LanguageCodes, String> phonologicalRepresentationsOfInput = getPhonologicalRepresentationsOfInput(
-					input);
-			// create
-			Map<LanguageCodes, String> simplePhonologicalRepresentationOfInput = PhoneticTransliterator
-					.getSimplePhonologicalRepresentationOfInput(ipaSimple, phonologicalRepresentationsOfInput);
+			float lowestDistance = 1000;
+			String closestSimplePhonTabuWord = "";
+			String closestPhonTabooWord = "";
+			String closestOriginalWord = "";
+			String longestCommonSubstring = "";
 
-			System.out.println();
-			System.out.println("phonetic representation of the input word level");
-			System.out.println("-------------------------------------------------------------");
-			// print
-			for (LanguageCodes c : phonologicalRepresentationsOfInput.keySet()) {
-				String originalPhonWord = phonologicalRepresentationsOfInput.get(c);
-				String simplifiedPhonWord = simplePhonologicalRepresentationOfInput.get(c);
-				System.out.println(c + " -> " + originalPhonWord + " -> " + simplifiedPhonWord);
-			}
+			// go through simple representations of taboo words
+			for (LanguageCodes ct : phonologicalRepresentationOfTabuWords.keySet()) {
+				if (c.equals(ct)) {
 
-			/*
-			 * tabu word transformation to phonetic representation
-			 */
-			Map<LanguageCodes, List<TabooWordSummary>> phonologicalRepresentationOfTabuWords = getPhonologicalRepresentationOfTabuWords();
-			// add simple phon
-			phonologicalRepresentationOfTabuWords = PhoneticTransliterator
-					.getSimplePhonologicalRepresentationOfTabuWords(ipaSimple, phonologicalRepresentationOfTabuWords);
+					List<TabooWordSummary> phonTabuWords = phonologicalRepresentationOfTabuWords.get(ct);
 
-			/*
-			 * distance
-			 */
-			System.out.println("DISTANCE");
-			System.out.println(
-					"++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+					// reduce search space via LCS
+					List<TabooWordSummary> longestCommonSubstrings = new ArrayList<>();
+					int longestCommonSubstringLenght = 0;
+					for (TabooWordSummary phonTabooWord : phonTabuWords) {
+						String simplePhonTabooWord = phonTabooWord.getSimplefiedPhonologicalRepresentationOfTabooWord();
+						String lcs = SimilarityMeasures.longestCommonSubstring(simplePhonInput, simplePhonTabooWord);
 
-			Levenshtein dist = new Levenshtein();
-			for (LanguageCodes c : simplePhonologicalRepresentationOfInput.keySet()) {
-				String simplePhonInput = simplePhonologicalRepresentationOfInput.get(c);
+						if (lcs.length() == longestCommonSubstringLenght) {
+							longestCommonSubstrings.add(phonTabooWord);
 
-				float lowestDistance = 999;
-				String closestSimplePhonTabuWord = "";
-				String closestPhonTabooWord = "";
-				String closestOriginalWord = "";
-				String longestCommonSubstring = "";
+						} else if (lcs.length() > longestCommonSubstringLenght) {
+							longestCommonSubstringLenght = lcs.length();
 
-				for (LanguageCodes ct : phonologicalRepresentationOfTabuWords.keySet()) {
-					if (c.equals(ct)) {
-
-						List<TabooWordSummary> phonTabuWords = phonologicalRepresentationOfTabuWords.get(ct);
-
-						List<TabooWordSummary> longestCommonSubstrings = new ArrayList<>();
-						int longestCommonSubstringLenght = 0;
-						for (TabooWordSummary phonTabooWord : phonTabuWords) {
-							String simplePhonTabooWord = phonTabooWord
-									.getSimplefiedPhonologicalRepresentationOfTabooWord();
-							String lcs = SimilarityMeasures.longestCommonSubstring(simplePhonInput,
-									simplePhonTabooWord);
-
-							if (lcs.length() == longestCommonSubstringLenght) {
-								longestCommonSubstrings.add(phonTabooWord);
-
-							} else if (lcs.length() > longestCommonSubstringLenght) {
-								longestCommonSubstringLenght = lcs.length();
-
-								longestCommonSubstrings = new ArrayList<>();
-								longestCommonSubstrings.add(phonTabooWord);
-							}
+							longestCommonSubstrings = new ArrayList<>();
+							longestCommonSubstrings.add(phonTabooWord);
 						}
-
-						phonTabuWords = longestCommonSubstrings;
-
-						for (TabooWordSummary phonTabuWord : phonTabuWords) {
-							String simplePhonTabooWord = phonTabuWord
-									.getSimplefiedPhonologicalRepresentationOfTabooWord();
-							String lcs = SimilarityMeasures.longestCommonSubstring(simplePhonInput,
-									simplePhonTabooWord);
-
-							String[] beforeAndAfterLCSInput = simplePhonInput.split(lcs, 2);
-							String[] beforeAndAfterLCSTabooWord = simplePhonTabooWord.split(lcs, 2);
-
-				
-							/*
-							 * before / after means in regard to the LCS
-							 */
-							float distance = 0;
-
-							//the LCS is not allowed to be the same as the input AND the taboo word
-							//it is allowed tho to be EITHER the same as the input OR the same as the taboo word
-							//since a the input can be a substring of the taboo word and the other way around
-							if (lcs != null && lcs.length() > 0 && !(lcs.equals(simplePhonInput) && lcs.equals(simplePhonTabooWord)) ) {
-
-								String beforeInput = "";
-								if (beforeAndAfterLCSInput.length > 1 || lcs.charAt(0) != simplePhonInput.charAt(0)) {
-									beforeInput = beforeAndAfterLCSInput[0];
-								}
-
-								String beforeTabooWord = "";
-								if (beforeAndAfterLCSTabooWord.length > 1
-										|| lcs.charAt(0) != simplePhonTabooWord.charAt(0)) {
-									beforeTabooWord = beforeAndAfterLCSTabooWord[0];
-								}
-
-								String afterInput = "";
-								if (beforeAndAfterLCSInput.length > 1) {
-									afterInput = beforeAndAfterLCSInput[1];
-								} else if (beforeAndAfterLCSInput.length > 0
-										&& lcs.charAt(0) == simplePhonInput.charAt(0)) {
-									afterInput = beforeAndAfterLCSInput[0];
-								}
-
-								String afterTabooWord = "";
-								if (beforeAndAfterLCSTabooWord.length > 1) {
-									afterTabooWord = beforeAndAfterLCSTabooWord[1];
-								} else if (beforeAndAfterLCSTabooWord.length > 0
-										&& lcs.charAt(0) == simplePhonTabooWord.charAt(0)) {
-									afterTabooWord = beforeAndAfterLCSTabooWord[0];
-								}
-
-								// weighting
-								float before = dist.getDistance(beforeInput, beforeTabooWord);
-								int longerDistBefore = Math.max(beforeInput.length(), beforeTabooWord.length());
-								before = before / (longerDistBefore * 2);
-
-								float after = dist.getDistance(afterInput, afterTabooWord);
-								int longerDistAfter = Math.max(afterInput.length(), afterTabooWord.length());
-								after = after / longerDistAfter;
-								distance = (before * 2) + (after * 1);
-								distance = distance / 2;
-
-
-							} else {
-								distance = dist.getDistance(simplePhonInput, simplePhonTabooWord);
-							}
-
-							if (distance < lowestDistance) {
-
-								longestCommonSubstring = lcs;
-								lowestDistance = distance;
-								closestSimplePhonTabuWord = simplePhonTabooWord;
-								closestPhonTabooWord = phonTabuWord.getPhonologicalRepresentationOfTabooWord();
-								closestOriginalWord = phonTabuWord.getTabooWord();
-							}
-						}
-
 					}
+
+					phonTabuWords = longestCommonSubstrings;
+
+					// calculate the distance
+					for (TabooWordSummary phonTabuWord : phonTabuWords) {
+						String simplePhonTabooWord = phonTabuWord.getSimplefiedPhonologicalRepresentationOfTabooWord();
+						String lcs = SimilarityMeasures.longestCommonSubstring(simplePhonInput, simplePhonTabooWord);
+
+						float distance = WeightedMeasures.weightedLevenshteinWithLCS(simplePhonInput,
+								simplePhonTabooWord, 2, 1);
+
+						if (distance < lowestDistance) {
+
+							longestCommonSubstring = lcs;
+							lowestDistance = distance;
+							closestSimplePhonTabuWord = simplePhonTabooWord;
+							closestPhonTabooWord = phonTabuWord.getPhonologicalRepresentationOfTabooWord();
+							closestOriginalWord = phonTabuWord.getTabooWord();
+						}
+					}
+
 				}
-
-				System.out.println(c);
-				System.out.println("input (simple phon): " + simplePhonInput);
-				System.out.println("distance " + lowestDistance);
-				System.out.println("longest common substring: " + longestCommonSubstring);
-				System.out.println(closestOriginalWord + " (original) -> " + closestPhonTabooWord + " (phon) -> "
-						+ closestSimplePhonTabuWord + " (simple phon) ");
-				System.out.println();
-
-				if (lowestDistance < 0.3) {
-					numberOfDist++;
-				}
-
 			}
 			
-			sb.append(input);
-			sb.append(" -> ");
-			sb.append(numberOfDist);
-			sb.append("\n");
+			
+			rval.add(new ClientTabooWordSummary(c, closestOriginalWord, lowestDistance));
+
+			System.out.println(c);
+			System.out.println("input (simple phon): " + simplePhonInput);
+			System.out.println("distance " + lowestDistance);
+			System.out.println("longest common substring: " + longestCommonSubstring);
+			System.out.println(closestOriginalWord + " (original) -> " + closestPhonTabooWord + " (phon) -> "
+					+ closestSimplePhonTabuWord + " (simple phon) ");
+			System.out.println();
 
 		}
 		
-		System.out.println(sb);
-		return result;
+		rval.sort((o1, o2) -> Float.compare(o1.getDistanceToInput(), o2.getDistanceToInput()));
+
+		return rval;
 	}
 
 	/**
