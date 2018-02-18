@@ -190,15 +190,7 @@ public class TokenTabooFinderUiBinder extends Composite {
 	}
 	
 	@UiField
-	HTMLPanel firstLine;
-	@UiField
-	HTMLPanel secondLine;
-	@UiField
-	HTMLPanel thirdLine;
-	@UiField
-	HTMLPanel fourthLine;
-	@UiField
-	HTMLPanel fithLine;
+	HTMLPanel applicationBody;
 
 	@UiField
 	TextBox inputBox;
@@ -441,11 +433,8 @@ public class TokenTabooFinderUiBinder extends Composite {
 			public void onKeyUp(KeyUpEvent event) {
 				if (event.getNativeKeyCode() == KeyCodes.KEY_ENTER) {
 					
-					firstLine.setVisible(false);
-					secondLine.setVisible(false);
-					thirdLine.setVisible(false);
-					fourthLine.setVisible(false);
-					fithLine.setVisible(false);
+					applicationBody.setVisible(false);
+
 
 					img_00.setResource(resources.ajaxLoader());
 					img_01.setResource(resources.ajaxLoader());
@@ -493,7 +482,7 @@ public class TokenTabooFinderUiBinder extends Composite {
 									tabooWords[i].getElement().setInnerHTML(tabooWord);
 									footers[i].setStyleName(colorClass);
 									status[i].getElement().setInnerHTML(evaluated);
-									languages[i].getElement().setInnerHTML(LanguageCodes.fullLanguageName(l).toUpperCase());
+									languages[i].getElement().setInnerHTML(LanguageCodes.fullLanguageName(l));
 									translations[i].getElement().setInnerHTML(translation);
 									break;
 								case SPA:
@@ -501,7 +490,7 @@ public class TokenTabooFinderUiBinder extends Composite {
 									tabooWords[i].getElement().setInnerHTML(tabooWord);
 									footers[i].setStyleName(colorClass);
 									status[i].getElement().setInnerHTML(evaluated);
-									languages[i].getElement().setInnerHTML(LanguageCodes.fullLanguageName(l).toUpperCase());
+									languages[i].getElement().setInnerHTML(LanguageCodes.fullLanguageName(l));
 									translations[i].getElement().setInnerHTML(translation);
 									break;
 								case FAS:
@@ -509,7 +498,7 @@ public class TokenTabooFinderUiBinder extends Composite {
 									tabooWords[i].getElement().setInnerHTML(tabooWord);
 									footers[i].setStyleName(colorClass);
 									status[i].getElement().setInnerHTML(evaluated);
-									languages[i].getElement().setInnerHTML(LanguageCodes.fullLanguageName(l).toUpperCase());
+									languages[i].getElement().setInnerHTML(LanguageCodes.fullLanguageName(l));
 									translations[i].getElement().setInnerHTML(translation);
 									break;
 								case FRA:
@@ -517,7 +506,7 @@ public class TokenTabooFinderUiBinder extends Composite {
 									tabooWords[i].getElement().setInnerHTML(tabooWord);
 									footers[i].setStyleName(colorClass);
 									status[i].getElement().setInnerHTML(evaluated);
-									languages[i].getElement().setInnerHTML(LanguageCodes.fullLanguageName(l).toUpperCase());
+									languages[i].getElement().setInnerHTML(LanguageCodes.fullLanguageName(l));
 									translations[i].getElement().setInnerHTML(translation);
 									break;
 								case HIN:
@@ -525,7 +514,7 @@ public class TokenTabooFinderUiBinder extends Composite {
 									tabooWords[i].getElement().setInnerHTML(tabooWord);
 									footers[i].setStyleName(colorClass);
 									status[i].getElement().setInnerHTML(evaluated);
-									languages[i].getElement().setInnerHTML(LanguageCodes.fullLanguageName(l).toUpperCase());
+									languages[i].getElement().setInnerHTML(LanguageCodes.fullLanguageName(l));
 									translations[i].getElement().setInnerHTML(translation);
 									break;
 								case ITA:
@@ -533,7 +522,7 @@ public class TokenTabooFinderUiBinder extends Composite {
 									tabooWords[i].getElement().setInnerHTML(tabooWord);
 									footers[i].setStyleName(colorClass);
 									status[i].getElement().setInnerHTML(evaluated);
-									languages[i].getElement().setInnerHTML(LanguageCodes.fullLanguageName(l).toUpperCase());
+									languages[i].getElement().setInnerHTML(LanguageCodes.fullLanguageName(l));
 									translations[i].getElement().setInnerHTML(translation);
 									break;
 								case JPN:
@@ -541,7 +530,7 @@ public class TokenTabooFinderUiBinder extends Composite {
 									tabooWords[i].getElement().setInnerHTML(tabooWord);
 									footers[i].setStyleName(colorClass);
 									status[i].getElement().setInnerHTML(evaluated);
-									languages[i].getElement().setInnerHTML(LanguageCodes.fullLanguageName(l).toUpperCase());
+									languages[i].getElement().setInnerHTML(LanguageCodes.fullLanguageName(l));
 									translations[i].getElement().setInnerHTML(translation);
 									break;
 								case KOR:
@@ -549,7 +538,7 @@ public class TokenTabooFinderUiBinder extends Composite {
 									tabooWords[i].getElement().setInnerHTML(tabooWord);
 									footers[i].setStyleName(colorClass);
 									status[i].getElement().setInnerHTML(evaluated);
-									languages[i].getElement().setInnerHTML(LanguageCodes.fullLanguageName(l).toUpperCase());
+									languages[i].getElement().setInnerHTML(LanguageCodes.fullLanguageName(l));
 									translations[i].getElement().setInnerHTML(translation);
 									break;
 								case NLD:
@@ -557,7 +546,7 @@ public class TokenTabooFinderUiBinder extends Composite {
 									tabooWords[i].getElement().setInnerHTML(tabooWord);
 									footers[i].setStyleName(colorClass);
 									status[i].getElement().setInnerHTML(evaluated);
-									languages[i].getElement().setInnerHTML(LanguageCodes.fullLanguageName(l).toUpperCase());
+									languages[i].getElement().setInnerHTML(LanguageCodes.fullLanguageName(l));
 									translations[i].getElement().setInnerHTML(translation);
 									break;
 								case POL:
@@ -565,7 +554,7 @@ public class TokenTabooFinderUiBinder extends Composite {
 									tabooWords[i].getElement().setInnerHTML(tabooWord);
 									footers[i].setStyleName(colorClass);
 									status[i].getElement().setInnerHTML(evaluated);
-									languages[i].getElement().setInnerHTML(LanguageCodes.fullLanguageName(l).toUpperCase());
+									languages[i].getElement().setInnerHTML(LanguageCodes.fullLanguageName(l));
 									translations[i].getElement().setInnerHTML(translation);
 									break;
 								case POR:
@@ -573,7 +562,7 @@ public class TokenTabooFinderUiBinder extends Composite {
 									tabooWords[i].getElement().setInnerHTML(tabooWord);
 									footers[i].setStyleName(colorClass);
 									status[i].getElement().setInnerHTML(evaluated);
-									languages[i].getElement().setInnerHTML(LanguageCodes.fullLanguageName(l).toUpperCase());
+									languages[i].getElement().setInnerHTML(LanguageCodes.fullLanguageName(l));
 									translations[i].getElement().setInnerHTML(translation);
 									break;
 								case SWE:
@@ -581,7 +570,7 @@ public class TokenTabooFinderUiBinder extends Composite {
 									tabooWords[i].getElement().setInnerHTML(tabooWord);
 									footers[i].setStyleName(colorClass);
 									status[i].getElement().setInnerHTML(evaluated);
-									languages[i].getElement().setInnerHTML(LanguageCodes.fullLanguageName(l).toUpperCase());
+									languages[i].getElement().setInnerHTML(LanguageCodes.fullLanguageName(l));
 									translations[i].getElement().setInnerHTML(translation);
 									break;
 								case TH:
@@ -589,7 +578,7 @@ public class TokenTabooFinderUiBinder extends Composite {
 									tabooWords[i].getElement().setInnerHTML(tabooWord);
 									footers[i].setStyleName(colorClass);
 									status[i].getElement().setInnerHTML(evaluated);
-									languages[i].getElement().setInnerHTML(LanguageCodes.fullLanguageName(l).toUpperCase());
+									languages[i].getElement().setInnerHTML(LanguageCodes.fullLanguageName(l));
 									translations[i].getElement().setInnerHTML(translation);
 									break;
 								case TUR:
@@ -597,7 +586,7 @@ public class TokenTabooFinderUiBinder extends Composite {
 									tabooWords[i].getElement().setInnerHTML(tabooWord);
 									footers[i].setStyleName(colorClass);
 									status[i].getElement().setInnerHTML(evaluated);
-									languages[i].getElement().setInnerHTML(LanguageCodes.fullLanguageName(l).toUpperCase());
+									languages[i].getElement().setInnerHTML(LanguageCodes.fullLanguageName(l));
 									translations[i].getElement().setInnerHTML(translation);
 									break;
 								case CMN:
@@ -605,7 +594,7 @@ public class TokenTabooFinderUiBinder extends Composite {
 									tabooWords[i].getElement().setInnerHTML(tabooWord);
 									footers[i].setStyleName(colorClass);
 									status[i].getElement().setInnerHTML(evaluated);
-									languages[i].getElement().setInnerHTML(LanguageCodes.fullLanguageName(l).toUpperCase());
+									languages[i].getElement().setInnerHTML(LanguageCodes.fullLanguageName(l));
 									translations[i].getElement().setInnerHTML(translation);
 									break;
 								case ARA:
@@ -613,7 +602,7 @@ public class TokenTabooFinderUiBinder extends Composite {
 									tabooWords[i].getElement().setInnerHTML(tabooWord);
 									footers[i].setStyleName(colorClass);
 									status[i].getElement().setInnerHTML(evaluated);
-									languages[i].getElement().setInnerHTML(LanguageCodes.fullLanguageName(l).toUpperCase());
+									languages[i].getElement().setInnerHTML(LanguageCodes.fullLanguageName(l));
 									translations[i].getElement().setInnerHTML(translation);
 									break;
 								case RUS:
@@ -621,7 +610,7 @@ public class TokenTabooFinderUiBinder extends Composite {
 									tabooWords[i].getElement().setInnerHTML(tabooWord);
 									footers[i].setStyleName(colorClass);
 									status[i].getElement().setInnerHTML(evaluated);
-									languages[i].getElement().setInnerHTML(LanguageCodes.fullLanguageName(l).toUpperCase());
+									languages[i].getElement().setInnerHTML(LanguageCodes.fullLanguageName(l));
 									translations[i].getElement().setInnerHTML(translation);
 									break;
 
@@ -631,11 +620,8 @@ public class TokenTabooFinderUiBinder extends Composite {
 							}
 							
 							
-							firstLine.setVisible(true);
-							secondLine.setVisible(true);
-							thirdLine.setVisible(true);
-							fourthLine.setVisible(true);
-							fithLine.setVisible(true);
+							applicationBody.setVisible(true);
+							
 
 						}
 

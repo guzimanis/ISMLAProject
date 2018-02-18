@@ -19,8 +19,12 @@
   }
 
   .card-header {
-    display: inline-flex;
+    word-wrap: break-word;
     background-color: black;
     color: white;
+  }
+
+  .margin{
+    margin-top: 30px;
   }
 

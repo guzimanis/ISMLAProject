@@ -43,8 +43,7 @@
 	}
 	
 	.language {
-		margin-top: 33px;
-		margin-left: 20px;
+		
 	}
 	</ui:style>
 
@@ -72,492 +71,452 @@
 		</g:HTMLPanel>
 
 
-		<g:HTMLPanel styleName="{style.applicationBodyContainer}">
+		<g:HTMLPanel ui:field="applicationBody" styleName="{style.applicationBodyContainer}">
 			<div class="container-fluid">
-				<!-- first line -->
-				<g:HTMLPanel ui:field="firstLine" styleName="{style.card-container}">
 
-					<div class="row">
+				<div class="row justify-content-center">
 
-						<div class="col-lg-2"></div>
-						<div class="col-lg-2 col-md-4 col-sm-12">
+					<div class="col-lg-2 col-md-4 col-sm-12">
 
-							<div class="card" style="max-width: 20rem;">
-								<div class="card-header">
-									<g:Image ui:field="img_00"></g:Image>
-									<g:HTMLPanel ui:field="language_00" styleName="{style.language}">LANGUAGE</g:HTMLPanel>
-								</div>
-								<div class="card-body">
-									<h4 class="card-title">
-										<g:HTMLPanel ui:field="tabooWord_00"></g:HTMLPanel>
-									</h4>
-									<p class="card-text">
-										translation:
-										<g:HTMLPanel ui:field="translation_00"></g:HTMLPanel>
-									</p>
-								</div>
-
-								<g:HTMLPanel styleName="{style.footer}" ui:field="footer_00">
-									<div class="card-footer">
-										<g:HTMLPanel ui:field="status_00">STATUS</g:HTMLPanel>
-									</div>
-								</g:HTMLPanel>
+						<div class="card" style="max-width: 20rem;">
+							<div class="card-header">
+								<g:Image ui:field="img_00"></g:Image>
+								<g:HTMLPanel ui:field="language_00" styleName="{style.language}"></g:HTMLPanel>
+							</div>
+							<div class="card-body">
+								<h4 class="card-title">
+									<g:HTMLPanel ui:field="tabooWord_00"></g:HTMLPanel>
+								</h4>
+								<p class="card-text">
+									
+									<g:HTMLPanel ui:field="translation_00"></g:HTMLPanel>
+								</p>
 							</div>
 
+							<g:HTMLPanel styleName="{style.footer}" ui:field="footer_00">
+								<div class="card-footer">
+									<g:HTMLPanel ui:field="status_00"></g:HTMLPanel>
+								</div>
+							</g:HTMLPanel>
 						</div>
-						<div class="col-lg-2 col-md-4 col-sm-12">
 
-							<div class="card" style="max-width: 20rem;">
-								<div class="card-header">
-									<g:Image ui:field="img_01"></g:Image>
-									<g:HTMLPanel ui:field="language_01" styleName="{style.language}">LANGUAGE</g:HTMLPanel>
-								</div>
-								<div class="card-body">
-									<h4 class="card-title">
-										<g:HTMLPanel ui:field="tabooWord_01"></g:HTMLPanel>
-									</h4>
-									<p class="card-text">
-										translation:
-										<g:HTMLPanel ui:field="translation_01"></g:HTMLPanel>
-									</p>
-								</div>
+					</div>
+					<div class="col-lg-2 col-md-4 col-sm-12">
 
-								<g:HTMLPanel styleName="{style.footer}" ui:field="footer_01">
-									<div class="card-footer">
-										<g:HTMLPanel ui:field="status_01">STATUS</g:HTMLPanel>
-									</div>
-								</g:HTMLPanel>
+						<div class="card" style="max-width: 20rem;">
+							<div class="card-header">
+								<g:Image ui:field="img_01"></g:Image>
+								<g:HTMLPanel ui:field="language_01" styleName="{style.language}"></g:HTMLPanel>
+							</div>
+							<div class="card-body">
+								<h4 class="card-title">
+									<g:HTMLPanel ui:field="tabooWord_01"></g:HTMLPanel>
+								</h4>
+								<p class="card-text">
+									
+									<g:HTMLPanel ui:field="translation_01"></g:HTMLPanel>
+								</p>
 							</div>
 
+							<g:HTMLPanel styleName="{style.footer}" ui:field="footer_01">
+								<div class="card-footer">
+									<g:HTMLPanel ui:field="status_01"></g:HTMLPanel>
+								</div>
+							</g:HTMLPanel>
 						</div>
-						<div class="col-lg-2 col-md-4 col-sm-12">
 
-							<div class="card" style="max-width: 20rem;">
-								<div class="card-header">
-									<g:Image ui:field="img_02"></g:Image>
-									<g:HTMLPanel ui:field="language_02" styleName="{style.language}">LANGUAGE</g:HTMLPanel>
-								</div>
-								<div class="card-body">
-									<h4 class="card-title">
-										<g:HTMLPanel ui:field="tabooWord_02"></g:HTMLPanel>
-									</h4>
-									<p class="card-text">
-										translation:
-										<g:HTMLPanel ui:field="translation_02"></g:HTMLPanel>
-									</p>
-								</div>
+					</div>
+					<div class="col-lg-2 col-md-4 col-sm-12">
 
-								<g:HTMLPanel styleName="{style.footer}" ui:field="footer_02">
-									<div class="card-footer">
-										<g:HTMLPanel ui:field="status_02">STATUS</g:HTMLPanel>
-									</div>
-								</g:HTMLPanel>
+						<div class="card" style="max-width: 20rem;">
+							<div class="card-header">
+								<g:Image ui:field="img_02"></g:Image>
+								<g:HTMLPanel ui:field="language_02" styleName="{style.language}"></g:HTMLPanel>
+							</div>
+							<div class="card-body">
+								<h4 class="card-title">
+									<g:HTMLPanel ui:field="tabooWord_02"></g:HTMLPanel>
+								</h4>
+								<p class="card-text">
+									
+									<g:HTMLPanel ui:field="translation_02"></g:HTMLPanel>
+								</p>
 							</div>
 
+							<g:HTMLPanel styleName="{style.footer}" ui:field="footer_02">
+								<div class="card-footer">
+									<g:HTMLPanel ui:field="status_02"></g:HTMLPanel>
+								</div>
+							</g:HTMLPanel>
 						</div>
-						<div class="col-lg-2 col-md-4 col-sm-12">
 
-							<div class="card" style="max-width: 20rem;">
-								<div class="card-header">
-									<g:Image ui:field="img_03"></g:Image>
-									<g:HTMLPanel ui:field="language_03" styleName="{style.language}">LANGUAGE</g:HTMLPanel>
-								</div>
-								<div class="card-body">
-									<h4 class="card-title">
-										<g:HTMLPanel ui:field="tabooWord_03"></g:HTMLPanel>
-									</h4>
-									<p class="card-text">
-										translation:
-										<g:HTMLPanel ui:field="translation_03"></g:HTMLPanel>
-									</p>
-								</div>
+					</div>
+					<div class="col-lg-2 col-md-4 col-sm-12">
 
-								<g:HTMLPanel styleName="{style.footer}" ui:field="footer_03">
-									<div class="card-footer">
-										<g:HTMLPanel ui:field="status_03">STATUS</g:HTMLPanel>
-									</div>
-								</g:HTMLPanel>
+						<div class="card" style="max-width: 20rem;">
+							<div class="card-header">
+								<g:Image ui:field="img_03"></g:Image>
+								<g:HTMLPanel ui:field="language_03" styleName="{style.language}"></g:HTMLPanel>
+							</div>
+							<div class="card-body">
+								<h4 class="card-title">
+									<g:HTMLPanel ui:field="tabooWord_03"></g:HTMLPanel>
+								</h4>
+								<p class="card-text">
+									
+									<g:HTMLPanel ui:field="translation_03"></g:HTMLPanel>
+								</p>
 							</div>
 
+							<g:HTMLPanel styleName="{style.footer}" ui:field="footer_03">
+								<div class="card-footer">
+									<g:HTMLPanel ui:field="status_03"></g:HTMLPanel>
+								</div>
+							</g:HTMLPanel>
 						</div>
-<!-- 						<div class="col-lg-2"></div> -->
 
 					</div>
 
-				</g:HTMLPanel>
+					<!-- Force next columns to break to new line -->
+					<div class="w-100 d-none d-lg-block margin"></div>
 
+					<div class="col-lg-2 col-md-4 col-sm-12">
 
-
-
-				<!-- second line -->
-				<g:HTMLPanel ui:field="secondLine" styleName="{style.card-container}">
-
-					<div class="row">
-
-						<div class="col-lg-2"></div>
-						<div class="col-lg-2 col-md-4 col-sm-12">
-
-							<div class="card" style="max-width: 20rem;">
-								<div class="card-header">
-									<g:Image ui:field="img_04"></g:Image>
-									<g:HTMLPanel ui:field="language_04" styleName="{style.language}">LANGUAGE</g:HTMLPanel>
-								</div>
-								<div class="card-body">
-									<h4 class="card-title">
-										<g:HTMLPanel ui:field="tabooWord_04"></g:HTMLPanel>
-									</h4>
-									<p class="card-text">
-										translation:
-										<g:HTMLPanel ui:field="translation_04"></g:HTMLPanel>
-									</p>
-								</div>
-
-								<g:HTMLPanel styleName="{style.footer}" ui:field="footer_04">
-									<div class="card-footer">
-										<g:HTMLPanel ui:field="status_04">STATUS</g:HTMLPanel>
-									</div>
-								</g:HTMLPanel>
+						<div class="card" style="max-width: 20rem;">
+							<div class="card-header">
+								<g:Image ui:field="img_04"></g:Image>
+								<g:HTMLPanel ui:field="language_04" styleName="{style.language}"></g:HTMLPanel>
+							</div>
+							<div class="card-body">
+								<h4 class="card-title">
+									<g:HTMLPanel ui:field="tabooWord_04"></g:HTMLPanel>
+								</h4>
+								<p class="card-text">
+									
+									<g:HTMLPanel ui:field="translation_04"></g:HTMLPanel>
+								</p>
 							</div>
 
+							<g:HTMLPanel styleName="{style.footer}" ui:field="footer_04">
+								<div class="card-footer">
+									<g:HTMLPanel ui:field="status_04"></g:HTMLPanel>
+								</div>
+							</g:HTMLPanel>
 						</div>
-						<div class="col-lg-2 col-md-4 col-sm-12">
 
-							<div class="card" style="max-width: 20rem;">
-								<div class="card-header">
-									<g:Image ui:field="img_05"></g:Image>
-									<g:HTMLPanel ui:field="language_05" styleName="{style.language}">LANGUAGE</g:HTMLPanel>
-								</div>
-								<div class="card-body">
-									<h4 class="card-title">
-										<g:HTMLPanel ui:field="tabooWord_05"></g:HTMLPanel>
-									</h4>
-									<p class="card-text">
-										translation:
-										<g:HTMLPanel ui:field="translation_05"></g:HTMLPanel>
-									</p>
-								</div>
+					</div>
+					<div class="col-lg-2 col-md-4 col-sm-12">
 
-								<g:HTMLPanel styleName="{style.footer}" ui:field="footer_05">
-									<div class="card-footer">
-										<g:HTMLPanel ui:field="status_05">STATUS</g:HTMLPanel>
-									</div>
-								</g:HTMLPanel>
+						<div class="card" style="max-width: 20rem;">
+							<div class="card-header">
+								<g:Image ui:field="img_05"></g:Image>
+								<g:HTMLPanel ui:field="language_05" styleName="{style.language}"></g:HTMLPanel>
+							</div>
+							<div class="card-body">
+								<h4 class="card-title">
+									<g:HTMLPanel ui:field="tabooWord_05"></g:HTMLPanel>
+								</h4>
+								<p class="card-text">
+									
+									<g:HTMLPanel ui:field="translation_05"></g:HTMLPanel>
+								</p>
 							</div>
 
+							<g:HTMLPanel styleName="{style.footer}" ui:field="footer_05">
+								<div class="card-footer">
+									<g:HTMLPanel ui:field="status_05"></g:HTMLPanel>
+								</div>
+							</g:HTMLPanel>
 						</div>
-						<div class="col-lg-2 col-md-4 col-sm-12">
 
-							<div class="card" style="max-width: 20rem;">
-								<div class="card-header">
-									<g:Image ui:field="img_06"></g:Image>
-									<g:HTMLPanel ui:field="language_06" styleName="{style.language}">LANGUAGE</g:HTMLPanel>
-								</div>
-								<div class="card-body">
-									<h4 class="card-title">
-										<g:HTMLPanel ui:field="tabooWord_06"></g:HTMLPanel>
-									</h4>
-									<p class="card-text">
-										translation:
-										<g:HTMLPanel ui:field="translation_06"></g:HTMLPanel>
-									</p>
-								</div>
+					</div>
+					<div class="col-lg-2 col-md-4 col-sm-12">
 
-								<g:HTMLPanel styleName="{style.footer}" ui:field="footer_06">
-									<div class="card-footer">
-										<g:HTMLPanel ui:field="status_06">STATUS</g:HTMLPanel>
-									</div>
-								</g:HTMLPanel>
+						<div class="card" style="max-width: 20rem;">
+							<div class="card-header">
+								<g:Image ui:field="img_06"></g:Image>
+								<g:HTMLPanel ui:field="language_06" styleName="{style.language}"></g:HTMLPanel>
+							</div>
+							<div class="card-body">
+								<h4 class="card-title">
+									<g:HTMLPanel ui:field="tabooWord_06"></g:HTMLPanel>
+								</h4>
+								<p class="card-text">
+									
+									<g:HTMLPanel ui:field="translation_06"></g:HTMLPanel>
+								</p>
 							</div>
 
+							<g:HTMLPanel styleName="{style.footer}" ui:field="footer_06">
+								<div class="card-footer">
+									<g:HTMLPanel ui:field="status_06"></g:HTMLPanel>
+								</div>
+							</g:HTMLPanel>
 						</div>
-						<div class="col-lg-2 col-md-4 col-sm-12">
 
-							<div class="card" style="max-width: 20rem;">
-								<div class="card-header">
-									<g:Image ui:field="img_07"></g:Image>
-									<g:HTMLPanel ui:field="language_07" styleName="{style.language}">LANGUAGE</g:HTMLPanel>
-								</div>
-								<div class="card-body">
-									<h4 class="card-title">
-										<g:HTMLPanel ui:field="tabooWord_07"></g:HTMLPanel>
-									</h4>
-									<p class="card-text">
-										translation:
-										<g:HTMLPanel ui:field="translation_07"></g:HTMLPanel>
-									</p>
-								</div>
+					</div>
+					<div class="col-lg-2 col-md-4 col-sm-12">
 
-								<g:HTMLPanel styleName="{style.footer}" ui:field="footer_07">
-									<div class="card-footer">
-										<g:HTMLPanel ui:field="status_07">STATUS</g:HTMLPanel>
-									</div>
-								</g:HTMLPanel>
+						<div class="card" style="max-width: 20rem;">
+							<div class="card-header">
+								<g:Image ui:field="img_07"></g:Image>
+								<g:HTMLPanel ui:field="language_07" styleName="{style.language}"></g:HTMLPanel>
+							</div>
+							<div class="card-body">
+								<h4 class="card-title">
+									<g:HTMLPanel ui:field="tabooWord_07"></g:HTMLPanel>
+								</h4>
+								<p class="card-text">
+									
+									<g:HTMLPanel ui:field="translation_07"></g:HTMLPanel>
+								</p>
 							</div>
 
+							<g:HTMLPanel styleName="{style.footer}" ui:field="footer_07">
+								<div class="card-footer">
+									<g:HTMLPanel ui:field="status_07"></g:HTMLPanel>
+								</div>
+							</g:HTMLPanel>
 						</div>
-						<div class="col-lg-2"></div>
+
 					</div>
 
-				</g:HTMLPanel>
+					<!-- Force next columns to break to new line -->
+					<div class="w-100 d-none d-lg-block margin"></div>
 
+					<div class="col-lg-2 col-md-4 col-sm-12">
 
-				<!-- third line -->
-				<g:HTMLPanel ui:field="thirdLine" styleName="{style.card-container}">
-
-					<div class="row">
-						<div class="col-lg-2"></div>
-						<div class="col-lg-2 col-md-4 col-sm-12">
-
-							<div class="card" style="max-width: 20rem;">
-								<div class="card-header">
-									<g:Image ui:field="img_08"></g:Image>
-									<g:HTMLPanel ui:field="language_08" styleName="{style.language}">LANGUAGE</g:HTMLPanel>
-								</div>
-								<div class="card-body">
-									<h4 class="card-title">
-										<g:HTMLPanel ui:field="tabooWord_08"></g:HTMLPanel>
-									</h4>
-									<p class="card-text">
-										translation:
-										<g:HTMLPanel ui:field="translation_08"></g:HTMLPanel>
-									</p>
-								</div>
-
-								<g:HTMLPanel styleName="{style.footer}" ui:field="footer_08">
-									<div class="card-footer">
-										<g:HTMLPanel ui:field="status_08">STATUS</g:HTMLPanel>
-									</div>
-								</g:HTMLPanel>
+						<div class="card" style="max-width: 20rem;">
+							<div class="card-header">
+								<g:Image ui:field="img_08"></g:Image>
+								<g:HTMLPanel ui:field="language_08" styleName="{style.language}"></g:HTMLPanel>
+							</div>
+							<div class="card-body">
+								<h4 class="card-title">
+									<g:HTMLPanel ui:field="tabooWord_08"></g:HTMLPanel>
+								</h4>
+								<p class="card-text">
+									
+									<g:HTMLPanel ui:field="translation_08"></g:HTMLPanel>
+								</p>
 							</div>
 
+							<g:HTMLPanel styleName="{style.footer}" ui:field="footer_08">
+								<div class="card-footer">
+									<g:HTMLPanel ui:field="status_08"></g:HTMLPanel>
+								</div>
+							</g:HTMLPanel>
 						</div>
-						<div class="col-lg-2 col-md-4 col-sm-12">
 
-							<div class="card" style="max-width: 20rem;">
-								<div class="card-header">
-									<g:Image ui:field="img_09"></g:Image>
-									<g:HTMLPanel ui:field="language_09" styleName="{style.language}">LANGUAGE</g:HTMLPanel>
-								</div>
-								<div class="card-body">
-									<h4 class="card-title">
-										<g:HTMLPanel ui:field="tabooWord_09"></g:HTMLPanel>
-									</h4>
-									<p class="card-text">
-										translation:
-										<g:HTMLPanel ui:field="translation_09"></g:HTMLPanel>
-									</p>
-								</div>
+					</div>
+					<div class="col-lg-2 col-md-4 col-sm-12">
 
-								<g:HTMLPanel styleName="{style.footer}" ui:field="footer_09">
-									<div class="card-footer">
-										<g:HTMLPanel ui:field="status_09">STATUS</g:HTMLPanel>
-									</div>
-								</g:HTMLPanel>
+						<div class="card" style="max-width: 20rem;">
+							<div class="card-header">
+								<g:Image ui:field="img_09"></g:Image>
+								<g:HTMLPanel ui:field="language_09" styleName="{style.language}"></g:HTMLPanel>
+							</div>
+							<div class="card-body">
+								<h4 class="card-title">
+									<g:HTMLPanel ui:field="tabooWord_09"></g:HTMLPanel>
+								</h4>
+								<p class="card-text">
+									
+									<g:HTMLPanel ui:field="translation_09"></g:HTMLPanel>
+								</p>
 							</div>
 
+							<g:HTMLPanel styleName="{style.footer}" ui:field="footer_09">
+								<div class="card-footer">
+									<g:HTMLPanel ui:field="status_09"></g:HTMLPanel>
+								</div>
+							</g:HTMLPanel>
 						</div>
-						<div class="col-lg-2 col-md-4 col-sm-12">
 
-							<div class="card" style="max-width: 20rem;">
-								<div class="card-header">
-									<g:Image ui:field="img_10"></g:Image>
-									<g:HTMLPanel ui:field="language_10" styleName="{style.language}">LANGUAGE</g:HTMLPanel>
-								</div>
-								<div class="card-body">
-									<h4 class="card-title">
-										<g:HTMLPanel ui:field="tabooWord_10"></g:HTMLPanel>
-									</h4>
-									<p class="card-text">
-										translation:
-										<g:HTMLPanel ui:field="translation_10"></g:HTMLPanel>
-									</p>
-								</div>
+					</div>
+					<div class="col-lg-2 col-md-4 col-sm-12">
 
-								<g:HTMLPanel styleName="{style.footer}" ui:field="footer_10">
-									<div class="card-footer">
-										<g:HTMLPanel ui:field="status_10">STATUS</g:HTMLPanel>
-									</div>
-								</g:HTMLPanel>
+						<div class="card" style="max-width: 20rem;">
+							<div class="card-header">
+								<g:Image ui:field="img_10"></g:Image>
+								<g:HTMLPanel ui:field="language_10" styleName="{style.language}"></g:HTMLPanel>
+							</div>
+							<div class="card-body">
+								<h4 class="card-title">
+									<g:HTMLPanel ui:field="tabooWord_10"></g:HTMLPanel>
+								</h4>
+								<p class="card-text">
+									
+									<g:HTMLPanel ui:field="translation_10"></g:HTMLPanel>
+								</p>
 							</div>
 
+							<g:HTMLPanel styleName="{style.footer}" ui:field="footer_10">
+								<div class="card-footer">
+									<g:HTMLPanel ui:field="status_10"></g:HTMLPanel>
+								</div>
+							</g:HTMLPanel>
 						</div>
-						<div class="col-lg-2 col-md-4 col-sm-12">
 
-							<div class="card" style="max-width: 20rem;">
-								<div class="card-header">
-									<g:Image ui:field="img_11"></g:Image>
-									<g:HTMLPanel ui:field="language_11" styleName="{style.language}">LANGUAGE</g:HTMLPanel>
-								</div>
-								<div class="card-body">
-									<h4 class="card-title">
-										<g:HTMLPanel ui:field="tabooWord_11"></g:HTMLPanel>
-									</h4>
-									<p class="card-text">
-										translation:
-										<g:HTMLPanel ui:field="translation_11"></g:HTMLPanel>
-									</p>
-								</div>
+					</div>
+					<div class="col-lg-2 col-md-4 col-sm-12">
 
-								<g:HTMLPanel styleName="{style.footer}" ui:field="footer_11">
-									<div class="card-footer">
-										<g:HTMLPanel ui:field="status_11">STATUS</g:HTMLPanel>
-									</div>
-								</g:HTMLPanel>
+						<div class="card" style="max-width: 20rem;">
+							<div class="card-header">
+								<g:Image ui:field="img_11"></g:Image>
+								<g:HTMLPanel ui:field="language_11" styleName="{style.language}"></g:HTMLPanel>
+							</div>
+							<div class="card-body">
+								<h4 class="card-title">
+									<g:HTMLPanel ui:field="tabooWord_11"></g:HTMLPanel>
+								</h4>
+								<p class="card-text">
+									
+									<g:HTMLPanel ui:field="translation_11"></g:HTMLPanel>
+								</p>
 							</div>
 
+							<g:HTMLPanel styleName="{style.footer}" ui:field="footer_11">
+								<div class="card-footer">
+									<g:HTMLPanel ui:field="status_11"></g:HTMLPanel>
+								</div>
+							</g:HTMLPanel>
 						</div>
-						<div class="col-lg-2"></div>
 					</div>
 
-				</g:HTMLPanel>
+					<!-- Force next columns to break to new line -->
+					<div class="w-100 d-none d-lg-block margin"></div>
 
+					<div class="col-lg-2 col-md-4 col-sm-12">
 
-				<!-- fourth line -->
-				<g:HTMLPanel ui:field="fourthLine" styleName="{style.card-container}">
-
-					<div class="row">
-						<div class="col-lg-2"></div>
-						<div class="col-lg-2 col-md-4 col-sm-12">
-
-							<div class="card" style="max-width: 20rem;">
-								<div class="card-header">
-									<g:Image ui:field="img_12"></g:Image>
-									<g:HTMLPanel ui:field="language_12" styleName="{style.language}">LANGUAGE</g:HTMLPanel>
-								</div>
-								<div class="card-body">
-									<h4 class="card-title">
-										<g:HTMLPanel ui:field="tabooWord_12"></g:HTMLPanel>
-									</h4>
-									<p class="card-text">
-										translation:
-										<g:HTMLPanel ui:field="translation_12"></g:HTMLPanel>
-									</p>
-								</div>
-
-								<g:HTMLPanel styleName="{style.footer}" ui:field="footer_12">
-									<div class="card-footer">
-										<g:HTMLPanel ui:field="status_12">STATUS</g:HTMLPanel>
-									</div>
-								</g:HTMLPanel>
+						<div class="card" style="max-width: 20rem;">
+							<div class="card-header">
+								<g:Image ui:field="img_12"></g:Image>
+								<g:HTMLPanel ui:field="language_12" styleName="{style.language}"></g:HTMLPanel>
+							</div>
+							<div class="card-body">
+								<h4 class="card-title">
+									<g:HTMLPanel ui:field="tabooWord_12"></g:HTMLPanel>
+								</h4>
+								<p class="card-text">
+									
+									<g:HTMLPanel ui:field="translation_12"></g:HTMLPanel>
+								</p>
 							</div>
 
+							<g:HTMLPanel styleName="{style.footer}" ui:field="footer_12">
+								<div class="card-footer">
+									<g:HTMLPanel ui:field="status_12"></g:HTMLPanel>
+								</div>
+							</g:HTMLPanel>
 						</div>
-						<div class="col-lg-2 col-md-4 col-sm-12">
 
-							<div class="card" style="max-width: 20rem;">
-								<div class="card-header">
-									<g:Image ui:field="img_13"></g:Image>
-									<g:HTMLPanel ui:field="language_13" styleName="{style.language}">LANGUAGE</g:HTMLPanel>
-								</div>
-								<div class="card-body">
-									<h4 class="card-title">
-										<g:HTMLPanel ui:field="tabooWord_13"></g:HTMLPanel>
-									</h4>
-									<p class="card-text">
-										translation:
-										<g:HTMLPanel ui:field="translation_13"></g:HTMLPanel>
-									</p>
-								</div>
+					</div>
+					<div class="col-lg-2 col-md-4 col-sm-12">
 
-								<g:HTMLPanel styleName="{style.footer}" ui:field="footer_13">
-									<div class="card-footer">
-										<g:HTMLPanel ui:field="status_13">STATUS</g:HTMLPanel>
-									</div>
-								</g:HTMLPanel>
+						<div class="card" style="max-width: 20rem;">
+							<div class="card-header">
+								<g:Image ui:field="img_13"></g:Image>
+								<g:HTMLPanel ui:field="language_13" styleName="{style.language}"></g:HTMLPanel>
+							</div>
+							<div class="card-body">
+								<h4 class="card-title">
+									<g:HTMLPanel ui:field="tabooWord_13"></g:HTMLPanel>
+								</h4>
+								<p class="card-text">
+									
+									<g:HTMLPanel ui:field="translation_13"></g:HTMLPanel>
+								</p>
 							</div>
 
+							<g:HTMLPanel styleName="{style.footer}" ui:field="footer_13">
+								<div class="card-footer">
+									<g:HTMLPanel ui:field="status_13"></g:HTMLPanel>
+								</div>
+							</g:HTMLPanel>
 						</div>
-						<div class="col-lg-2 col-md-4 col-sm-12">
 
-							<div class="card" style="max-width: 20rem;">
-								<div class="card-header">
-									<g:Image ui:field="img_14"></g:Image>
-									<g:HTMLPanel ui:field="language_14" styleName="{style.language}">LANGUAGE</g:HTMLPanel>
-								</div>
-								<div class="card-body">
-									<h4 class="card-title">
-										<g:HTMLPanel ui:field="tabooWord_14"></g:HTMLPanel>
-									</h4>
-									<p class="card-text">
-										translation:
-										<g:HTMLPanel ui:field="translation_14"></g:HTMLPanel>
-									</p>
-								</div>
+					</div>
+					<div class="col-lg-2 col-md-4 col-sm-12">
 
-								<g:HTMLPanel styleName="{style.footer}" ui:field="footer_14">
-									<div class="card-footer">
-										<g:HTMLPanel ui:field="status_14">STATUS</g:HTMLPanel>
-									</div>
-								</g:HTMLPanel>
+						<div class="card" style="max-width: 20rem;">
+							<div class="card-header">
+								<g:Image ui:field="img_14"></g:Image>
+								<g:HTMLPanel ui:field="language_14" styleName="{style.language}"></g:HTMLPanel>
+							</div>
+							<div class="card-body">
+								<h4 class="card-title">
+									<g:HTMLPanel ui:field="tabooWord_14"></g:HTMLPanel>
+								</h4>
+								<p class="card-text">
+									
+									<g:HTMLPanel ui:field="translation_14"></g:HTMLPanel>
+								</p>
 							</div>
 
+							<g:HTMLPanel styleName="{style.footer}" ui:field="footer_14">
+								<div class="card-footer">
+									<g:HTMLPanel ui:field="status_14"></g:HTMLPanel>
+								</div>
+							</g:HTMLPanel>
 						</div>
-						<div class="col-lg-2 col-md-4 col-sm-12">
 
-							<div class="card" style="max-width: 20rem;">
-								<div class="card-header">
-									<g:Image ui:field="img_15"></g:Image>
-									<g:HTMLPanel ui:field="language_15" styleName="{style.language}">LANGUAGE</g:HTMLPanel>
-								</div>
-								<div class="card-body">
-									<h4 class="card-title">
-										<g:HTMLPanel ui:field="tabooWord_15"></g:HTMLPanel>
-									</h4>
-									<p class="card-text">
-										translation:
-										<g:HTMLPanel ui:field="translation_15"></g:HTMLPanel>
-									</p>
-								</div>
+					</div>
+					<div class="col-lg-2 col-md-4 col-sm-12">
 
-								<g:HTMLPanel styleName="{style.footer}" ui:field="footer_15">
-									<div class="card-footer">
-										<g:HTMLPanel ui:field="status_15">STATUS</g:HTMLPanel>
-									</div>
-								</g:HTMLPanel>
+						<div class="card" style="max-width: 20rem;">
+							<div class="card-header">
+								<g:Image ui:field="img_15"></g:Image>
+								<g:HTMLPanel ui:field="language_15" styleName="{style.language}"></g:HTMLPanel>
+							</div>
+							<div class="card-body">
+								<h4 class="card-title">
+									<g:HTMLPanel ui:field="tabooWord_15"></g:HTMLPanel>
+								</h4>
+								<p class="card-text">
+									
+									<g:HTMLPanel ui:field="translation_15"></g:HTMLPanel>
+								</p>
 							</div>
 
+							<g:HTMLPanel styleName="{style.footer}" ui:field="footer_15">
+								<div class="card-footer">
+									<g:HTMLPanel ui:field="status_15"></g:HTMLPanel>
+								</div>
+							</g:HTMLPanel>
 						</div>
-						<div class="col-lg-2"></div>
+
 					</div>
 
-				</g:HTMLPanel>
+					<!-- Force next columns to break to new line -->
+					<div class="w-100 d-none d-lg-block margin"></div>
 
-				<!-- fith line -->
-				<g:HTMLPanel ui:field="fithLine" styleName="{style.card-container}">
+					<div class="col-lg-2 col-md-4 col-sm-12">
 
-					<div class="row">
-						<div class="col-lg-2"></div>
-						<div class="col-lg-2 col-md-4 col-sm-12">
-
-							<div class="card" style="max-width: 20rem;">
-								<div class="card-header">
-									<g:Image ui:field="img_16"></g:Image>
-									<g:HTMLPanel ui:field="language_16" styleName="{style.language}">LANGUAGE</g:HTMLPanel>
-								</div>
-								<div class="card-body">
-									<h4 class="card-title">
-										<g:HTMLPanel ui:field="tabooWord_16"></g:HTMLPanel>
-									</h4>
-									<p class="card-text">
-										translation:
-										<g:HTMLPanel ui:field="translation_16"></g:HTMLPanel>
-									</p>
-								</div>
-
-								<g:HTMLPanel styleName="{style.footer}" ui:field="footer_16">
-									<div class="card-footer">
-										<g:HTMLPanel ui:field="status_16">STATUS</g:HTMLPanel>
-									</div>
-								</g:HTMLPanel>
+						<div class="card" style="max-width: 20rem;">
+							<div class="card-header">
+								<g:Image ui:field="img_16"></g:Image>
+								<g:HTMLPanel ui:field="language_16" styleName="{style.language}"></g:HTMLPanel>
+							</div>
+							<div class="card-body">
+								<h4 class="card-title">
+									<g:HTMLPanel ui:field="tabooWord_16"></g:HTMLPanel>
+								</h4>
+								<p class="card-text">
+									
+									<g:HTMLPanel ui:field="translation_16"></g:HTMLPanel>
+								</p>
 							</div>
 
+							<g:HTMLPanel styleName="{style.footer}" ui:field="footer_16">
+								<div class="card-footer">
+									<g:HTMLPanel ui:field="status_16"></g:HTMLPanel>
+								</div>
+							</g:HTMLPanel>
 						</div>
-						<div class="col-lg-2"></div>
 					</div>
-				</g:HTMLPanel>
-
+				</div>
 			</div>
-
 		</g:HTMLPanel>
 	</g:HTMLPanel>
 
