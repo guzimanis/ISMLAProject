@@ -20,5 +20,7 @@
 
   .card-header {
     display: inline-flex;
+    background-color: black;
+    color: white;
   }
 
