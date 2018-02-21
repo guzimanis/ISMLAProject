@@ -1,4 +1,4 @@
-package com.ws1718.ismla.server;
+package test.com.ws1718.ismla.server;
 
 import java.io.BufferedReader;
 import java.io.IOException;

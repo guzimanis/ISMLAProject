@@ -78,6 +78,8 @@ public class TokenTabooFinderUiBinder extends Composite {
 		img_15.setResource(resources.arabic());
 		img_16.setResource(resources.russian());
 		
+		
+		
 		slots[0] = img_00;
 		slots[1] = img_01;
 		slots[2] = img_02;

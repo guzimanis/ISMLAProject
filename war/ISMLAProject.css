@@ -20,8 +20,9 @@
 
   .card-header {
     word-wrap: break-word;
-    background-color: black;
-    color: white;
+    background-color: white;
+   	border: 1px solid #00c3d1;
+    
   }
 
   .margin{
